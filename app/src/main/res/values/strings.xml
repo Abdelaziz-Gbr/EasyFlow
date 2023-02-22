@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">EasyFlow</string>
+    <string name="useravatar">userAvatar</string>
+    <string name="email">email</string>
+    <string name="pasword">pasword</string>
+    <string name="new_user_press_here_to_register">new user? press here to register.</string>
+    <string name="forogt_password">forogt password?</string>
+    <string name="sign_in">Sign in</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="recharge">Recharge</string>
+</resources>
