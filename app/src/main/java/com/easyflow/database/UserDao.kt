@@ -13,4 +13,7 @@ interface UserDao {
 
     @Query("SELECT userKey FROM user_table WHERE id = 0")
     fun getUserKey(): String?
+
+    @Query("DELETE FROM user_table WHERE id = 0")
+    fun removeUser()
 }

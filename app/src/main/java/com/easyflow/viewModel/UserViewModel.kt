@@ -26,4 +26,10 @@ class UserViewModel(application: Application): AndroidViewModel(application) {
             UserKey.key = repository.getUserKey()
         }
     }
+
+    fun removeUser(){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.removeUser()
+        }
+    }
 }

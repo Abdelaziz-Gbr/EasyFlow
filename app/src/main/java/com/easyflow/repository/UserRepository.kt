@@ -11,4 +11,8 @@ class UserRepository(private val userDao: UserDao) {
     suspend fun getUserKey(): String?{
         return userDao.getUserKey()
     }
+
+    suspend fun removeUser(){
+        return userDao.removeUser()
+    }
 }

@@ -8,6 +8,6 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.easyflow.fragments.HomeFragment"
-        android:label="fragment_home"
+        android:label="my Home Screen"
         tools:layout="@layout/fragment_home" />
 </navigation>
