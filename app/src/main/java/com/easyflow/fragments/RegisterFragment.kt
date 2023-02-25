@@ -1,6 +1,5 @@
 package com.easyflow.fragments
 
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,21 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.easyflow.BuildConfig
 import com.easyflow.R
 import com.easyflow.databinding.FragmentRegisterBinding
+import com.easyflow.models.ServerResponse
 import com.easyflow.models.User
 import com.easyflow.repository.NetworkRepository
 import com.easyflow.viewModel.NetworkViewModel
 import com.easyflow.viewModel.UserDatabaseViewModel
 import com.easyflow.viewModelFactory.NetworkViewModelFactory
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.util.*
+import com.google.gson.Gson
 
 class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
@@ -53,18 +50,18 @@ class RegisterFragment : Fragment() {
         else{
             Toast.makeText(requireContext(), "please fill all the above slots", Toast.LENGTH_LONG).show()
         }
-        networkViewModel.registerResponse.observe(viewLifecycleOwner){response ->
+        networkViewModel.registerResponse.observe(viewLifecycleOwner){ response ->
             if(response.isSuccessful){
                 Toast.makeText(requireContext(), "Sign up Successful", Toast.LENGTH_LONG).show()
-                //todo change when getting a custom response from the server
-                if (BuildConfig.DEBUG) Log.d("register", response.message())
+                if (BuildConfig.DEBUG) Log.d("register_success", response.message())
+
                 view?.findNavController()?.navigate(RegisterFragmentDirections.actionRegisterFragmentToSignInFragment())
+
 
             }
             else{
-                //todo get a consistent message for all bad requests back from the server.
-                if (BuildConfig.DEBUG) Log.d("register", response.message())
-                Toast.makeText(requireContext(), "error signing up please enter valid info", Toast.LENGTH_LONG).show()
+                var errorResponse: ServerResponse? = Gson().fromJson(response.errorBody()?.charStream(), ServerResponse::class.java)
+               Toast.makeText(requireContext(), "error signing up ${errorResponse?.message!!}", Toast.LENGTH_LONG).show()
 
             }
         }

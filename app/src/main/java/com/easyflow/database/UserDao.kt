@@ -12,8 +12,11 @@ interface UserDao {
     suspend fun addUser(user: User)
 
     @Query("SELECT userKey FROM user_table WHERE id = 0")
-    fun getUserKey(): String?
+    suspend fun getUserKey(): String?
 
     @Query("DELETE FROM user_table WHERE id = 0")
-    fun removeUser()
+    suspend fun removeUser()
+
+    @Query("SELECT * FROM user_table WHERE id = 0")
+    suspend fun getUser(): User?
 }

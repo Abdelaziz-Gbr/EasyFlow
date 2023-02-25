@@ -1,7 +1,9 @@
 package com.easyflow.models
 
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.easyflow.cache.Wallet
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "user_table")
@@ -15,5 +17,8 @@ data class User (
         var phoneNumber: String? = null,
         var gender: String? = null,
         var birthDay: String? = null,
-        var userKey: String? = null
+        var userKey: String? = null,
+        var type: String? = null,
+        var city: String? = null,
+        var balance: Double? = null
         )
