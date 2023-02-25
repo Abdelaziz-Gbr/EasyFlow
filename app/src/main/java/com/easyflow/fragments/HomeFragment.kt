@@ -11,15 +11,14 @@ import com.easyflow.R
 import com.easyflow.activities.SignInActivity
 import com.easyflow.cache.UserKey
 import com.easyflow.databinding.FragmentHomeBinding
-import com.easyflow.viewModel.UserViewModel
-import kotlin.math.log
+import com.easyflow.viewModel.UserDatabaseViewModel
 
 class HomeFragment : Fragment() {
-    private lateinit var userViewModel: UserViewModel
+    private lateinit var userDatabaseViewModel: UserDatabaseViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
-        userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
+        userDatabaseViewModel = ViewModelProvider(this)[UserDatabaseViewModel::class.java]
         // Inflate the layout for this fragment
         val binding : FragmentHomeBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_home, container, false)
@@ -38,9 +37,9 @@ class HomeFragment : Fragment() {
 
     private fun logOut(){
         //remove user info from db
-        userViewModel.removeUser()
+        userDatabaseViewModel.removeUser()
         //clear the cached key
-        UserKey.key = null
+        UserKey.key = String()
         //go back to sign in screen
         startActivity(Intent(activity, SignInActivity::class.java))
         activity?.finish()

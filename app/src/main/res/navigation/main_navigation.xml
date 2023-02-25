@@ -9,5 +9,14 @@
         android:id="@+id/homeFragment"
         android:name="com.easyflow.fragments.HomeFragment"
         android:label="my Home Screen"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_QRCodeFragment"
+            app:destination="@id/QRCodeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/QRCodeFragment"
+        android:name="com.easyflow.fragments.QRCodeFragment"
+        android:label="fragment_q_r_code"
+        tools:layout="@layout/fragment_q_r_code" />
 </navigation>

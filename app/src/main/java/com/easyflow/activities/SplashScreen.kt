@@ -8,16 +8,16 @@ import androidx.lifecycle.ViewModelProvider
 import com.easyflow.R
 import com.easyflow.cache.UserKey
 import com.easyflow.databinding.ActivitySplashScreenBinding
-import com.easyflow.viewModel.UserViewModel
+import com.easyflow.viewModel.UserDatabaseViewModel
 
 class SplashScreen : AppCompatActivity() {
-    private lateinit var viewModel: UserViewModel
+    private lateinit var viewModel: UserDatabaseViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
         val binding = DataBindingUtil.setContentView<ActivitySplashScreenBinding>(this, R.layout.activity_splash_screen)
         binding.efLogo.alpha = 0f
-        viewModel = ViewModelProvider(this)[UserViewModel::class.java]
+        viewModel = ViewModelProvider(this)[UserDatabaseViewModel::class.java]
         viewModel.cacheUserKey()
         binding.efLogo.animate().setDuration(1500).alpha(1f).withEndAction {
             val intent : Intent?

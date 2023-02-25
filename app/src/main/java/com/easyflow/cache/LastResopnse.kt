@@ -1,8 +1,11 @@
 package com.easyflow.cache
 
-import okhttp3.ResponseBody
+import androidx.lifecycle.MutableLiveData
 
 object LastResopnse {
     var code: Int? = null
-    var msg : ResponseBody? = null
+    var msg : String? = null
+    @Volatile
+    var checkResponse : Boolean = false
+//var checkResponse : MutableLiveData<Boolean> = MutableLiveData()
 }
