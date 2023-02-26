@@ -32,7 +32,12 @@ class SignInFragment : Fragment() {
         databaseViewModel = ViewModelProvider(this)[UserDatabaseViewModel::class.java]
         binding.signInButton.setOnClickListener {   signIn(it)  }
         binding.register.setOnClickListener{    register(it)    }
+        binding.forgotPassword.setOnClickListener{    forgotPassword(it)    }
         return binding.root
+    }
+
+    private fun forgotPassword(it: View?) {
+        Toast.makeText(requireContext(), "work in progress", Toast.LENGTH_SHORT).show()
     }
 
     private fun register(it: View?) {
@@ -44,7 +49,7 @@ class SignInFragment : Fragment() {
         val networkViewModelFactory = NetworkViewModelFactory(networkRepository)
         val networkViewModel : NetworkViewModel = ViewModelProvider(this, networkViewModelFactory)[NetworkViewModel::class.java]
 
-        val userName = binding.userEmail.text.toString()
+        val userName = binding.username.text.toString()
         val userPassword = binding.userPassword.text.toString()
         var user = User(id = null, username = userName, password =  userPassword)
 

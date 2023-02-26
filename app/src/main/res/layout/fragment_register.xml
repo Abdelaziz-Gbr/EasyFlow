@@ -8,10 +8,10 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#1BB2E4"
         android:fillViewport="true">
 
         <LinearLayout
+            android:background="#4D6A6E"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"

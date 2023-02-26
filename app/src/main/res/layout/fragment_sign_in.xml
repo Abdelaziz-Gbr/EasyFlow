@@ -8,59 +8,44 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#1A65E8">
+        android:background="#4D6A6E"
+        android:padding="24dp">
 
         <ImageView
-            android:id="@+id/userAvatar"
+            android:id="@+id/userLogin"
             android:layout_width="200dp"
-            android:layout_height="150dp"
-            android:background="#000000"
-            android:backgroundTint="#2336B3"
-            android:backgroundTintMode="src_atop"
-            android:contentDescription="@string/useravatar"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="200dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.469"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.117"
-            tools:ignore="ImageContrastCheck"
-            tools:src="@drawable/ic_account" />
+            android:src="@drawable/ic_account" />
 
         <EditText
-            android:id="@+id/userEmail"
+            android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
             android:autofillHints="emailAddress"
-            android:ems="10"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"
+            android:ems="15"
+            android:hint="Enter your user name"
+            android:inputType="text"
             android:minHeight="48dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userAvatar"
-            app:layout_constraintVertical_bias="0.114" />
+            app:layout_constraintTop_toBottomOf="@+id/userLogin" />
 
         <EditText
             android:id="@+id/userPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:ems="10"
+            android:ems="15"
             android:hint="@string/pasword"
             android:importantForAutofill="no"
             android:inputType="textPassword"
             android:minHeight="48dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userEmail"
-            app:layout_constraintVertical_bias="0.053" />
+            app:layout_constraintTop_toBottomOf="@+id/username" />
 
         <TextView
             android:id="@+id/register"
@@ -68,9 +53,10 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:text="@string/new_user_press_here_to_register"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
@@ -79,6 +65,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="@string/forogt_password"
+            android:textSize="16sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.85"
@@ -88,16 +76,13 @@
 
         <Button
             android:id="@+id/signInButton"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:layout_marginBottom="16dp"
             android:text="@string/sign_in"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userPassword"
-            app:layout_constraintVertical_bias="0.06999999" />
+            app:layout_constraintTop_toBottomOf="@+id/forgot_password" />
 
         <CheckBox
             android:id="@+id/staySignedInCheck"
@@ -105,26 +90,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="16dp"
+            android:ems="9"
             android:text="stay signed in"
-            app:layout_constraintBottom_toTopOf="@+id/register"
+            android:textSize="18sp"
+            android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.26"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signInButton"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <ImageView
-            android:id="@+id/loading"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:alpha="0"
-            android:background="#000000"
-            android:backgroundTint="#3594B6"
-            app:layout_constraintBottom_toTopOf="@+id/register"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/staySignedInCheck"
-            app:srcCompat="@drawable/easyflow_logo" />
+            app:layout_constraintTop_toBottomOf="@+id/signInButton" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
