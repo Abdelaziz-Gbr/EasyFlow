@@ -63,6 +63,7 @@ class SplashScreen : AppCompatActivity() {
                             else{
                                 Toast.makeText(this, "failed to fetch userData from the server.", Toast.LENGTH_LONG).show()
                             }
+                            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                             startActivity(intent)
                             finish()
                         }
@@ -74,12 +75,11 @@ class SplashScreen : AppCompatActivity() {
                 }
             }
             //one of the previous calls has failed.
-            if(intent == null){
-                intent = Intent(this, SignInActivity::class.java)
+            else{
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+                startActivity(intent)
+                finish()
             }
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-            startActivity(intent)
-            finish()
 
         }
 
