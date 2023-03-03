@@ -1,19 +1,20 @@
-package com.easyflow.fragments
+package com.easyflow.fragments.signActivity
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.easyflow.BuildConfig
 import com.easyflow.R
 import com.easyflow.databinding.FragmentRegisterBinding
+import com.easyflow.fragments.signActivity.RegisterFragmentDirections
 import com.easyflow.models.ServerResponse
 import com.easyflow.models.User
 import com.easyflow.repository.NetworkRepository
@@ -61,7 +62,11 @@ class RegisterFragment : Fragment() {
             }
             else{
                 var errorResponse: ServerResponse? = Gson().fromJson(response.errorBody()?.charStream(), ServerResponse::class.java)
-               Toast.makeText(requireContext(), "error signing up ${errorResponse?.message!!}", Toast.LENGTH_LONG).show()
+               Toast.makeText(
+                   requireContext(),
+                   "error signing up ${errorResponse?.message!!}",
+                   Toast.LENGTH_LONG
+               ).show()
 
             }
         }
@@ -81,17 +86,23 @@ class RegisterFragment : Fragment() {
             Toast.makeText(requireContext(), "please fill all the info above.", Toast.LENGTH_SHORT).show()
             return null
         }
-        user = User(null, binding.firstNameRegister.text.toString(), binding.lastNameRegister.text.toString(),
-            binding.userNameRegister.text.toString(), binding.emailRegister.text.toString(),
-            binding.passwordRegister.text.toString(), binding.phoneNumberRegister.text.toString(),
-            gender, birthDate
+        user = User(
+            null,
+            binding.firstNameRegister.text.toString(),
+            binding.lastNameRegister.text.toString(),
+            binding.userNameRegister.text.toString(),
+            binding.emailRegister.text.toString(),
+            binding.passwordRegister.text.toString(),
+            binding.phoneNumberRegister.text.toString(),
+            gender,
+            birthDate
         )
         return user
 
     }
+    private fun DatePicker.getDate(): String {
+        return "$year-$month-$dayOfMonth"
 
-}
-private fun DatePicker.getDate(): String {
-    return "$year-$month-$dayOfMonth"
+    }
 
 }

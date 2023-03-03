@@ -1,4 +1,4 @@
-package com.easyflow.fragments
+package com.easyflow.fragments.homeActivity.tickitingFragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

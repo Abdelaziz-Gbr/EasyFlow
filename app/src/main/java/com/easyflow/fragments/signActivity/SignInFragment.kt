@@ -1,20 +1,20 @@
-package com.easyflow.fragments
+package com.easyflow.fragments.signActivity
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.easyflow.R
 import com.easyflow.activities.HomeScreen
 import com.easyflow.cache.UserCache
-import com.easyflow.cache.UserKey
 import com.easyflow.databinding.FragmentSignInBinding
+import com.easyflow.fragments.signActivity.SignInFragmentDirections
 import com.easyflow.models.User
 import com.easyflow.repository.NetworkRepository
 import com.easyflow.viewModel.NetworkViewModel
@@ -47,11 +47,14 @@ class SignInFragment : Fragment() {
     private fun signIn(view: View?) {
         val networkRepository = NetworkRepository()
         val networkViewModelFactory = NetworkViewModelFactory(networkRepository)
-        val networkViewModel : NetworkViewModel = ViewModelProvider(this, networkViewModelFactory)[NetworkViewModel::class.java]
+        val networkViewModel : NetworkViewModel = ViewModelProvider(
+            this,
+            networkViewModelFactory
+        )[NetworkViewModel::class.java]
 
         val userName = binding.username.text.toString()
         val userPassword = binding.userPassword.text.toString()
-        var user = User(id = null, username = userName, password =  userPassword)
+        var user = User(id = null, username = userName, password = userPassword)
 
         var intent : Intent? = null
         networkViewModel.signIn(user)
@@ -74,7 +77,11 @@ class SignInFragment : Fragment() {
                         intent = Intent(activity, HomeScreen::class.java)
                     }
                     else{
-                        Toast.makeText(requireContext(), "failed to fetch userData from the server.", Toast.LENGTH_LONG).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "failed to fetch userData from the server.",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                     if(intent != null) {
                         startActivity(intent)

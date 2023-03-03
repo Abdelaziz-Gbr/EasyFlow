@@ -1,4 +1,4 @@
-package com.easyflow.fragments
+package com.easyflow.fragments.homeActivity
 
 import android.content.Intent
 import android.os.Bundle
@@ -40,7 +40,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun qr(view: View?) {
-        Toast.makeText(requireContext(), "work in progress", Toast.LENGTH_SHORT).show()
+        view?.findNavController()?.navigate(HomeFragmentDirections.actionHomeFragmentToQRCodeFragment())
     }
 
     private fun recharge(view: View?) {

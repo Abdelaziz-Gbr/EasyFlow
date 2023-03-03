@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.easyflow.cache.UserCache
 import com.easyflow.models.User
 import com.easyflow.repository.NetworkRepository
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -18,6 +17,7 @@ class NetworkViewModel(private val networkRepository: NetworkRepository): ViewMo
     val userInfoResponse : MutableLiveData<Response<User>> = MutableLiveData()
     private val handler = CoroutineExceptionHandler { _, exception ->
         Log.d("Network", "Caught $exception")
+        //todo handle splash screen freezing on socket time out.
     }
     fun signIn(user : User){
         viewModelScope.launch (handler) {
