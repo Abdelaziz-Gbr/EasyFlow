@@ -5,7 +5,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.easyflow.cache.UserCache
-import com.easyflow.cache.UserKey
 import com.easyflow.database.UserDatabase
 import com.easyflow.models.User
 import com.easyflow.repository.UserDatabaseRepository
@@ -23,11 +22,6 @@ class UserDatabaseViewModel(application: Application): AndroidViewModel(applicat
     fun addUser(user: User){
         viewModelScope.launch(Dispatchers.IO) {
             databaseRepository.addUser(user)
-        }
-    }
-    fun cacheUserKey(){
-        viewModelScope.launch(Dispatchers.IO) {
-            UserKey.key = databaseRepository.getUserKey()
         }
     }
 

@@ -31,4 +31,19 @@ object UserCache {
         city = user.city
         balance = user.balance
     }
+
+    fun freeAll(){
+        firstName = null
+        lastName = null
+        username = null
+        email = null
+        password = null
+        phoneNumber = null
+        gender = null
+        birthDay = null
+        userKey = null
+        type = null
+        city = null
+        balance = null
+    }
 }

@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.easyflow.cache.UserCache
 import com.easyflow.models.User
 import com.easyflow.repository.NetworkRepository
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -13,23 +14,44 @@ import retrofit2.Response
 
 class NetworkViewModel(private val networkRepository: NetworkRepository): ViewModel() {
     val registerResponse : MutableLiveData<Response<ResponseBody>> = MutableLiveData()
-    val signResponse : MutableLiveData<Response<ResponseBody>> = MutableLiveData()
+    private val _signResponse : MutableLiveData<Response<ResponseBody>> = MutableLiveData()
     val userInfoResponse : MutableLiveData<Response<User>> = MutableLiveData()
+    val loginResponse : MutableLiveData<Boolean> = MutableLiveData()
     private val handler = CoroutineExceptionHandler { _, exception ->
         Log.d("Network", "Caught $exception")
-        //todo handle splash screen freezing on socket time out.
+        loginResponse.value = false
     }
     fun signIn(user : User){
         viewModelScope.launch (handler) {
             val response = networkRepository.signIn(user)
-            signResponse.value = response
+            //signResponse.value = response
+            if(!response.isSuccessful){
+                loginResponse.value = false
+            }
+            else{
+                val header = response.headers()["Authorization"]
+                if (header != null) {
+                    getUserInfo(header)
+                }
+                else{
+                    loginResponse.value = false
+                }
+            }
         }
     }
 
-    fun getUserInfo(auth: String){
+    private fun getUserInfo(auth: String){
         viewModelScope.launch(handler) {
             val response = networkRepository.getUserInfo(auth)
-            userInfoResponse.value = response
+            //userInfoResponse.value = response
+            if(!response.isSuccessful){
+                loginResponse.value = false
+            }
+            else{
+                val user = response.body()
+                UserCache.cacheUser(user)
+                loginResponse.value = true
+            }
         }
     }
 

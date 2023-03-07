@@ -12,7 +12,6 @@ import androidx.navigation.ui.NavigationUI
 import com.easyflow.R
 import com.easyflow.activities.SignInActivity
 import com.easyflow.cache.UserCache
-import com.easyflow.cache.UserKey
 import com.easyflow.databinding.FragmentHomeBinding
 import com.easyflow.viewModel.UserDatabaseViewModel
 
@@ -53,7 +52,7 @@ class HomeFragment : Fragment() {
         //remove user info from db
         userDatabaseViewModel.removeUser()
         //clear the cached key
-        UserKey.key = String()
+        UserCache.freeAll()
         //go back to sign in screen
         startActivity(Intent(activity, SignInActivity::class.java))
         activity?.finish()
