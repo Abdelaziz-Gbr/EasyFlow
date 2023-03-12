@@ -11,6 +11,8 @@ import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.easyflow.R
 import com.easyflow.activities.SplashScreen
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -19,7 +21,18 @@ const val channelName = "com.easyflow.firebaseMessagingService"
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
-
+    init {
+        FirebaseMessaging.getInstance().subscribeToTopic("main_topic")
+            .addOnCompleteListener{
+                task ->
+                if(task.isSuccessful){
+                    Log.d("Firebase_subscription", "succeeded")
+                }
+                else{
+                    Log.d("Firebase_subscription", "failed")
+                }
+            }
+    }
     override fun onMessageReceived(message: RemoteMessage) {
         Log.d("firebase", "message Received")
         if(message.notification != null){
@@ -27,7 +40,12 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         }
     }
 
-    fun generateNotification(title: String, message: String){
+    override fun onNewToken(token: String) {
+        super.onNewToken(token)
+        Log.d("FireBase_Token", token)
+    }
+
+    private fun generateNotification(title: String, message: String){
 
         val intent = Intent(this, SplashScreen::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
