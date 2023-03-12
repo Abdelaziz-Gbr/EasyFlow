@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "369678568049",
+    "project_id": "easy-flow-f74c0",
+    "storage_bucket": "easy-flow-f74c0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:369678568049:android:93a3df3d352207486be9d0",
+        "android_client_info": {
+          "package_name": "com.easyflow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "369678568049-vgmq1k1rp6j4pikl63i1b7upe5su12ea.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD08ga2IQci9EPrucVk2WgbwhfqkOC-tOE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "369678568049-vgmq1k1rp6j4pikl63i1b7upe5su12ea.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
