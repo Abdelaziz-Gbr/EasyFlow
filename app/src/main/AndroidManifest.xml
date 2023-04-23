@@ -27,7 +27,7 @@
             android:name=".activities.HomeScreen"
             android:exported="false" />
         <activity
-            android:name=".activities.SplashScreen"
+            android:name=".activities.splashScreen.SplashScreen"
             android:exported="true"
             android:theme="@style/Theme.EasyFlow.SplashScreen">
             <intent-filter>
