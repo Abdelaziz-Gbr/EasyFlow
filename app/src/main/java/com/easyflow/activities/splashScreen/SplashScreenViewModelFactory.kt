@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.easyflow.database.UserDao
 
 class SplashScreenViewModelFactory(private val dataSource : UserDao) : ViewModelProvider.Factory {
+    @Suppress("unchecked_cast")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if(modelClass.isAssignableFrom(SplashScreenViewModel::class.java)){
             return SplashScreenViewModel(dataSource) as T

@@ -16,6 +16,7 @@ class SplashScreenViewModel(private val dataSource: UserDao): ViewModel() {
         get() = _navigateToHomeScreen
 
     fun getUser(){
+        //todo common function between login & splash screen -> move to repository.
         viewModelScope.launch {
             //get User from DB
             val tempUser = dataSource.getUser()
