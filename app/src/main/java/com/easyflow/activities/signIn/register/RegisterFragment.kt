@@ -1,7 +1,6 @@
-package com.easyflow.fragments.signActivity
+package com.easyflow.activities.signIn.register
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,72 +8,59 @@ import android.widget.DatePicker
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import com.easyflow.BuildConfig
 import com.easyflow.R
 import com.easyflow.databinding.FragmentRegisterBinding
-import com.easyflow.fragments.signActivity.RegisterFragmentDirections
-import com.easyflow.models.ServerResponse
 import com.easyflow.models.User
-import com.easyflow.repository.NetworkRepository
-import com.easyflow.viewModel.NetworkViewModel
-import com.easyflow.viewModel.UserDatabaseViewModel
-import com.easyflow.viewModelFactory.NetworkViewModelFactory
-import com.google.gson.Gson
 
 class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
-    private lateinit var databaseViewModel: UserDatabaseViewModel
-    private lateinit var networkViewModel : NetworkViewModel
+    private lateinit var viewModel : RegisterViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register, container, false)
-        databaseViewModel = ViewModelProvider(this)[UserDatabaseViewModel::class.java]
-        binding.registerButton.setOnClickListener {  register(it)   }
+        viewModel = RegisterViewModel()
+        binding.registerButton.setOnClickListener {  register()   }
         return binding.root
     }
 
-    private fun register(view: View?) {
-        val networkRepository = NetworkRepository()
-        val networkViewModelFactory = NetworkViewModelFactory(networkRepository)
-        networkViewModel = ViewModelProvider(this, networkViewModelFactory)[NetworkViewModel::class.java]
-
-        val user = getUser(view)
+    private fun register() {
+        val user = getUser()
 
         if (user != null) {
-            networkViewModel.register(user)
+            viewModel.register(user)
         }
         else{
             Toast.makeText(requireContext(), "please fill all the above slots", Toast.LENGTH_LONG).show()
         }
-        networkViewModel.registerResponse.observe(viewLifecycleOwner){ response ->
-            if(response.isSuccessful){
-                Toast.makeText(requireContext(), "Sign up Successful", Toast.LENGTH_LONG).show()
-                if (BuildConfig.DEBUG) Log.d("register_success", response.message())
-
-                view?.findNavController()?.navigate(RegisterFragmentDirections.actionRegisterFragmentToSignInFragment())
-
-
-            }
-            else{
-                var errorResponse: ServerResponse? = Gson().fromJson(response.errorBody()?.charStream(), ServerResponse::class.java)
-               Toast.makeText(
-                   requireContext(),
-                   "error signing up ${errorResponse?.message!!}",
-                   Toast.LENGTH_LONG
-               ).show()
-
+        viewModel.registerResponse.observe(viewLifecycleOwner){ response ->
+            if(response != null){
+                when(response){
+                    RegisterStatus.LOADING -> {
+                    //todo add loading effect.
+                    }
+                    RegisterStatus.OK -> {
+                        Toast.makeText(requireContext(), "Sign up Successful", Toast.LENGTH_LONG).show()
+                        view?.findNavController()?.navigate(RegisterFragmentDirections.actionRegisterFragmentToSignInFragment())
+                    }
+                    else -> {
+                        viewModel.registerErrorMessage.observe(viewLifecycleOwner){msg->
+                            if(msg != null)Toast.makeText(requireContext(), "error: $msg", Toast.LENGTH_LONG).show()
+                        }
+                    }
+                }
+                viewModel.onRegistered()
             }
         }
 
     }
-    private fun getUser(view: View?): User? {
+    private fun getUser(): User? {
         var user: User?
         var gender = if(binding.maleRadioButton.isChecked) "M" else "F"
+        //todo change this to get Date from a button on the ui.
         var birthDate = binding.birthDateRegister.getDate()
         if(binding.firstNameRegister.text.isEmpty() ||
             binding.lastNameRegister.text.isEmpty() ||

@@ -8,15 +8,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.easyflow.R
 import com.easyflow.activities.HomeScreen
-import com.easyflow.activities.SignInActivity
-import com.easyflow.cache.UserCache
+import com.easyflow.activities.signIn.SignInActivity
 import com.easyflow.database.UserDatabase
 import com.easyflow.databinding.ActivitySplashScreenBinding
-import com.easyflow.models.User
-import com.easyflow.repository.NetworkRepository
-import com.easyflow.viewModel.NetworkViewModel
-import com.easyflow.viewModel.UserDatabaseViewModel
-import com.easyflow.viewModelFactory.NetworkViewModelFactory
 
 class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,8 +28,8 @@ class SplashScreen : AppCompatActivity() {
         viewModel.getUser()
         binding.efLogo.animate().setDuration(500).alpha(0.75f)
         viewModel.navigateToHomeScreen.observe(this, Observer { navigate ->
-            navigate.let {
-                binding.efLogo.animate().setDuration(250).alpha(1f).withEndAction {
+            if(navigate != null){
+                binding.efLogo.animate().setDuration(1).alpha(1f).withEndAction {
                     intent = Intent(this, SignInActivity::class.java)
                     if(navigate == true){
                         intent = Intent(this, HomeScreen::class.java)

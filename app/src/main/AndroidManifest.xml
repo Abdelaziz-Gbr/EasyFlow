@@ -20,7 +20,7 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/purple_700" />
         <activity
-            android:name=".activities.SignInActivity"
+            android:name=".activities.signIn.SignInActivity"
             android:exported="false"
             />
         <activity

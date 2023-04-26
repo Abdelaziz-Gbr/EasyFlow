@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.easyflow.R
-import com.easyflow.activities.SignInActivity
+import com.easyflow.activities.signIn.SignInActivity
 import com.easyflow.cache.UserCache
 import com.easyflow.databinding.FragmentHomeBinding
 import com.easyflow.viewModel.UserDatabaseViewModel

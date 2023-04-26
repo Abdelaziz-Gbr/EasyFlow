@@ -1,4 +1,4 @@
-package com.easyflow.fragments.signActivity
+package com.easyflow.activities.signIn
 
 import android.os.Bundle
 import android.view.LayoutInflater
