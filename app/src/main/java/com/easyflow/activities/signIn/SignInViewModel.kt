@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.easyflow.api.EasyFlowServices
+import com.easyflow.api.Network
 import com.easyflow.cache.UserCache
 import com.easyflow.database.UserDao
 import com.easyflow.models.User
@@ -20,7 +20,7 @@ class SignInViewModel(private val userDataSource: UserDao): ViewModel() {
             //todo change when user model splits from network & db
             try {
                 //todo delegate initiating temp user to api class.
-                val logInResponse = EasyFlowServices.api.signIn(User(id = null, username = username, password = password))
+                val logInResponse = Network.easyFlowServices.signIn(User(id = null, username = username, password = password))
                 if(!logInResponse.isSuccessful){
                     _signInResponse.value = false
                     return@launch

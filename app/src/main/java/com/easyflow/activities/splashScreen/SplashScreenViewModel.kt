@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.easyflow.api.EasyFlowServices
+import com.easyflow.api.Network
 import com.easyflow.cache.UserCache
 import com.easyflow.database.UserDao
 import com.easyflow.models.User
@@ -25,15 +25,20 @@ class SplashScreenViewModel(private val dataSource: UserDao): ViewModel() {
                 return@launch
             }
             //test user credentials
-            //todo change it when User DB model separates from Network Model
-            val logInResponse = EasyFlowServices.api.signIn(User(id = null, username = tempUser.username, password = tempUser.password))
-            if(!logInResponse.isSuccessful){
-                _navigateToHomeScreen.value = false
-                return@launch
+            try {
+                //todo change it when User DB model separates from Network Model
+                val logInResponse = Network.easyFlowServices.signIn(User(id = null, username = tempUser.username, password = tempUser.password))
+                if(!logInResponse.isSuccessful){
+                    _navigateToHomeScreen.value = false
+                    return@launch
+                }
+                tempUser.userKey = logInResponse.headers()["Authorization"]
+                UserCache.cacheUser(tempUser)
+                _navigateToHomeScreen.value = true
             }
-            tempUser.userKey = logInResponse.headers()["Authorization"]
-            UserCache.cacheUser(tempUser)
-            _navigateToHomeScreen.value = true
+            catch (e: Exception){
+                _navigateToHomeScreen.value = false
+            }
         }
     }
     fun onUserGot(){

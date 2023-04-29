@@ -1,4 +1,4 @@
-package com.easyflow.fragments.homeActivity
+package com.easyflow.activities.homeScreen.fragmentHome
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,20 +12,27 @@ import androidx.navigation.ui.NavigationUI
 import com.easyflow.R
 import com.easyflow.activities.signIn.SignInActivity
 import com.easyflow.cache.UserCache
+import com.easyflow.database.UserDatabase
 import com.easyflow.databinding.FragmentHomeBinding
-import com.easyflow.viewModel.UserDatabaseViewModel
 
 class HomeFragment : Fragment() {
-    private lateinit var userDatabaseViewModel: UserDatabaseViewModel
+    private lateinit var viewModel: HomeFragmentViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
-        userDatabaseViewModel = ViewModelProvider(this)[UserDatabaseViewModel::class.java]
 
         val binding : FragmentHomeBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_home, container, false)
+
+        val application = requireNotNull(this.activity).application
+        val dataSource = UserDatabase.getDatabase(application).userDao()
+        val viewModelFactory = HomeFragmentViewModelFactory(dataSource)
+        viewModel = ViewModelProvider(this, viewModelFactory)[HomeFragmentViewModel::class.java]
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+        //todo get and cache user info
         binding.helloText.append(" ${UserCache.firstName}")
-        binding.rechargeButton.setOnClickListener{  recharge(view)  }
+        binding.navigateToRechargeFragmentButton.setOnClickListener{  recharge(view)  }
         binding.nfcButton.setOnClickListener{  nfc(view)  }
         binding.qrButton.setOnClickListener{  qr(view)  }
 
@@ -43,14 +50,14 @@ class HomeFragment : Fragment() {
     }
 
     private fun recharge(view: View?) {
-        Toast.makeText(requireContext(), "work in progress", Toast.LENGTH_SHORT).show()
+        view?.findNavController()?.navigate(HomeFragmentDirections.actionHomeFragmentToRechargeFragment())
 
     }
 
 
     private fun logOut(){
         //remove user info from db
-        userDatabaseViewModel.removeUser()
+        viewModel.logOut()
         //clear the cached key
         UserCache.freeAll()
         //go back to sign in screen

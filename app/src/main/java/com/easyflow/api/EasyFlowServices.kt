@@ -1,25 +1,23 @@
 package com.easyflow.api
 
-import com.easyflow.utils.Constants.serverBaseURL
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import com.easyflow.models.User
+import okhttp3.ResponseBody
+import retrofit2.Response
+import retrofit2.http.*
 
-object EasyFlowServices{
-    private val logging = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-    private val okHttpBuilder = OkHttpClient.Builder().addInterceptor(logging)
-    private val client = okHttpBuilder.build()
+interface EasyFlowServices {
 
-    private val retrofit by lazy {
-        Retrofit.Builder()
-            .baseUrl(serverBaseURL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(client)
-            .build()
-    }
+    @POST("login")
+    suspend fun signIn(@Body userInfo: User) : Response<ResponseBody>
 
-    val api: RestApi by lazy {
-        retrofit.create(RestApi::class.java)
-    }
+    @POST("Register")
+    suspend fun register(@Body user: User) : Response<ResponseBody>
+
+    @GET("passenger/profile")
+    suspend fun getUserInfo(@Header("Authorization") authKey : String) : Response<User>
+
+    @PUT("recharge/{amount}")
+    suspend fun recharge(@Path("amount") amount: Int,
+                         @Header("Authorization") authKey: String): Response<ResponseBody>
+
 }

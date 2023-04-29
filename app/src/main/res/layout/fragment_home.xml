@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".fragments.homeActivity.HomeFragment">
-
+    tools:context=".activities.homeScreen.fragmentHome.HomeFragment">
+<data>
+    <variable
+        name="viewModel"
+        type="com.easyflow.activities.homeScreen.fragmentHome.HomeFragmentViewModel" />
+</data>
     <LinearLayout
         android:id="@+id/homeLinearLayout"
         android:layout_width="match_parent"
@@ -24,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="Hello "
+            android:text="@{viewModel.welcomeText}"
             android:textColor="@color/teal_200"
             android:textSize="34sp"
             android:textStyle="bold" />
@@ -43,9 +47,10 @@
                 android:background="@color/teal_700"
                 android:text="QR"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="20sp"/>
 
             <Button
+                android:enabled="@{viewModel.enableNFCButton}"
                 android:id="@+id/nfc_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,14 +63,14 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/recharge_button"
+            android:id="@+id/navigate_to_recharge_fragment_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:background="@color/teal_700"
             android:text="Recharge"
             android:textColor="@color/black"
-            android:textSize="20sp" />
-
+            android:textSize="20sp"/>
     </LinearLayout>
+
 </layout>

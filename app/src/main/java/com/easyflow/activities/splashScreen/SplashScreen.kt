@@ -7,11 +7,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.easyflow.R
-import com.easyflow.activities.HomeScreen
+import com.easyflow.activities.homeScreen.HomeScreen
 import com.easyflow.activities.signIn.SignInActivity
 import com.easyflow.database.UserDatabase
 import com.easyflow.databinding.ActivitySplashScreenBinding
 
+//todo maybe the splash screen is not relative anymore and should be replaced with the main activity?
 class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         //initialize the view
@@ -26,10 +27,16 @@ class SplashScreen : AppCompatActivity() {
         val viewModel = ViewModelProvider(this, viewModelFactory)[SplashScreenViewModel::class.java]
         binding.efLogo.alpha = 0f
         viewModel.getUser()
-        binding.efLogo.animate().setDuration(500).alpha(0.75f)
+        //binding.efLogo.animate().setDuration(500).alpha(0.75f)
         viewModel.navigateToHomeScreen.observe(this, Observer { navigate ->
             if(navigate != null){
-                binding.efLogo.animate().setDuration(1).alpha(1f).withEndAction {
+                intent = Intent(this, SignInActivity::class.java)
+                if(navigate == true){
+                    intent = Intent(this, HomeScreen::class.java)
+                }
+                startActivity(intent)
+                finish()
+                /*binding.efLogo.animate().setDuration(1).alpha(1f).withEndAction {
                     intent = Intent(this, SignInActivity::class.java)
                     if(navigate == true){
                         intent = Intent(this, HomeScreen::class.java)
@@ -37,7 +44,7 @@ class SplashScreen : AppCompatActivity() {
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                     startActivity(intent)
                     finish()
-                }
+                }*/
                 viewModel.onUserGot()
             }
         })

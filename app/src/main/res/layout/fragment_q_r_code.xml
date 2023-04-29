@@ -2,7 +2,7 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".fragments.homeActivity.tickitingFragments.QRCodeFragment">
+    tools:context=".activities.homeScreen.QRCodeFragment">
 
     <LinearLayout
         android:layout_width="match_parent"

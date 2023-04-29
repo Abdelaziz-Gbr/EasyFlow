@@ -1,4 +1,4 @@
-package com.easyflow.fragments.homeActivity.tickitingFragments
+package com.easyflow.activities.homeScreen
 
 import android.os.Build
 import android.os.Bundle

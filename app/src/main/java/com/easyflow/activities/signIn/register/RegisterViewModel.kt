@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.easyflow.api.EasyFlowServices
+import com.easyflow.api.Network
 import com.easyflow.models.ServerResponse
 import com.easyflow.models.User
 import com.google.gson.Gson
@@ -23,7 +23,7 @@ class RegisterViewModel: ViewModel() {
         viewModelScope.launch {
             _registerResponse.value = RegisterStatus.LOADING
             try {
-                val registerRequest = EasyFlowServices.api.register(user)
+                val registerRequest = Network.easyFlowServices.register(user)
                 if(registerRequest.isSuccessful){
                     _registerResponse.value = RegisterStatus.OK
                 }
