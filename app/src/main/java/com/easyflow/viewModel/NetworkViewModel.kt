@@ -5,23 +5,23 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.easyflow.cache.UserCache
-import com.easyflow.models.User
+import com.easyflow.database.models.UserDatabaseModel
 import com.easyflow.repository.NetworkRepository
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import okhttp3.ResponseBody
 import retrofit2.Response
 
-class NetworkViewModel(private val networkRepository: NetworkRepository): ViewModel() {
+class NetworkViewModel(private val networkRepository: NetworkRepository): ViewModel() {/*
     val registerResponse : MutableLiveData<Response<ResponseBody>> = MutableLiveData()
     private val _signResponse : MutableLiveData<Response<ResponseBody>> = MutableLiveData()
-    val userInfoResponse : MutableLiveData<Response<User>> = MutableLiveData()
+    val userInfoResponse : MutableLiveData<Response<UserDatabaseModel>> = MutableLiveData()
     val loginResponse : MutableLiveData<Boolean> = MutableLiveData()
     private val handler = CoroutineExceptionHandler { _, exception ->
         Log.d("Network", "Caught $exception")
         loginResponse.value = false
     }
-    fun signIn(user : User){
+    fun signIn(user : UserDatabaseModel){
         viewModelScope.launch (handler) {
             val response = networkRepository.signIn(user)
             //signResponse.value = response
@@ -55,10 +55,10 @@ class NetworkViewModel(private val networkRepository: NetworkRepository): ViewMo
         }
     }
 
-    fun register(user:User){
+    fun register(user: UserDatabaseModel){
         viewModelScope.launch(handler) {
             val response = networkRepository.register(user)
             registerResponse.value = response
         }
-    }
+    }*/
 }

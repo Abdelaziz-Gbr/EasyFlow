@@ -4,10 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.easyflow.api.Network
+import com.easyflow.network.Network
 import com.easyflow.cache.UserCache
+import com.easyflow.cache.UserKey
 import com.easyflow.database.UserDao
-import com.easyflow.models.User
+import com.easyflow.database.models.UserDatabaseModel
+import com.easyflow.database.models.toNetworkModel
+import com.easyflow.network.models.UserNetworkModel
 import kotlinx.coroutines.launch
 
 class SplashScreenViewModel(private val dataSource: UserDao): ViewModel() {
@@ -18,7 +21,7 @@ class SplashScreenViewModel(private val dataSource: UserDao): ViewModel() {
     fun getUser(){
         //todo common function between login & splash screen -> move to repository.
         viewModelScope.launch {
-            //get User from DB
+            //get UserDatabaseModel from DB
             val tempUser = dataSource.getUser()
             if(tempUser == null){
                 _navigateToHomeScreen.value = false
@@ -26,14 +29,13 @@ class SplashScreenViewModel(private val dataSource: UserDao): ViewModel() {
             }
             //test user credentials
             try {
-                //todo change it when User DB model separates from Network Model
-                val logInResponse = Network.easyFlowServices.signIn(User(id = null, username = tempUser.username, password = tempUser.password))
+                //UserNetworkModel(username = tempUser.username, password = tempUser.password)
+                val logInResponse = Network.easyFlowServices.signIn(tempUser.toNetworkModel())
                 if(!logInResponse.isSuccessful){
                     _navigateToHomeScreen.value = false
                     return@launch
                 }
-                tempUser.userKey = logInResponse.headers()["Authorization"]
-                UserCache.cacheUser(tempUser)
+                UserKey.value = logInResponse.headers()["Authorization"]
                 _navigateToHomeScreen.value = true
             }
             catch (e: Exception){

@@ -1,10 +1,10 @@
 package com.easyflow.repository
 
 import com.easyflow.database.UserDao
-import com.easyflow.models.User
+import com.easyflow.database.models.UserDatabaseModel
 
 class UserDatabaseRepository(private val userDao: UserDao) {
-    suspend fun addUser(user: User){
+/*    suspend fun addUser(user: UserDatabaseModel){
         userDao.addUser(user)
     }
 
@@ -16,8 +16,8 @@ class UserDatabaseRepository(private val userDao: UserDao) {
         return userDao.removeUser()
     }
 
-    suspend fun getUser(): User?{
+    suspend fun getUser(): UserDatabaseModel?{
         return userDao.getUser()
-    }
+    }*/
 
 }

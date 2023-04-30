@@ -6,20 +6,20 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.easyflow.cache.UserCache
 import com.easyflow.database.UserDatabase
-import com.easyflow.models.User
+import com.easyflow.database.models.UserDatabaseModel
 import com.easyflow.repository.UserDatabaseRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class UserDatabaseViewModel(application: Application): AndroidViewModel(application) {
+class UserDatabaseViewModel(application: Application): AndroidViewModel(application) {/*
     private val databaseRepository: UserDatabaseRepository
 
-    var userFromDB : MutableLiveData<User> = MutableLiveData()
+    var userFromDB : MutableLiveData<UserDatabaseModel> = MutableLiveData()
     init {
         val userDao = UserDatabase.getDatabase(application).userDao()
         databaseRepository = UserDatabaseRepository(userDao)
     }
-    fun addUser(user: User){
+    fun addUser(user: UserDatabaseModel){
         viewModelScope.launch(Dispatchers.IO) {
             databaseRepository.addUser(user)
         }
@@ -35,5 +35,5 @@ class UserDatabaseViewModel(application: Application): AndroidViewModel(applicat
         viewModelScope.launch(Dispatchers.IO) {
            UserCache.cacheUser(databaseRepository.getUser())
         }
-    }
+    }*/
 }

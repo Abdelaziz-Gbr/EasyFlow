@@ -22,12 +22,12 @@
     </fragment>
     <fragment
         android:id="@+id/QRCodeFragment"
-        android:name="com.easyflow.activities.homeScreen.QRCodeFragment"
+        android:name="com.easyflow.activities.homeScreen.ticketMaking.QRCodeFragment"
         android:label="QR Code"
         tools:layout="@layout/fragment_q_r_code" />
     <fragment
         android:id="@+id/NFCFragment"
-        android:name="com.easyflow.activities.homeScreen.NFCFragment"
+        android:name="com.easyflow.activities.homeScreen.ticketMaking.NFCFragment"
         android:label="fragment_n_f_c"
         tools:layout="@layout/fragment_n_f_c" />
     <fragment

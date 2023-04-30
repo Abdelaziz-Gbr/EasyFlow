@@ -4,9 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.easyflow.api.Network
-import com.easyflow.models.ServerResponse
-import com.easyflow.models.User
+import com.easyflow.network.Network
+import com.easyflow.network.models.ServerResponse
+import com.easyflow.database.models.UserDatabaseModel
+import com.easyflow.network.models.UserNetworkModel
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
 
@@ -19,7 +20,7 @@ class RegisterViewModel: ViewModel() {
         val registerErrorMessage : LiveData<String?>
             get() = _registerErrorMessage
 
-    fun register(user: User){
+    fun register(user: UserNetworkModel){
         viewModelScope.launch {
             _registerResponse.value = RegisterStatus.LOADING
             try {

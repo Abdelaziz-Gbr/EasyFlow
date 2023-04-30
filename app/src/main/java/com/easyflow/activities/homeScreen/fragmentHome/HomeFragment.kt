@@ -30,8 +30,6 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)[HomeFragmentViewModel::class.java]
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        //todo get and cache user info
-        binding.helloText.append(" ${UserCache.firstName}")
         binding.navigateToRechargeFragmentButton.setOnClickListener{  recharge(view)  }
         binding.nfcButton.setOnClickListener{  nfc(view)  }
         binding.qrButton.setOnClickListener{  qr(view)  }

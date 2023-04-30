@@ -4,10 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.easyflow.api.Network
+import com.easyflow.network.Network
 import com.easyflow.cache.UserCache
+import com.easyflow.cache.UserKey
 import com.easyflow.database.UserDao
-import com.easyflow.models.User
+import com.easyflow.database.models.UserDatabaseModel
+import com.easyflow.network.models.UserNetworkModel
 import kotlinx.coroutines.launch
 
 class SignInViewModel(private val userDataSource: UserDao): ViewModel() {
@@ -17,17 +19,13 @@ class SignInViewModel(private val userDataSource: UserDao): ViewModel() {
     //todo partly common with splash screen
     fun signIn(username: String, password: String){
         viewModelScope.launch {
-            //todo change when user model splits from network & db
             try {
-                //todo delegate initiating temp user to api class.
-                val logInResponse = Network.easyFlowServices.signIn(User(id = null, username = username, password = password))
+                val logInResponse = Network.easyFlowServices.signIn(UserNetworkModel(username = username, password = password))
                 if(!logInResponse.isSuccessful){
                     _signInResponse.value = false
                     return@launch
                 }
-                val tempUser = User(username = username, password = password)
-                tempUser.userKey = logInResponse.headers()["Authorization"]
-                UserCache.cacheUser(tempUser)
+                UserKey.value = logInResponse.headers()["Authorization"]
                 _signInResponse.value = true
             }
             catch (e: Exception){
@@ -37,7 +35,7 @@ class SignInViewModel(private val userDataSource: UserDao): ViewModel() {
     }
 
     //todo change responsibility to DB repository
-    fun addUser(user: User){
+    fun addUser(user: UserDatabaseModel){
         viewModelScope.launch { userDataSource.addUser(user) }
     }
     fun onResponseReceived(){

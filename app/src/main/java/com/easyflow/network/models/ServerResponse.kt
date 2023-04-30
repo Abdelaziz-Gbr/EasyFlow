@@ -1,4 +1,4 @@
-package com.easyflow.models
+package com.easyflow.network.models
 
 data class ServerResponse (
     val status: String? = null,

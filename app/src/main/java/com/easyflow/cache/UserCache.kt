@@ -1,6 +1,7 @@
 package com.easyflow.cache
 
-import com.easyflow.models.User
+import com.easyflow.database.models.UserDatabaseModel
+import com.easyflow.network.models.UserNetworkModel
 
 object UserCache {
     var firstName: String? = null
@@ -11,11 +12,10 @@ object UserCache {
     var phoneNumber: String? = null
     var gender: String? = null
     var birthDay: String? = null
-    var userKey: String? = null
     var type : String? = null
     var city : String? = null
-    var balance : Double? = null
-    fun cacheUser(user: User?){
+    var balance : Float? = null
+    fun cacheUser(user: UserNetworkModel?){
         if(user == null)
             return
         firstName = user.firstName
@@ -26,10 +26,9 @@ object UserCache {
         phoneNumber = user.phoneNumber
         gender = user.gender
         birthDay = user.birthDay
-        userKey = user.userKey
         type = user.type
         city = user.city
-        balance = user.balance
+        balance = user.wallet?.balance
     }
 
     fun freeAll(){
@@ -41,7 +40,6 @@ object UserCache {
         phoneNumber = null
         gender = null
         birthDay = null
-        userKey = null
         type = null
         city = null
         balance = null

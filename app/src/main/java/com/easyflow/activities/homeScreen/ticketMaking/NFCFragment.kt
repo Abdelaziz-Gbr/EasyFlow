@@ -1,4 +1,4 @@
-package com.easyflow.activities.homeScreen
+package com.easyflow.activities.homeScreen.ticketMaking
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

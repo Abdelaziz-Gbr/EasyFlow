@@ -4,9 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.easyflow.models.User
+import com.easyflow.database.models.UserDatabaseModel
 
-@Database(entities = [User::class], version = 1, exportSchema = false)
+@Database(entities = [UserDatabaseModel::class], version = 2, exportSchema = false)
 abstract class UserDatabase: RoomDatabase() {
     abstract fun userDao(): UserDao
 

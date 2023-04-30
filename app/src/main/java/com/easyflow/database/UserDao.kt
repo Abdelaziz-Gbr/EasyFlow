@@ -4,19 +4,17 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.easyflow.models.User
+import com.easyflow.database.models.UserDatabaseModel
 
 @Dao
 interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addUser(user: User)
+    suspend fun addUser(user: UserDatabaseModel)
 
-    @Query("SELECT userKey FROM user_table WHERE id = 0")
-    suspend fun getUserKey(): String?
 
     @Query("DELETE FROM user_table WHERE id = 0")
     suspend fun removeUser()
 
     @Query("SELECT * FROM user_table WHERE id = 0")
-    suspend fun getUser(): User?
+    suspend fun getUser(): UserDatabaseModel?
 }

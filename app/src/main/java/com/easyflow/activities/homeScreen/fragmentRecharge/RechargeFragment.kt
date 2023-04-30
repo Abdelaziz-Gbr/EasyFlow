@@ -20,7 +20,7 @@ class RechargeFragment : Fragment() {
         val binding = DataBindingUtil.inflate<FragmentRechargeBinding>(inflater, R.layout.fragment_recharge, container, false)
         val viewModel = ViewModelProvider(this)[RechargeFragmentViewModel::class.java]
         binding.rechargeButton.setOnClickListener{
-            val amount = binding.rechargeAmount.text.toString().toInt()
+            val amount = binding.rechargeAmount.text.toString().toFloat()
             viewModel.recharge(amount)
             //todo view ProgressBar
         }

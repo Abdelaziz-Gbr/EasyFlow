@@ -14,7 +14,7 @@ import com.easyflow.R
 import com.easyflow.activities.homeScreen.HomeScreen
 import com.easyflow.database.UserDatabase
 import com.easyflow.databinding.FragmentSignInBinding
-import com.easyflow.models.User
+import com.easyflow.database.models.UserDatabaseModel
 
 class SignInFragment : Fragment() {
     private lateinit var binding: FragmentSignInBinding
@@ -44,7 +44,6 @@ class SignInFragment : Fragment() {
         val viewModel = ViewModelProvider(this, viewModelFactory)[SignInViewModel::class.java]
         val userName = binding.username.text.toString()
         val userPassword = binding.userPassword.text.toString()
-        //todo split network User model from DB User model.
 
         viewModel.signIn(userName, userPassword)
         viewModel.signInResponse.observe(viewLifecycleOwner) {
@@ -52,8 +51,7 @@ class SignInFragment : Fragment() {
             if (signResponse != null) {
                 if(signResponse){
                     if(binding.staySignedInCheck.isChecked){
-                        //todo if not the other info have use saved on the DB just remove them from the model.
-                        viewModel.addUser(User(id = 0, username = userName, password = userPassword))
+                        viewModel.addUser(UserDatabaseModel(id = 0, username = userName, password = userPassword))
                     }
                     val intent = Intent(activity, HomeScreen::class.java)
                     startActivity(intent)
