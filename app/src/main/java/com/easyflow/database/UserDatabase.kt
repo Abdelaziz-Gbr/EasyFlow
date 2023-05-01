@@ -4,12 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.easyflow.database.models.TicketDatabaseModel
 import com.easyflow.database.models.UserDatabaseModel
 
-@Database(entities = [UserDatabaseModel::class], version = 2, exportSchema = false)
+@Database(entities = [UserDatabaseModel::class, TicketDatabaseModel::class], version = 3, exportSchema = false)
 abstract class UserDatabase: RoomDatabase() {
     abstract fun userDao(): UserDao
-
+    abstract fun ticketDao(): TicketDao
     companion object{
         @Volatile
         private var INSTANCE: UserDatabase? = null
