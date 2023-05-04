@@ -16,7 +16,7 @@ class HistoryFragmentViewModel(private val ticketDao: TicketDao): ViewModel() {
     val tickets = ticketDao.getAllTickets()
     init {
         //refreshTickets()
-        viewModelScope.launch { ticketDao.deleteAllTickets() }
+        //viewModelScope.launch { ticketDao.deleteAllTickets() }
     }
 
     private fun refreshTickets() {

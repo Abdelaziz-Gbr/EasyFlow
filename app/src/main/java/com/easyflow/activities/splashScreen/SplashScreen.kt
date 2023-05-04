@@ -27,16 +27,16 @@ class SplashScreen : AppCompatActivity() {
         val viewModel = ViewModelProvider(this, viewModelFactory)[SplashScreenViewModel::class.java]
         binding.efLogo.alpha = 0f
         viewModel.getUser()
-        //binding.efLogo.animate().setDuration(500).alpha(0.75f)
+        binding.efLogo.animate().setDuration(500).alpha(0.75f)
         viewModel.navigateToHomeScreen.observe(this, Observer { navigate ->
             if(navigate != null){
-                intent = Intent(this, SignInActivity::class.java)
+                /*intent = Intent(this, SignInActivity::class.java)
                 if(navigate == true){
                     intent = Intent(this, HomeScreen::class.java)
                 }
                 startActivity(intent)
-                finish()
-                /*binding.efLogo.animate().setDuration(1).alpha(1f).withEndAction {
+                finish()*/
+                binding.efLogo.animate().setDuration(1).alpha(1f).withEndAction {
                     intent = Intent(this, SignInActivity::class.java)
                     if(navigate == true){
                         intent = Intent(this, HomeScreen::class.java)
@@ -44,7 +44,7 @@ class SplashScreen : AppCompatActivity() {
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                     startActivity(intent)
                     finish()
-                }*/
+                }
                 viewModel.onUserGot()
             }
         })
