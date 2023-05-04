@@ -45,4 +45,9 @@
         android:name="com.easyflow.activities.homeScreen.ProfileFragment"
         android:label="my profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.easyflow.activities.homeScreen.fragmentHistory.HistoryFragment"
+        android:label="Tickets History"
+        tools:layout="@layout/fragment_history" />
 </navigation>

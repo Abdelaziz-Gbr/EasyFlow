@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.easyflow.database.models.TicketDatabaseModel
 import com.easyflow.database.models.UserDatabaseModel
 
-@Database(entities = [UserDatabaseModel::class, TicketDatabaseModel::class], version = 3, exportSchema = false)
+@Database(entities = [UserDatabaseModel::class, TicketDatabaseModel::class], version = 4, exportSchema = false)
 abstract class UserDatabase: RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun ticketDao(): TicketDao

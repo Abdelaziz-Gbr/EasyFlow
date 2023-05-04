@@ -33,6 +33,16 @@
             android:textSize="34sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/current_balance_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="@{viewModel.currentBalance}"
+            android:textColor="@color/teal_200"
+            android:textSize="34sp"
+            android:textStyle="bold" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

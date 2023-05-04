@@ -2,6 +2,6 @@ package com.easyflow.network.models
 
 data class Wallet (
     val id: String,
-    val balance: Float,
+    var balance: Float,
     val creditCard: String
         )

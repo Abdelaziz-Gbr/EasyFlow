@@ -22,6 +22,6 @@ interface EasyFlowServices {
                          @Header("Authorization") authKey: String): Response<ResponseBody>
 
     @GET("passenger/history")
-    suspend fun getAllTickets(): Response<List<TicketNetworkModel>>
+    suspend fun getAllTickets(@Header("Authorization") authKey: String): Response<List<TicketNetworkModel>>
 
 }

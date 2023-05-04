@@ -8,13 +8,14 @@ import com.easyflow.network.models.TicketNetworkModel
 data class TicketDatabaseModel (
     @PrimaryKey(autoGenerate = false)
     val id: String,
+    val startTime: Long,
+    val endTime: Long,
+    val status: String,
+    val startStation: String,
     val price: Float,
-    val time: Long,
-    val weight: Int,
-    val line_id: String,
-    val owner_id: String,
+    val endStation: String
         )
 
 fun TicketDatabaseModel.toNetworkDomain(): TicketNetworkModel{
-    return TicketNetworkModel(id, price, time, weight, line_id, owner_id)
+    return TicketNetworkModel(id, startTime, endTime, status, startStation, price, endStation)
 }

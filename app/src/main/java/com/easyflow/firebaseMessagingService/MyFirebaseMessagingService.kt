@@ -11,13 +11,11 @@ import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.easyflow.R
 import com.easyflow.activities.splashScreen.SplashScreen
+import com.easyflow.utils.Constants.channelID
+import com.easyflow.utils.Constants.channelName
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-
-const val channelID = "easyFlow_notificationChannel"
-const val channelName = "com.easyflow.firebaseMessagingService"
-
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     init {

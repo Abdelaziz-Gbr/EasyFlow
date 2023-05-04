@@ -17,6 +17,8 @@ class RechargeFragmentViewModel: ViewModel() {
         viewModelScope.launch {
             try {
                 val rechargeResponse = Network.easyFlowServices.recharge(amount, UserKey.value!!)
+                if(rechargeResponse.isSuccessful)
+                    UserCache.addBalance(amount)
                 _rechargeStatus.value = rechargeResponse.isSuccessful
             }
             catch (e: Exception){

@@ -7,14 +7,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.easyflow.network.Network
 import com.easyflow.cache.UserCache
+import com.easyflow.cache.UserCache.username
 import com.easyflow.cache.UserKey
 import com.easyflow.database.UserDao
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.launch
 
 class HomeFragmentViewModel(private val userDao: UserDao): ViewModel() {
     private val _welcomeText = MutableLiveData<String>()
     val welcomeText : LiveData<String>
         get() = _welcomeText
+
+    private val _currentBalance = MutableLiveData<String>()
+    val currentBalance : LiveData<String>
+        get() = _currentBalance
 
     private val _enableNFCButton = MutableLiveData<Boolean>()
     val enableNFCButton : LiveData<Boolean>
@@ -31,6 +37,8 @@ class HomeFragmentViewModel(private val userDao: UserDao): ViewModel() {
     fun logOut(){
         viewModelScope.launch {
             userDao.removeUser()
+            FirebaseMessaging.getInstance().unsubscribeFromTopic("$username")
+
             //todo delete all tickets as well. || just retrieve them from the internet each time.
         }
 
@@ -44,9 +52,12 @@ class HomeFragmentViewModel(private val userDao: UserDao): ViewModel() {
                 Log.d("user_wallet", userInfo.body()?.wallet?.balance.toString())
                 UserCache.cacheUser(userInfo.body())
                 _welcomeText.value = "mr. ${UserCache.firstName}"
+                val currentAmountString = (UserCache.wallet!!.balance).toString()
+                _currentBalance.value = "current balance = $currentAmountString"
             }
         }
         catch (e: Exception){
+            //todo
             //failed to retrieve user Info the program should break!.
         }
     }

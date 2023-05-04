@@ -10,6 +10,7 @@ import com.easyflow.cache.UserKey
 import com.easyflow.database.UserDao
 import com.easyflow.database.models.UserDatabaseModel
 import com.easyflow.network.models.UserNetworkModel
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.launch
 
 class SignInViewModel(private val userDataSource: UserDao): ViewModel() {
@@ -26,6 +27,7 @@ class SignInViewModel(private val userDataSource: UserDao): ViewModel() {
                     return@launch
                 }
                 UserKey.value = logInResponse.headers()["Authorization"]
+                FirebaseMessaging.getInstance().subscribeToTopic("$username")
                 _signInResponse.value = true
             }
             catch (e: Exception){
