@@ -15,5 +15,8 @@
     <item
         android:id="@+id/profileFragment"
         android:title="Profile" />
+    <item
+        android:id="@+id/historyFragment"
+        android:title="History" />
 
 </menu>
