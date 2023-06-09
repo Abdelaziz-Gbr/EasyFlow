@@ -4,28 +4,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.easyflow.R
 import com.easyflow.database.models.TicketDatabaseModel
 import com.easyflow.utils.convertLongToTime
 
-class TicketAdapter: RecyclerView.Adapter<TicketAdapter.ViewHolder>() {
-    var data = listOf<TicketDatabaseModel>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
-
+class TicketAdapter: ListAdapter<TicketDatabaseModel,TicketAdapter.ViewHolder>(TicketDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = data[position]
+        val item = getItem(position)
         holder.bind(item)
     }
-
-    override fun getItemCount() = data.size
 
     class ViewHolder private constructor(itemView: View): RecyclerView.ViewHolder(itemView) {
         val timeText = itemView.findViewById<TextView>(R.id.ticket_item_time)
@@ -46,6 +40,23 @@ class TicketAdapter: RecyclerView.Adapter<TicketAdapter.ViewHolder>() {
 
                 return ViewHolder(view)
             }
+        }
+
+    }
+
+    class TicketDiffCallback : DiffUtil.ItemCallback<TicketDatabaseModel> (){
+        override fun areItemsTheSame(
+            oldItem: TicketDatabaseModel,
+            newItem: TicketDatabaseModel
+        ): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(
+            oldItem: TicketDatabaseModel,
+            newItem: TicketDatabaseModel
+        ): Boolean {
+            return oldItem == newItem
         }
 
     }
