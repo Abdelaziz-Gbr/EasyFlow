@@ -1,14 +1,12 @@
 package com.easyflow.activities.homeScreen.fragmentHistory
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.easyflow.R
 import com.easyflow.database.models.TicketDatabaseModel
+import com.easyflow.databinding.TicketHistoryListItemBinding
 import com.easyflow.utils.convertLongToTime
 
 class TicketAdapter: ListAdapter<TicketDatabaseModel,TicketAdapter.ViewHolder>(TicketDiffCallback()) {
@@ -21,24 +19,18 @@ class TicketAdapter: ListAdapter<TicketDatabaseModel,TicketAdapter.ViewHolder>(T
         holder.bind(item)
     }
 
-    class ViewHolder private constructor(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val timeText = itemView.findViewById<TextView>(R.id.ticket_item_time)
-        val placeText = itemView.findViewById<TextView>(R.id.ticket_item_place)
-        val priceText = itemView.findViewById<TextView>(R.id.ticket_item_price)
-
-        fun bind(item: TicketDatabaseModel) {
-            timeText.text = convertLongToTime(item.startTime)
-            placeText.text = "from ${item.startStation} to ${item.endStation}"
-            priceText.text = "${item.price} EGP."
+    class ViewHolder private constructor(val binding: TicketHistoryListItemBinding): RecyclerView.ViewHolder(binding.root) {
+        fun bind(ticket: TicketDatabaseModel) {
+            binding.ticket = ticket
+            binding.executePendingBindings()
         }
 
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val view = layoutInflater
-                    .inflate(R.layout.ticket_history_list_item, parent, false)
+                val binding = TicketHistoryListItemBinding.inflate(layoutInflater, parent, false)
 
-                return ViewHolder(view)
+                return ViewHolder(binding)
             }
         }
 
