@@ -15,7 +15,7 @@ interface TicketDao {
     @Query("SELECT * FROM Ticket_Table ORDER BY startTime DESC")
     fun getAllTickets(): LiveData<List<TicketDatabaseModel>>
 
-    @Query("SELECT * FROM Ticket_Table WHERE id = :ticketID")
+    @Query("SELECT * from Ticket_Table WHERE id = :ticketID")
     fun getTicketWithId(ticketID: String): LiveData<TicketDatabaseModel>
 
     @Query("DELETE FROM Ticket_Table")

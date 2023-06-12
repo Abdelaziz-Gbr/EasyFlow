@@ -28,12 +28,12 @@
     <fragment
         android:id="@+id/NFCFragment"
         android:name="com.easyflow.activities.homeScreen.ticketMaking.NFCFragment"
-        android:label="fragment_n_f_c"
+        android:label="NFC manager"
         tools:layout="@layout/fragment_n_f_c" />
     <fragment
         android:id="@+id/rechargeFragment"
         android:name="com.easyflow.activities.homeScreen.fragmentRecharge.RechargeFragment"
-        android:label="fragment_recharge"
+        android:label="Recharge"
         tools:layout="@layout/fragment_recharge" />
     <fragment
         android:id="@+id/settingsFragment"
@@ -49,5 +49,23 @@
         android:id="@+id/historyFragment"
         android:name="com.easyflow.activities.homeScreen.fragmentHistory.HistoryFragment"
         android:label="Tickets History"
-        tools:layout="@layout/fragment_history" />
+        tools:layout="@layout/fragment_history" >
+        <action
+            android:id="@+id/action_historyFragment_to_ticketDetail"
+            app:destination="@id/ticketDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/ticketDetail"
+        android:name="com.easyflow.activities.homeScreen.fragmentHistory.ticketDetail.TicketDetail"
+        android:label="My Ticket Detail"
+        tools:layout="@layout/fragment_ticket_detail">
+        <action
+            android:id="@+id/action_ticketDetail_to_historyFragment"
+            app:destination="@id/historyFragment"
+            app:popUpTo="@id/ticketDetail"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="ticketId"
+            app:argType="string" />
+    </fragment>
 </navigation>

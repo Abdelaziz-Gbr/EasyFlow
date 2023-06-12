@@ -1,5 +1,6 @@
 package com.easyflow.activities.homeScreen.fragmentHistory
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.easyflow.cache.UserKey
@@ -38,5 +39,16 @@ class HistoryFragmentViewModel(private val ticketDao: TicketDao): ViewModel() {
 
     fun onRefreshButtonClicked(){
         refreshTickets()
+    }
+
+    private val _navigateToTicketView = MutableLiveData<String?>()
+    val navigateToTicketView
+        get() = _navigateToTicketView
+    fun onTicketClicked(ticketId: String) {
+        _navigateToTicketView.value = ticketId
+    }
+
+    fun onTicketViewNavigated(){
+        _navigateToTicketView.value = null
     }
 }

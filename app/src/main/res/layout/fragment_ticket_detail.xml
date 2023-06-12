@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.easyflow.activities.homeScreen.fragmentHistory.ticketDetail.TicketDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#4D6A6E"
+        android:padding="16dp">
+
+
+        <ImageView
+            android:id="@+id/ticket_view_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ticket_route" />
+
+        <TextView
+            android:id="@+id/ticket_id_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ticket_view_image"
+            tools:text="ticket id: das-dasd-2323-sadas-2323-2323"
+            app:ticketId="@{viewModel.ticket}"
+            />
+
+        <TextView
+            android:id="@+id/ticketTime_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ticket_id_text_view"
+            tools:text="Ticket Date: 25/3/2023"
+            app:ticketTime="@{viewModel.ticket}"/>
+
+        <TextView
+            android:id="@+id/ticket_status_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ticketTime_text_view"
+            tools:text="Ticket Status: Open"
+            app:ticketStatus="@{viewModel.ticket}"/>
+
+        <LinearLayout
+            android:id="@+id/ticket_station"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ticket_status_text_view"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/ticket_start_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                app:startStation = "@{viewModel.ticket}"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="From: here" />
+
+            <TextView
+                android:id="@+id/ticket_end_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                app:endStation = "@{viewModel.ticket}"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="to: There" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/ticket_price_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ticket_station"
+            tools:text="Total Price: 5902 EGP"
+            app:ticketPrice="@{viewModel.ticket}"/>
+
+        <Button
+            android:id="@+id/report_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textCapSentences|textCapWords|textCapCharacters"
+            android:text="Report a problem"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ticket_price_text_view" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

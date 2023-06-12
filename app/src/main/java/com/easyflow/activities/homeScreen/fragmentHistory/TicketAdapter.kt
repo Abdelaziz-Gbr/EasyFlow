@@ -7,21 +7,21 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.easyflow.database.models.TicketDatabaseModel
 import com.easyflow.databinding.TicketHistoryListItemBinding
-import com.easyflow.utils.convertLongToTime
 
-class TicketAdapter: ListAdapter<TicketDatabaseModel,TicketAdapter.ViewHolder>(TicketDiffCallback()) {
+class TicketAdapter(val ticketItemListener: TicketItemListener): ListAdapter<TicketDatabaseModel,TicketAdapter.ViewHolder>(TicketDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(item, ticketItemListener)
     }
 
     class ViewHolder private constructor(val binding: TicketHistoryListItemBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(ticket: TicketDatabaseModel) {
+        fun bind(ticket: TicketDatabaseModel, ticketItemListener: TicketItemListener) {
             binding.ticket = ticket
+            binding.clickListener = ticketItemListener
             binding.executePendingBindings()
         }
 
@@ -51,5 +51,8 @@ class TicketAdapter: ListAdapter<TicketDatabaseModel,TicketAdapter.ViewHolder>(T
             return oldItem == newItem
         }
 
+    }
+    class TicketItemListener(val clickListener: (ticketId: String) -> Unit){
+        fun onClick(ticket: TicketDatabaseModel) = clickListener(ticket.id)
     }
 }
