@@ -70,7 +70,7 @@
             android:id="@+id/ticket_station"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_margin="4dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ticket_status_text_view"
@@ -94,7 +94,7 @@
                 app:endStation = "@{viewModel.ticket}"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                tools:text="to: There" />
+                tools:text="To: There" />
         </LinearLayout>
 
         <TextView
