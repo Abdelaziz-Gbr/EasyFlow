@@ -1,10 +1,12 @@
 package com.easyflow.activities.signIn.register
 
+import android.app.DatePickerDialog
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.DatePicker
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -12,10 +14,15 @@ import androidx.navigation.findNavController
 import com.easyflow.R
 import com.easyflow.databinding.FragmentRegisterBinding
 import com.easyflow.network.models.UserNetworkModel
+import java.text.SimpleDateFormat
+import java.util.Calendar
 
 class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
     private lateinit var viewModel : RegisterViewModel
+    private var userHasPickedDate : Boolean = false
+    private var cal: Calendar = Calendar.getInstance()
+    private val dateFormat = SimpleDateFormat("dd.MM.yyyy")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -23,6 +30,28 @@ class RegisterFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register, container, false)
         viewModel = RegisterViewModel()
+
+
+        val dateRegister = binding.birthDateRegister
+        dateRegister.text = dateFormat.format(System.currentTimeMillis())
+
+        val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            cal.set(Calendar.YEAR, year)
+            cal.set(Calendar.MONTH, monthOfYear)
+            cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+            dateRegister.text = dateFormat.format(cal.time)
+
+            userHasPickedDate = true
+            dateRegister.setBackgroundColor(Color.BLUE)
+        }
+        binding.birthDateRegister.setOnClickListener {
+            DatePickerDialog(requireContext(), dateSetListener,
+            cal.get(Calendar.YEAR),
+            cal.get(Calendar.MONTH),
+            cal.get(Calendar.DAY_OF_MONTH)).show()
+        }
+
         binding.registerButton.setOnClickListener {  register()   }
         return binding.root
     }
@@ -59,17 +88,12 @@ class RegisterFragment : Fragment() {
     }
     private fun getUser(): UserNetworkModel? {
         var user: UserNetworkModel?
-        var gender = if(binding.maleRadioButton.isChecked) "M" else "F"
-        //todo change this to get Date from a button on the ui.
-        var birthDate = binding.birthDateRegister.getDate()
-        if(binding.firstNameRegister.text.isEmpty() ||
-            binding.lastNameRegister.text.isEmpty() ||
-            binding.userNameRegister.text.isEmpty() ||
-            binding.emailRegister.text.isEmpty() ||
-            binding.passwordRegister.text.isEmpty() ||
-            binding.phoneNumberRegister.text.isEmpty())
-        {
-            Toast.makeText(requireContext(), "please fill all the info above.", Toast.LENGTH_SHORT).show()
+        var gender = if (binding.maleRadioButton.isChecked) "M" else "F"
+        var birthDate = SimpleDateFormat("yyyy-MM-dd").format(cal.time)
+        Log.d("birthDate", birthDate)
+        if (checkForValidInput()) {
+            Toast.makeText(requireContext(), "please fill all the info above.", Toast.LENGTH_SHORT)
+                .show()
             return null
         }
         user = UserNetworkModel(
@@ -85,9 +109,15 @@ class RegisterFragment : Fragment() {
         return user
 
     }
-    private fun DatePicker.getDate(): String {
-        return "$year-$month-$dayOfMonth"
 
+    private fun checkForValidInput(): Boolean {
+        return  binding.firstNameRegister.text.isEmpty() ||
+                binding.lastNameRegister.text.isEmpty() ||
+                binding.userNameRegister.text.isEmpty() ||
+                binding.emailRegister.text.isEmpty() ||
+                binding.passwordRegister.text.isEmpty() ||
+                binding.phoneNumberRegister.text.isEmpty()||
+                !userHasPickedDate
     }
 
 }
