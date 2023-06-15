@@ -1,171 +1,177 @@
-<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activities.signIn.register.RegisterFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.easyflow.activities.signIn.register.RegisterViewModel" />
+    </data>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
-
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:background="#4D6A6E"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:context=".activities.signIn.register.RegisterFragment">
 
-            <EditText
-                android:id="@+id/firstNameRegister"
-                android:layout_width="350dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="24dp"
-                android:background="#FFFFFF"
-                android:backgroundTint="#FFFFFF"
-                android:gravity="center"
-                android:hint="first name"
-                android:inputType="textPersonName"
-                android:textSize="22sp" />
+            <!-- <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="Register"
+                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                 android:textColor="@color/black"
+                 android:layout_gravity="center_horizontal"
+                 android:layout_marginTop="32dp"
+                 android:layout_marginBottom="16dp"/>-->
 
-            <EditText
-                android:id="@+id/lastNameRegister"
-                android:layout_width="350dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="24dp"
-                android:background="#FFFFFF"
-                android:backgroundTint="#FFFFFF"
-                android:ems="20"
-                android:gravity="center"
-                android:hint="last name"
-                android:inputType="textPersonName"
-                android:textSize="22sp" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp">
 
-            <EditText
-                android:id="@+id/userNameRegister"
-                android:layout_width="350dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="24dp"
-                android:background="#FFFFFF"
-                android:backgroundTint="#FFFFFF"
-                android:ems="20"
-                android:gravity="center"
-                android:hint="user name"
-                android:inputType="textPersonName"
-                android:textSize="22sp" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/firstNameRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/first_name"
+                    android:inputType="textPersonName" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/emailRegister"
-                android:layout_width="350dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="24dp"
-                android:background="#FFFFFF"
-                android:backgroundTint="#FFFFFF"
-                android:ems="20"
-                android:gravity="center"
-                android:hint="your Email"
-                android:inputType="textEmailAddress"
-                android:textSize="22sp" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp">
 
-            <EditText
-                android:id="@+id/passwordRegister"
-                android:layout_width="350dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="24dp"
-                android:background="#FFFFFF"
-                android:backgroundTint="#FFFFFF"
-                android:ems="20"
-                android:gravity="center"
-                android:hint="your password"
-                android:inputType="textPassword"
-                android:textSize="22sp" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/lastNameRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/last_name"
+                    android:inputType="textPersonName" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/phoneNumberRegister"
-                android:layout_width="350dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="24dp"
-                android:background="#FFFFFF"
-                android:backgroundTint="#FFFFFF"
-                android:gravity="center"
-                android:hint="your phone number"
-                android:inputType="phone"
-                android:textSize="22sp" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/emailRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/userNameRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/username_text"
+                    android:inputType="text"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phoneNumberRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/phone_number_text"
+                    android:inputType="phone" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <RadioGroup
-                android:id="@+id/genderRadioGroup"
-                android:layout_width="wrap_content"
+                android:id="@+id/rgGender"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="10dp"
-                android:background="#FFFFFF"
-                android:backgroundTint="#2336B3">
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp">
 
                 <RadioButton
                     android:id="@+id/maleRadioButton"
-                    android:layout_width="200dp"
-                    android:layout_height="48dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="4dp"
-                    android:background="#FFFFFF"
-                    android:checked="true"
-                    android:text="male"
-                    android:textSize="20sp" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/male_text"
+                    android:checked="true" />
 
                 <RadioButton
                     android:id="@+id/femaleRadioButton"
-                    android:layout_width="200dp"
-                    android:layout_height="48dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="4dp"
-                    android:background="#FFFFFF"
-                    android:checked="false"
-                    android:text="female"
-                    android:textSize="20sp" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/female_text" />
 
             </RadioGroup>
 
-            <TextView
-                android:id="@+id/title_for_birthDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="18dp"
-
-                android:text="Please Enter your birthDate below" />
-
-            <TextView
-                android:id="@+id/birthDateRegister"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="24dp"
-                android:background="#EA0619"
-                android:gravity="center"
-                android:text="Enter your birth Date"
-                android:textSize="20sp"
-                android:textStyle="bold|italic" />
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp">
+
+                <DatePicker
+                    android:id="@+id/birthDateRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:calendarViewShown="false"
+                    android:datePickerMode="spinner"
+                    android:textColor="@color/black"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/passwordRegister"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/password_text"
+                    android:inputType="textPassword"
+                    />
+
+                <CheckBox
+                    android:id="@+id/cbShowPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/show_password_text" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/registerButton"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp"
-                android:text="Register" />
+                android:text="@string/register_text"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="32dp" />
+
         </LinearLayout>
     </ScrollView>
 </layout>

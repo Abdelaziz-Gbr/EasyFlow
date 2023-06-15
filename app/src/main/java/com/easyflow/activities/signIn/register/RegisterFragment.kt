@@ -3,10 +3,12 @@ package com.easyflow.activities.signIn.register
 import android.app.DatePickerDialog
 import android.graphics.Color
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.DatePicker
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -30,28 +32,34 @@ class RegisterFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register, container, false)
         viewModel = RegisterViewModel()
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
-
-        val dateRegister = binding.birthDateRegister
-        dateRegister.text = dateFormat.format(System.currentTimeMillis())
-
-        val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+        val dateSetListener = DatePicker.OnDateChangedListener { view, year, monthOfYear, dayOfMonth ->
             cal.set(Calendar.YEAR, year)
             cal.set(Calendar.MONTH, monthOfYear)
             cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-            dateRegister.text = dateFormat.format(cal.time)
-
             userHasPickedDate = true
-            dateRegister.setBackgroundColor(Color.BLUE)
-        }
-        binding.birthDateRegister.setOnClickListener {
-            DatePickerDialog(requireContext(), dateSetListener,
-            cal.get(Calendar.YEAR),
-            cal.get(Calendar.MONTH),
-            cal.get(Calendar.DAY_OF_MONTH)).show()
         }
 
+        val dateRegister = binding.birthDateRegister
+
+        dateRegister.init(dateRegister.year, dateRegister.month, dateRegister.dayOfMonth, dateSetListener)
+
+
+        val passwordText = binding.passwordRegister
+        val showPassword = binding.cbShowPassword
+
+        showPassword.setOnCheckedChangeListener{ view, isChecked ->
+            if(isChecked){
+                passwordText.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            }
+            else {
+                passwordText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD or InputType.TYPE_CLASS_TEXT
+            }
+            passwordText.setSelection(passwordText.text!!.length)
+        }
         binding.registerButton.setOnClickListener {  register()   }
         return binding.root
     }
@@ -111,12 +119,12 @@ class RegisterFragment : Fragment() {
     }
 
     private fun checkForValidInput(): Boolean {
-        return  binding.firstNameRegister.text.isEmpty() ||
-                binding.lastNameRegister.text.isEmpty() ||
-                binding.userNameRegister.text.isEmpty() ||
-                binding.emailRegister.text.isEmpty() ||
-                binding.passwordRegister.text.isEmpty() ||
-                binding.phoneNumberRegister.text.isEmpty()||
+        return  binding.firstNameRegister.text!!.isEmpty() ||
+                binding.lastNameRegister.text!!.isEmpty() ||
+                binding.userNameRegister.text!!.isEmpty() ||
+                binding.emailRegister.text!!.isEmpty() ||
+                binding.passwordRegister.text!!.isEmpty() ||
+                binding.phoneNumberRegister.text!!.isEmpty()||
                 !userHasPickedDate
     }
 

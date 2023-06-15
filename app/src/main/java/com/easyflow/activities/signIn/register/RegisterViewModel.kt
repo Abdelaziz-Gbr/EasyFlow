@@ -12,6 +12,8 @@ import com.google.gson.Gson
 import kotlinx.coroutines.launch
 
 class RegisterViewModel: ViewModel() {
+    private val user = UserNetworkModel()
+
     private val _registerResponse = MutableLiveData<RegisterStatus?>()
     val registerResponse : LiveData<RegisterStatus?>
         get() = _registerResponse

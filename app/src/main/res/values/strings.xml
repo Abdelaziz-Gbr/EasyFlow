@@ -9,4 +9,15 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="recharge">Recharge</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="username_text">Username</string>
+    <string name="phone_number_text">phone number</string>
+    <string name="male_text">male</string>
+    <string name="female_text">female</string>
+    <string name="your_birth_date">your birth date</string>
+    <string name="password_text">password</string>
+    <string name="show_password_text">show password</string>
+    <string name="register_text">Register new user.</string>
+    <string name="stay_signed_in_text">stay signed in</string>
 </resources>

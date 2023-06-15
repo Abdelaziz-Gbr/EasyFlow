@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.easyflow.activities.signIn.SignInFragment"
-        android:label="Sign in"
+        android:label="Sign In to EasyFlow"
         tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_signInFragment_to_registerFragment"
