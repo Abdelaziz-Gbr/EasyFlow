@@ -22,19 +22,33 @@ class HomeFragmentViewModel(private val userDao: UserDao): ViewModel() {
     val currentBalance : LiveData<String>
         get() = _currentBalance
 
-    private val _enableNFCButton = MutableLiveData<Boolean>()
-    val enableNFCButton : LiveData<Boolean>
-        get() = _enableNFCButton
+    private val _navigateToQrScreen = MutableLiveData<Boolean>()
+    val navigateToQrScreen : LiveData<Boolean>
+        get () = _navigateToQrScreen
 
+    private val _navigateToRechargeScreen = MutableLiveData<Boolean>()
+    val navigateToRechargeScreen : LiveData<Boolean>
+        get () = _navigateToRechargeScreen
 
+    private val _navigateToHistoryFragment = MutableLiveData<Boolean>()
+    val navigateToHistoryFragment : LiveData<Boolean>
+        get () = _navigateToHistoryFragment
 
+    private val _navigateToSettingsFragment = MutableLiveData<Boolean>()
+    val navigateToSettingsFragment : LiveData<Boolean>
+        get () = _navigateToSettingsFragment
+
+    private val _logout = MutableLiveData<Boolean>()
+    val logout : LiveData<Boolean>
+        get() = _logout
     init {
-        _enableNFCButton.value = false
         viewModelScope.launch { getUserInfo() }
 
     }
 
-    fun logOut(){
+    private fun userLogout(){
+        //clear the cached key
+        UserCache.freeAll()
         viewModelScope.launch {
             userDao.removeUser()
             FirebaseMessaging.getInstance().unsubscribeFromTopic("$username")
@@ -62,4 +76,42 @@ class HomeFragmentViewModel(private val userDao: UserDao): ViewModel() {
         }
     }
 
+    fun onNavigteToQrClicked(){
+        _navigateToQrScreen.value = true
+    }
+
+    fun onQrNavigated(){
+        _navigateToQrScreen.value = false
+    }
+    fun onNavigteToRechargeClicked(){
+        _navigateToRechargeScreen.value = true
+    }
+
+    fun onRechargeNavigated(){
+        _navigateToRechargeScreen.value = false
+    }
+
+    fun onHistoryClicked(){
+        _navigateToHistoryFragment.value = true
+    }
+
+    fun onHistoryNavigated(){
+        _navigateToHistoryFragment.value = false
+    }
+
+    fun onSettingsClicked(){
+        _navigateToSettingsFragment.value = true
+    }
+    fun onSettingsNavigated(){
+        _navigateToSettingsFragment.value = false
+    }
+
+    fun onLogoutClicked(){
+        userLogout()
+        _logout.value = true
+    }
+
+    fun onLoggedOut(){
+        _logout.value = false
+    }
 }

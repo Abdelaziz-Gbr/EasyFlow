@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -30,37 +29,55 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)[HomeFragmentViewModel::class.java]
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        binding.navigateToRechargeFragmentButton.setOnClickListener{  recharge(view)  }
-        binding.nfcButton.setOnClickListener{  nfc(view)  }
-        binding.qrButton.setOnClickListener{  qr(view)  }
+        viewModel.navigateToRechargeScreen.observe(viewLifecycleOwner){navigateToRecharge ->
+            navigateToRecharge?.let {
+                if(navigateToRecharge){
+                    view?.findNavController()?.navigate(HomeFragmentDirections.actionHomeFragmentToRechargeFragment())
+                    viewModel.onRechargeNavigated()
+                }
+            }
+        }
+        viewModel.navigateToQrScreen.observe(viewLifecycleOwner){ navigateToQrScreen ->
+            navigateToQrScreen?.let {
+                if(navigateToQrScreen){
+                    view?.findNavController()?.navigate(HomeFragmentDirections.actionHomeFragmentToQRCodeFragment())
+                    viewModel.onQrNavigated()
+                }
+            }
+        }
+
+        viewModel.navigateToHistoryFragment.observe(viewLifecycleOwner){ nav ->
+            nav?.let {
+                if(nav){
+                    view?.findNavController()?.navigate(HomeFragmentDirections.actionHomeFragmentToHistoryFragment())
+                    viewModel.onHistoryNavigated()
+                }
+            }
+        }
+
+        viewModel.navigateToSettingsFragment.observe(viewLifecycleOwner){ navigateToSettingsScreen ->
+            navigateToSettingsScreen?.let {
+                if(navigateToSettingsScreen){
+                    view?.findNavController()?.navigate(HomeFragmentDirections.actionHomeFragmentToSettingsFragment())
+                    viewModel.onSettingsNavigated()
+                }
+            }
+        }
+
+        viewModel.logout.observe(viewLifecycleOwner){logout ->
+            logout?.let {
+                if(logout){
+                    //go back to sign in screen
+                    startActivity(Intent(activity, SignInActivity::class.java))
+                    activity?.finish()
+                    viewModel.onLoggedOut()
+                }
+            }
+        }
 
         setHasOptionsMenu(true)
 
         return binding.root
-    }
-
-    private fun nfc(view: View?) {
-        Toast.makeText(requireContext(), "work in progress", Toast.LENGTH_SHORT).show()
-    }
-
-    private fun qr(view: View?) {
-        view?.findNavController()?.navigate(HomeFragmentDirections.actionHomeFragmentToQRCodeFragment())
-    }
-
-    private fun recharge(view: View?) {
-        view?.findNavController()?.navigate(HomeFragmentDirections.actionHomeFragmentToRechargeFragment())
-
-    }
-
-
-    private fun logOut(){
-        //remove user info from db
-        viewModel.logOut()
-        //clear the cached key
-        UserCache.freeAll()
-        //go back to sign in screen
-        startActivity(Intent(activity, SignInActivity::class.java))
-        activity?.finish()
     }
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -68,7 +85,7 @@ class HomeFragment : Fragment() {
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.nav_logout -> logOut()
+            R.id.nav_logout -> viewModel.onLogoutClicked()
         }
         return NavigationUI.onNavDestinationSelected(item!!,
         requireView().findNavController()) || super.onOptionsItemSelected(item)

@@ -14,22 +14,20 @@
             android:id="@+id/action_homeFragment_to_QRCodeFragment"
             app:destination="@id/QRCodeFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_NFCFragment"
-            app:destination="@id/NFCFragment" />
-        <action
             android:id="@+id/action_homeFragment_to_rechargeFragment"
             app:destination="@id/rechargeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
     </fragment>
     <fragment
         android:id="@+id/QRCodeFragment"
         android:name="com.easyflow.activities.homeScreen.ticketMaking.QRCodeFragment"
         android:label="QR Code"
         tools:layout="@layout/fragment_q_r_code" />
-    <fragment
-        android:id="@+id/NFCFragment"
-        android:name="com.easyflow.activities.homeScreen.ticketMaking.NFCFragment"
-        android:label="NFC manager"
-        tools:layout="@layout/fragment_n_f_c" />
     <fragment
         android:id="@+id/rechargeFragment"
         android:name="com.easyflow.activities.homeScreen.fragmentRecharge.RechargeFragment"
@@ -39,7 +37,11 @@
         android:id="@+id/settingsFragment"
         android:name="com.easyflow.activities.homeScreen.SettingsFragment"
         android:label="Settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.easyflow.activities.homeScreen.ProfileFragment"
@@ -53,6 +55,9 @@
         <action
             android:id="@+id/action_historyFragment_to_ticketDetail"
             app:destination="@id/ticketDetail" />
+        <action
+            android:id="@+id/action_historyFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/ticketDetail"
