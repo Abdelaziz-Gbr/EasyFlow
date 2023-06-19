@@ -13,9 +13,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:background="#00ff00"
+            android:background="#B4B4FE"
             android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme" />
+            android:theme="?attr/actionBarTheme"
+            app:subtitleTextColor="#000000"
+            app:titleTextColor="#000000" />
         <fragment
             android:id="@+id/HomeNavHostFragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
@@ -31,7 +33,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="#F40202"
+            android:background="#2626FE"
+            app:itemIconTint="@color/white"
+            app:itemTextColor="@color/white"
             app:menu="@menu/bottm_menu" />
     </RelativeLayout>
 

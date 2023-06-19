@@ -1,14 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activities.homeScreen.SettingsFragment">
+    tools:context=".activities.homeScreen.SettingsFragment"
+    >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+    </data>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@drawable/background_gradiant"
+        android:orientation="vertical">
 
-</FrameLayout>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_offers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="#aa555555"
+            android:padding="16dp"
+            android:text="Get notification about our offers and news"
+            android:textColor="#000"
+            android:textColorHint="#000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_trips"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/switch_offers"
+            android:text="Get notified about your trips"
+            android:layout_marginTop="8dp"
+            android:background="#aa555555"
+            android:padding="16dp"
+            android:textColor="#000"
+            android:textColorHint="#000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/button_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="16dp"
+            android:text="Logout" />
+    </RelativeLayout>
+</layout>
