@@ -25,10 +25,13 @@ class HomeFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
         val dataSource = UserDatabase.getDatabase(application).userDao()
+
         val viewModelFactory = HomeFragmentViewModelFactory(dataSource)
         viewModel = ViewModelProvider(this, viewModelFactory)[HomeFragmentViewModel::class.java]
+
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
         viewModel.navigateToRechargeScreen.observe(viewLifecycleOwner){navigateToRecharge ->
             navigateToRecharge?.let {
                 if(navigateToRecharge){
@@ -55,31 +58,11 @@ class HomeFragment : Fragment() {
             }
         }
 
-        viewModel.navigateToSettingsFragment.observe(viewLifecycleOwner){ navigateToSettingsScreen ->
-            navigateToSettingsScreen?.let {
-                if(navigateToSettingsScreen){
-                    view?.findNavController()?.navigate(HomeFragmentDirections.actionHomeFragmentToSettingsFragment())
-                    viewModel.onSettingsNavigated()
-                }
-            }
-        }
-
-        viewModel.logout.observe(viewLifecycleOwner){logout ->
-            logout?.let {
-                if(logout){
-                    //go back to sign in screen
-                    startActivity(Intent(activity, SignInActivity::class.java))
-                    activity?.finish()
-                    viewModel.onLoggedOut()
-                }
-            }
-        }
-
-        setHasOptionsMenu(true)
+        //setHasOptionsMenu(true)
 
         return binding.root
     }
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+/*    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.main_menu, menu)
     }
@@ -89,5 +72,5 @@ class HomeFragment : Fragment() {
         }
         return NavigationUI.onNavDestinationSelected(item!!,
         requireView().findNavController()) || super.onOptionsItemSelected(item)
-    }
+    }*/
 }

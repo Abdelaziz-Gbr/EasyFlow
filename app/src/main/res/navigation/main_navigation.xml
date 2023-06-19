@@ -2,73 +2,69 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigation"
+    android:id="@+id/main_navigation"
     app:startDestination="@id/homeFragment">
 
     <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.easyflow.activities.homeScreen.ProfileFragment"
+        android:label="My Profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.easyflow.activities.homeScreen.SettingsFragment"
+        android:label="Settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
         android:id="@+id/homeFragment"
         android:name="com.easyflow.activities.homeScreen.fragmentHome.HomeFragment"
-        android:label="my Home Screen"
-        tools:layout="@layout/fragment_home" >
-        <action
-            android:id="@+id/action_homeFragment_to_QRCodeFragment"
-            app:destination="@id/QRCodeFragment" />
+        android:label="My Home"
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_rechargeFragment"
             app:destination="@id/rechargeFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
+            android:id="@+id/action_homeFragment_to_QRCodeFragment"
+            app:destination="@id/QRCodeFragment" />
         <action
             android:id="@+id/action_homeFragment_to_historyFragment"
             app:destination="@id/historyFragment" />
     </fragment>
     <fragment
-        android:id="@+id/QRCodeFragment"
-        android:name="com.easyflow.activities.homeScreen.ticketMaking.QRCodeFragment"
-        android:label="QR Code"
-        tools:layout="@layout/fragment_q_r_code" />
-    <fragment
         android:id="@+id/rechargeFragment"
         android:name="com.easyflow.activities.homeScreen.fragmentRecharge.RechargeFragment"
-        android:label="Recharge"
-        tools:layout="@layout/fragment_recharge" />
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.easyflow.activities.homeScreen.SettingsFragment"
-        android:label="Settings"
-        tools:layout="@layout/fragment_settings" >
+        android:label="Balance Recharge"
+        tools:layout="@layout/fragment_recharge">
         <action
-            android:id="@+id/action_settingsFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/action_rechargeFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/rechargeFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
-        android:id="@+id/profileFragment"
-        android:name="com.easyflow.activities.homeScreen.ProfileFragment"
-        android:label="my profile"
-        tools:layout="@layout/fragment_profile" />
+        android:id="@+id/QRCodeFragment"
+        android:name="com.easyflow.activities.homeScreen.ticketMaking.QRCodeFragment"
+        android:label="Generate Qr Code"
+        tools:layout="@layout/fragment_q_r_code">
+        <action
+            android:id="@+id/action_QRCodeFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/QRCodeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.easyflow.activities.homeScreen.fragmentHistory.HistoryFragment"
         android:label="Tickets History"
-        tools:layout="@layout/fragment_history" >
+        tools:layout="@layout/fragment_history">
         <action
             android:id="@+id/action_historyFragment_to_ticketDetail"
             app:destination="@id/ticketDetail" />
-        <action
-            android:id="@+id/action_historyFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
     </fragment>
     <fragment
         android:id="@+id/ticketDetail"
         android:name="com.easyflow.activities.homeScreen.fragmentHistory.ticketDetail.TicketDetail"
-        android:label="My Ticket Detail"
-        tools:layout="@layout/fragment_ticket_detail">
-        <action
-            android:id="@+id/action_ticketDetail_to_historyFragment"
-            app:destination="@id/historyFragment"
-            app:popUpTo="@id/ticketDetail"
-            app:popUpToInclusive="true" />
+        android:label="Ticket Details">
         <argument
             android:name="ticketId"
             app:argType="string" />

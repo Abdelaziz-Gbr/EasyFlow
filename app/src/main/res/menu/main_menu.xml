@@ -9,7 +9,7 @@
         android:title="Logout"
         android:icon="@drawable/ic_logout"
         app:showAsAction="always"/>
-    <item
+    <!--<item
         android:id="@+id/settingsFragment"
         android:title="Settings" />
     <item
@@ -17,6 +17,6 @@
         android:title="Profile" />
     <item
         android:id="@+id/historyFragment"
-        android:title="History" />
+        android:title="History" />-->
 
 </menu>
