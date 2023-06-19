@@ -13,13 +13,14 @@ import com.easyflow.R
 import com.easyflow.activities.splashScreen.SplashScreen
 import com.easyflow.utils.Constants.channelID
 import com.easyflow.utils.Constants.channelName
+import com.easyflow.utils.subscribeToMainFeed
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     init {
-
+        subscribeToMainFeed()
     }
     override fun onMessageReceived(message: RemoteMessage) {
         Log.d("firebase", "message Received")
