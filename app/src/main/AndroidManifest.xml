@@ -22,6 +22,7 @@
         <activity
             android:name=".activities.signIn.SignInActivity"
             android:exported="false"
+            android:theme="@style/Theme.EasyFlow.SignInActivity"
             />
         <activity
             android:name=".activities.homeScreen.HomeScreen"

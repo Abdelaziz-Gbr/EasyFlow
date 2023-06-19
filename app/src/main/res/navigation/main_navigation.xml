@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.easyflow.activities.homeScreen.SettingsFragment"
+        android:name="com.easyflow.activities.homeScreen.fragmentSettings.SettingsFragment"
         android:label="Settings"
         tools:layout="@layout/fragment_settings" />
     <fragment

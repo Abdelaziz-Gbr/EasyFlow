@@ -19,16 +19,7 @@ import com.google.firebase.messaging.RemoteMessage
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     init {
-        FirebaseMessaging.getInstance().subscribeToTopic("main_topic")
-            .addOnCompleteListener{
-                task ->
-                if(task.isSuccessful){
-                    Log.d("Firebase_subscription", "succeeded")
-                }
-                else{
-                    Log.d("Firebase_subscription", "failed")
-                }
-            }
+
     }
     override fun onMessageReceived(message: RemoteMessage) {
         Log.d("firebase", "message Received")

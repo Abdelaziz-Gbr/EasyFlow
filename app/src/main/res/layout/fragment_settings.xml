@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activities.homeScreen.SettingsFragment"
+    tools:context=".activities.homeScreen.fragmentSettings.SettingsFragment"
     >
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.easyflow.activities.homeScreen.fragmentSettings.SettingsViewModel" />
     </data>
 
     <RelativeLayout
@@ -20,13 +22,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
+            android:text="Get notification about our offers and news"
             android:background="#aa555555"
             android:padding="16dp"
-            android:text="Get notification about our offers and news"
             android:textColor="#000"
             android:textColorHint="#000"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:onCheckedChanged="@{viewModel::onSwitchMainCheckedChanged}" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch_trips"
@@ -40,7 +43,8 @@
             android:textColor="#000"
             android:textColorHint="#000"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:onCheckedChanged="@{viewModel::onSwitchUserCheckedChanged}"/>
 
         <Button
             android:id="@+id/button_logout"
@@ -48,6 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_margin="16dp"
-            android:text="Logout" />
+            android:text="Logout"
+            />
     </RelativeLayout>
 </layout>
