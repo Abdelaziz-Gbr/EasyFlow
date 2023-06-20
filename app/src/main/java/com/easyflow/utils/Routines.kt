@@ -8,8 +8,6 @@ import com.easyflow.database.UserDao
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.runBlocking
 
-//todo logout routine
-
 //todo sign in routine?
 
 fun subscribeToMainFeed(){

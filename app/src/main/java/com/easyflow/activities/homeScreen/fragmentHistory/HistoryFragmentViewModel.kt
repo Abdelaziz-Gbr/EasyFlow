@@ -16,23 +16,14 @@ class HistoryFragmentViewModel(private val ticketDao: TicketDao): ViewModel() {
     private fun refreshTickets() {
         //get tickets from the internet
         viewModelScope.launch {
-            try{
-                val ticketsResponse = Network.easyFlowServices.getAllTickets(UserKey.value!!)
-                if (ticketsResponse.isSuccessful) {
-                    val tickets = ticketsResponse.body()
-                    if(tickets != null){
-                        ticketDao.insert(*tickets.map {
-                            it.toDatabaseDomain()
-                        }.toTypedArray())
-                    }
+            val ticketsResponse = Network.easyFlowServices.getAllTickets(UserKey.value!!)
+            if (ticketsResponse.isSuccessful) {
+                val tickets = ticketsResponse.body()
+                if(tickets != null){
+                    ticketDao.insert(*tickets.map {
+                        it.toDatabaseDomain()
+                    }.toTypedArray())
                 }
-                else{
-                    //todo show an error screen
-                }
-            }
-            catch (e: HttpException){
-
-                //todo show a retry again screen
             }
         }
     }

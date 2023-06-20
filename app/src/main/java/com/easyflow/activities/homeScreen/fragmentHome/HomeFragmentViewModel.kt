@@ -54,8 +54,7 @@ class HomeFragmentViewModel(private val userDao: UserDao): ViewModel() {
             }
         }
         catch (e: Exception){
-            //todo
-            //failed to retrieve user Info the program should break!.
+            throw Exception("Failed to Retrieve User Info.")
         }
     }
 
