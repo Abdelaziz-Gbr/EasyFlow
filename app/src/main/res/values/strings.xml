@@ -24,4 +24,12 @@
     <string name="view_my_tickets_history">view my tickets History</string>
     <string name="settings">Settings</string>
     <string name="log_out">Log out</string>
+    <string name="gender">Gender:</string>
+    <string name="male">male</string>
+    <string name="female">female</string>
+    <string name="m">M</string>
+    <string name="f">F</string>
+    <string name="wallet_balance">your current balance: %d</string>
+    <string name="save">save</string>
+
 </resources>

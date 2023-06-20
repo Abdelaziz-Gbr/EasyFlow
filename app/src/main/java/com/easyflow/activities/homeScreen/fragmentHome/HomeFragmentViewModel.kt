@@ -34,29 +34,12 @@ class HomeFragmentViewModel(private val userDao: UserDao): ViewModel() {
     val navigateToHistoryFragment : LiveData<Boolean>
         get () = _navigateToHistoryFragment
 
-    private val _navigateToSettingsFragment = MutableLiveData<Boolean>()
-    val navigateToSettingsFragment : LiveData<Boolean>
-        get () = _navigateToSettingsFragment
 
-    private val _logout = MutableLiveData<Boolean>()
-    val logout : LiveData<Boolean>
-        get() = _logout
     init {
         viewModelScope.launch { getUserInfo() }
 
     }
 
-    private fun userLogout(){
-        //clear the cached key
-        UserCache.freeAll()
-        viewModelScope.launch {
-            userDao.removeUser()
-            FirebaseMessaging.getInstance().unsubscribeFromTopic("$username")
-
-            //todo delete all tickets as well. || just retrieve them from the internet each time.
-        }
-
-    }
 
     private suspend fun getUserInfo(){
         val auth = UserKey.value
@@ -99,19 +82,4 @@ class HomeFragmentViewModel(private val userDao: UserDao): ViewModel() {
         _navigateToHistoryFragment.value = false
     }
 
-    fun onSettingsClicked(){
-        _navigateToSettingsFragment.value = true
-    }
-    fun onSettingsNavigated(){
-        _navigateToSettingsFragment.value = false
-    }
-
-    fun onLogoutClicked(){
-        userLogout()
-        _logout.value = true
-    }
-
-    fun onLoggedOut(){
-        _logout.value = false
-    }
 }

@@ -36,7 +36,8 @@
             android:background="#2626FE"
             app:itemIconTint="@color/white"
             app:itemTextColor="@color/white"
-            app:menu="@menu/bottm_menu" />
+            app:menu="@menu/bottm_menu"
+            app:itemBackground="@drawable/bottom_nav_background" />
     </RelativeLayout>
 
 </layout>

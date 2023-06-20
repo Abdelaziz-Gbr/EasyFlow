@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.easyflow.activities.homeScreen.ProfileFragment"
+        android:name="com.easyflow.activities.homeScreen.fragmentProfile.ProfileFragment"
         android:label="My Profile"
         tools:layout="@layout/fragment_profile" />
     <fragment

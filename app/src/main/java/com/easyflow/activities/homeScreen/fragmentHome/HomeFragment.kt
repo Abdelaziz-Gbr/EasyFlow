@@ -57,20 +57,6 @@ class HomeFragment : Fragment() {
                 }
             }
         }
-
-        //setHasOptionsMenu(true)
-
         return binding.root
     }
-/*    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.main_menu, menu)
-    }
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.nav_logout -> viewModel.onLogoutClicked()
-        }
-        return NavigationUI.onNavDestinationSelected(item!!,
-        requireView().findNavController()) || super.onOptionsItemSelected(item)
-    }*/
 }
