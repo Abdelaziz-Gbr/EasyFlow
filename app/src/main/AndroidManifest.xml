@@ -26,7 +26,8 @@
             />
         <activity
             android:name=".activities.homeScreen.HomeScreen"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.EasyFlow"/>
         <activity
             android:name=".activities.splashScreen.SplashScreen"
             android:exported="true"

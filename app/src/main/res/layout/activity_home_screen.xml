@@ -13,11 +13,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:background="#B4B4FE"
             android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            app:subtitleTextColor="#000000"
-            app:titleTextColor="#000000" />
+            android:background="@color/main_color"
+            android:theme="?attr/actionBarTheme" />
         <fragment
             android:id="@+id/HomeNavHostFragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
@@ -33,11 +31,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="#2626FE"
-            app:itemIconTint="@color/white"
-            app:itemTextColor="@color/white"
-            app:menu="@menu/bottm_menu"
-            app:itemBackground="@drawable/bottom_nav_background" />
+            android:background="#CCCCD6"
+            app:itemIconTint="@drawable/nav_item_color_selected"
+            app:itemTextColor="@drawable/nav_item_color_selected"
+            app:menu="@menu/bottm_menu" />
     </RelativeLayout>
 
 </layout>

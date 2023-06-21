@@ -35,7 +35,7 @@ class HomeFragment : Fragment() {
         viewModel.navigateToRechargeScreen.observe(viewLifecycleOwner){navigateToRecharge ->
             navigateToRecharge?.let {
                 if(navigateToRecharge){
-                    view?.findNavController()?.navigate(HomeFragmentDirections.actionHomeFragmentToRechargeFragment())
+                   view?.findNavController()?.navigate(HomeFragmentDirections.actionHomeFragmentToRechargeFragment())
                     viewModel.onRechargeNavigated()
                 }
             }
@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
         viewModel.navigateToQrScreen.observe(viewLifecycleOwner){ navigateToQrScreen ->
             navigateToQrScreen?.let {
                 if(navigateToQrScreen){
-                    view?.findNavController()?.navigate(HomeFragmentDirections.actionHomeFragmentToQRCodeFragment())
+                    view?.findNavController()?.navigate(HomeFragmentDirections.actionHomeFragmentToFragmentTicketing())
                     viewModel.onQrNavigated()
                 }
             }

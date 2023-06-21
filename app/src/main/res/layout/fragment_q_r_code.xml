@@ -7,10 +7,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_gradiant"
         android:orientation="vertical"
         android:padding="24dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:background="@color/main_color">
 
         <ImageView
             android:id="@+id/qrImage"
@@ -23,7 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Generate new QR Code" />
+            android:text="Generate new QR Code"
+            style="@style/myButtonStyle" />
     </LinearLayout>
 
 </layout>

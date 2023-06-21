@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:state_checked="true" app:itemIconTint="#55ffee" app:itemTextColor="#55ffee"/>
+    <item android:state_checked="false" app:itemIconTint="#000" app:itemTextColor="#000"/>
+</selector>

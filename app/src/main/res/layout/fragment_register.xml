@@ -14,8 +14,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="@drawable/background_gradiant"
-            tools:context=".activities.signIn.register.RegisterFragment">
+            tools:context=".activities.signIn.register.RegisterFragment"
+            android:background="@color/main_color">
 
             <TextView
                  android:layout_width="wrap_content"
@@ -171,7 +171,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/register_text"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="32dp" />
+                android:layout_marginTop="32dp"
+                style="@style/myButtonStyle" />
 
         </LinearLayout>
     </ScrollView>

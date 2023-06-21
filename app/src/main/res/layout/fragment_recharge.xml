@@ -7,7 +7,7 @@
         android:id="@+id/recharge_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_gradiant"
+        android:background="@color/main_color"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -28,7 +28,8 @@
             android:padding="16dp"
             android:text="Recharge"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            style="@style/myButtonStyle" />
     </LinearLayout>
 
 </layout>

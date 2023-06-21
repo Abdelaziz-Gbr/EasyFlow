@@ -13,6 +13,12 @@
     <color name="primary_button_end_color">#388E3C</color>
     <color name="secondary_button_color">#E0E0E0</color>
     <color name="dark_gray">#A9A9A9</color>
-    <color name="selected_item">#e60000e6</color>
-    <color name="unselected_item">#ff0000ff</color>
+    <color name="selected_item">#000</color>
+    <color name="unselected_item">#a6a6a6</color>
+    <color name="main_nav_color">#BFFFFFFF</color>
+    <color name="main_color">#EDEDF8</color>
+    <color name="text_input_color">#EDE9E9</color>
+    <color name="button_background_color">#C4000000</color>
+    <color  name="button_text_color">#fff</color>
+
 </resources>

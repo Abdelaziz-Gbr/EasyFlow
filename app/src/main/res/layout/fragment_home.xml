@@ -13,26 +13,18 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_gradiant">
-
-        <TextView
-            android:id="@+id/app_name"
-            android:text="@string/app_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textColor="@color/primary_text_color"
-            android:padding="32dp"
-            android:gravity="center_horizontal"/>
+        android:background="@color/main_color"
+        >
 
         <TextView
             android:id="@+id/welcome_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="24dp"
+            android:text="@{viewModel.welcomeText}"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:text="@{viewModel.welcomeText}"
             tools:text="hello mr. Ahmed" />
 
         <TextView
@@ -59,27 +51,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/primary_button_background"
                 android:onClick="@{() -> viewModel.onNavigteToQrClicked()}"
-                android:text="@string/generate_qr_code" />
+                android:text="@string/generate_qr_code"
+                style="@style/myButtonStyle" />
 
             <Button
                 android:id="@+id/navigateToRechargeFragmentButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/primary_button_background"
                 android:onClick="@{() -> viewModel.onNavigteToRechargeClicked()}"
-                android:text="@string/recharge" />
+                android:text="@string/recharge"
+                style="@style/myButtonStyle"/>
 
             <Button
                 android:id="@+id/view_history_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/primary_button_background"
                 android:onClick="@{() -> viewModel.onHistoryClicked()}"
-                android:text="@string/view_my_tickets_history" />
+                android:text="@string/view_my_tickets_history"
+                style="@style/myButtonStyle" />
 
 
         </LinearLayout>

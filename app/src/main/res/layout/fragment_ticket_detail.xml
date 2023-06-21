@@ -12,8 +12,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_gradiant"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:background="@color/main_color">
 
 
         <ImageView
@@ -120,7 +120,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ticket_price_text_view" />
+            app:layout_constraintTop_toBottomOf="@+id/ticket_price_text_view"
+            style="@style/myButtonStyle" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
