@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.easyflow.R
 import com.easyflow.activities.trips.fragmentTrips.TripsFragmentArgs
 import com.easyflow.database.UserDatabase
@@ -34,7 +35,7 @@ class TripsFragment : Fragment() {
 
         viewModel.tripID.observe(viewLifecycleOwner){tripId ->
             tripId?.let {
-                Toast.makeText(requireContext(), "your trip id is $tripId", Toast.LENGTH_LONG).show()
+                findNavController().navigate(TripsFragmentDirections.actionTripsFragmentToQRCodeFragment(tripID = tripId, count = passengersCount))
             }
         }
 

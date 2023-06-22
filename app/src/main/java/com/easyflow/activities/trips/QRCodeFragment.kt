@@ -1,4 +1,4 @@
-package com.easyflow.activities.homeScreen.ticketMaking
+package com.easyflow.activities.trips
 
 import android.os.Build
 import android.os.Bundle
@@ -19,7 +19,10 @@ class QRCodeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = DataBindingUtil.inflate<FragmentQRCodeBinding>(inflater, R.layout.fragment_q_r_code, container, false)
-        binding.generateNewQr.setOnClickListener { binding.qrImage.setImageBitmap(QRCodeGenerator().getQrCode()) }
+        val argument = QRCodeFragmentArgs.fromBundle(requireArguments())
+        val tripID = argument.tripID
+        val count = argument.count
+        binding.qrImage.setImageBitmap(QRCodeGenerator().getQrCode(tripID = tripID, passengerCount = count))
         return binding.root
     }
 

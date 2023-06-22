@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/QRCodeFragment"
-        android:name="com.easyflow.activities.homeScreen.ticketMaking.QRCodeFragment"
+        android:name="com.easyflow.activities.trips.QRCodeFragment"
         android:label="fragment_q_r_code"
         tools:layout="@layout/fragment_q_r_code" >
         <argument

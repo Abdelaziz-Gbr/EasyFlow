@@ -2,7 +2,7 @@
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activities.homeScreen.ticketMaking.QRCodeFragment">
+    tools:context=".activities.trips.QRCodeFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,17 +14,9 @@
 
         <ImageView
             android:id="@+id/qrImage"
-            android:layout_width= "150dp"
-            android:layout_height="150dp"
-            android:contentDescription="QR Code"/>
-
-        <Button
-            android:id="@+id/generateNewQr"
-            android:layout_width="match_parent"
+            android:layout_width= "match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Generate new QR Code"
-            style="@style/myButtonStyle" />
+            android:contentDescription="QR Code"/>
     </LinearLayout>
 
 </layout>
