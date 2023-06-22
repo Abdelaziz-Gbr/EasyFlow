@@ -2,6 +2,7 @@ package com.easyflow.network
 
 import com.easyflow.network.models.TicketNetworkModel
 import com.easyflow.network.models.UserNetworkModel
+import com.easyflow.network.models.TripNetworkModel
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -23,5 +24,8 @@ interface EasyFlowServices {
 
     @GET("passenger/history")
     suspend fun getAllTickets(@Header("Authorization") authKey: String): Response<List<TicketNetworkModel>>
+
+    @GET("passenger/Trips")
+    suspend fun getTrips(@Header("Authorization") authKey: String): Response<List<TripNetworkModel>>
 
 }

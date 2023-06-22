@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/main_color"
+        android:gravity="center"
+        tools:context=".activities.TripsActivity">
+
+        <Button
+            android:id="@+id/trip_button_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            style="@style/myButtonStyle"
+            android:text="1st Code" />
+
+        <Button
+            android:id="@+id/trip_button_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            style="@style/myButtonStyle"
+            android:text="2nd Code" />
+
+        <Button
+            android:id="@+id/trip_button_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            style="@style/myButtonStyle"
+            android:text="3rd Code" />
+
+        <Button
+            android:id="@+id/trip_button_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            style="@style/myButtonStyle"
+            android:text="4th Code" />
+
+        <Button
+            android:id="@+id/trip_button_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            style="@style/myButtonStyle"
+            android:text="5th Code" />
+    </LinearLayout>
+</layout>

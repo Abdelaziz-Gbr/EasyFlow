@@ -7,10 +7,8 @@ import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI
 import com.easyflow.R
-import com.easyflow.activities.signIn.SignInActivity
-import com.easyflow.cache.UserCache
+import com.easyflow.activities.TripsActivity
 import com.easyflow.database.UserDatabase
 import com.easyflow.databinding.FragmentHomeBinding
 
@@ -40,11 +38,12 @@ class HomeFragment : Fragment() {
                 }
             }
         }
-        viewModel.navigateToQrScreen.observe(viewLifecycleOwner){ navigateToQrScreen ->
+        viewModel.navigateToTripsScreen.observe(viewLifecycleOwner){ navigateToQrScreen ->
             navigateToQrScreen?.let {
                 if(navigateToQrScreen){
-                    view?.findNavController()?.navigate(HomeFragmentDirections.actionHomeFragmentToFragmentTicketing())
-                    viewModel.onQrNavigated()
+                    val intent = Intent(requireActivity(), TripsActivity::class.java)
+                    startActivity(intent)
+                    viewModel.onTripsNavigated()
                 }
             }
         }

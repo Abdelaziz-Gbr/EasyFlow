@@ -7,10 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.easyflow.network.Network
 import com.easyflow.cache.UserCache
-import com.easyflow.cache.UserCache.username
 import com.easyflow.cache.UserKey
 import com.easyflow.database.UserDao
-import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.launch
 
 class HomeFragmentViewModel(private val userDao: UserDao): ViewModel() {
@@ -22,9 +20,9 @@ class HomeFragmentViewModel(private val userDao: UserDao): ViewModel() {
     val currentBalance : LiveData<String>
         get() = _currentBalance
 
-    private val _navigateToQrScreen = MutableLiveData<Boolean>()
-    val navigateToQrScreen : LiveData<Boolean>
-        get () = _navigateToQrScreen
+    private val _navigateToTripsScreen = MutableLiveData<Boolean>()
+    val navigateToTripsScreen : LiveData<Boolean>
+        get () = _navigateToTripsScreen
 
     private val _navigateToRechargeScreen = MutableLiveData<Boolean>()
     val navigateToRechargeScreen : LiveData<Boolean>
@@ -58,12 +56,12 @@ class HomeFragmentViewModel(private val userDao: UserDao): ViewModel() {
         }
     }
 
-    fun onNavigteToQrClicked(){
-        _navigateToQrScreen.value = true
+    fun onNavigateToTripsActivityClicked(){
+        _navigateToTripsScreen.value = true
     }
 
-    fun onQrNavigated(){
-        _navigateToQrScreen.value = false
+    fun onTripsNavigated(){
+        _navigateToTripsScreen.value = false
     }
     fun onNavigteToRechargeClicked(){
         _navigateToRechargeScreen.value = true

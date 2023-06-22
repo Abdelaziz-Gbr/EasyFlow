@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/trips_navigation"
+    app:startDestination="@id/tripsFragment">
+
+    <fragment
+        android:id="@+id/tripsFragment"
+        android:name="com.easyflow.TripsFragment"
+        android:label="fragment_trips"
+        tools:layout="@layout/fragment_trips" >
+        <action
+            android:id="@+id/action_tripsFragment_to_fragmentTicketing"
+            app:destination="@id/fragmentTicketing" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentTicketing"
+        android:name="com.easyflow.FragmentTicketing"
+        android:label="FragmentTicketing" >
+        <action
+            android:id="@+id/action_fragmentTicketing_to_QRCodeFragment"
+            app:destination="@id/QRCodeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/QRCodeFragment"
+        android:name="com.easyflow.activities.homeScreen.ticketMaking.QRCodeFragment"
+        android:label="fragment_q_r_code"
+        tools:layout="@layout/fragment_q_r_code" />
+</navigation>

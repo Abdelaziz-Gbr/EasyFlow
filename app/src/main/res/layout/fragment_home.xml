@@ -47,12 +47,12 @@
 
 
             <Button
-                android:id="@+id/navigateToQRFragmentButton"
+                android:id="@+id/navigateToTripsActivity_Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:onClick="@{() -> viewModel.onNavigteToQrClicked()}"
-                android:text="@string/generate_qr_code"
+                android:onClick="@{() -> viewModel.onNavigateToTripsActivityClicked()}"
+                android:text="@string/start_a_trip"
                 style="@style/myButtonStyle" />
 
             <Button

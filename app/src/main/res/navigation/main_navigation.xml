@@ -24,9 +24,6 @@
             android:id="@+id/action_homeFragment_to_historyFragment"
             app:destination="@id/historyFragment" />
         <action
-            android:id="@+id/action_homeFragment_to_fragmentTicketing"
-            app:destination="@id/fragmentTicketing" />
-        <action
             android:id="@+id/action_homeFragment_to_rechargeFragment"
             app:destination="@id/rechargeFragment" />
     </fragment>
@@ -46,11 +43,6 @@
             android:defaultValue="1" />
     </fragment>
     <fragment
-        android:id="@+id/QRCodeFragment"
-        android:name="com.easyflow.activities.homeScreen.ticketMaking.QRCodeFragment"
-        android:label="Generate Qr Code"
-        tools:layout="@layout/fragment_q_r_code"/>
-    <fragment
         android:id="@+id/historyFragment"
         android:name="com.easyflow.activities.homeScreen.fragmentHistory.HistoryFragment"
         android:label="Tickets History"
@@ -66,14 +58,5 @@
         <argument
             android:name="ticketId"
             app:argType="string" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragmentTicketing"
-        android:name="com.easyflow.FragmentTicketing"
-        android:label="Enter number of Passengers"
-        tools:layout="@layout/fragment_ticketing">
-        <action
-            android:id="@+id/action_fragmentTicketing_to_QRCodeFragment"
-            app:destination="@id/QRCodeFragment" />
     </fragment>
 </navigation>
