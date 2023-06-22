@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.easyflow.R
-import com.easyflow.activities.TripsActivity
+import com.easyflow.activities.trips.TripsActivity
 import com.easyflow.database.UserDatabase
 import com.easyflow.databinding.FragmentHomeBinding
 

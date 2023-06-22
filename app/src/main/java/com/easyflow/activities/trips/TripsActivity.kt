@@ -1,4 +1,4 @@
-package com.easyflow.activities
+package com.easyflow.activities.trips
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
