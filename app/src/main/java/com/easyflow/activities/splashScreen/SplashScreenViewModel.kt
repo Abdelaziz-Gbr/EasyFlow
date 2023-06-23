@@ -1,5 +1,6 @@
 package com.easyflow.activities.splashScreen
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,6 +14,8 @@ import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.net.ConnectException
+import java.net.SocketTimeoutException
 
 class SplashScreenViewModel(private val dataSource: UserDao, private val tripsDao: TripDao): ViewModel() {
     private val _navigateTo = MutableLiveData<Int>()
@@ -40,17 +43,20 @@ class SplashScreenViewModel(private val dataSource: UserDao, private val tripsDa
                 FirebaseMessaging.getInstance().subscribeToTopic("${tempUser.username}")
                 _navigateTo.value = 2// go to home screen
             }
-            catch (e: java.net.SocketTimeoutException){
-                val trips = withContext(Dispatchers.IO){
-                    tripsDao.getAllTrips()
-                }
-                if(trips.isNotEmpty())
-                    _navigateTo.value = 3// go to offline mode
-                else
-                    _navigateTo.value = 2
-            }
             catch (e: Exception){
-                _navigateTo.value = 2
+                val offlineModeExceptions : List<Class<out Exception>> = listOf(ConnectException::class.java, SocketTimeoutException::class.java)
+                if(offlineModeExceptions.contains(e.javaClass)){
+                    val trips = withContext(Dispatchers.IO){
+                        tripsDao.getAllTrips()
+                    }
+                    if(trips.isNotEmpty())
+                        _navigateTo.value = 3// go to offline mode
+                    else
+                        _navigateTo.value = 1
+                }
+                else{
+                    _navigateTo.value = 1
+                }
 
             }
         }

@@ -1,5 +1,6 @@
 package com.easyflow.activities.signIn.fragmentSign
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -56,6 +57,11 @@ class SignInFragment : Fragment() {
                     }
                     val intent = Intent(activity, HomeScreen::class.java)
                     startActivity(intent)
+                    val sharedPreferences = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+                    with(sharedPreferences.edit()){
+                        putBoolean("offline", false)
+                        apply()
+                    }
                     activity?.finish()
                 }
                 else {

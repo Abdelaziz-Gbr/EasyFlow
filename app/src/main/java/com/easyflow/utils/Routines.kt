@@ -4,9 +4,14 @@ import android.util.Log
 import com.easyflow.cache.UserCache
 import com.easyflow.cache.UserKey
 import com.easyflow.database.TicketDao
+import com.easyflow.database.TripDao
 import com.easyflow.database.UserDao
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.runBlocking
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+
 
 //todo sign in routine?
 
@@ -62,8 +67,8 @@ fun unSubscribeToUserFeed(){
         }
 }
 
-fun logUserOut(userDataSource: UserDao, ticketDataSource : TicketDao){
-    runBlocking { dropAllData(userDataSource, ticketDataSource) }
+fun logUserOut(userDataSource: UserDao, ticketDataSource : TicketDao, tripDao: TripDao){
+    runBlocking { dropAllData(userDataSource, ticketDataSource, tripDao) }
     clearCaches()
 }
 
@@ -72,8 +77,24 @@ fun clearCaches() {
     UserKey.value = null
 }
 
-suspend fun dropAllData(userDataSource: UserDao, ticketDataSource : TicketDao){
+suspend fun dropAllData(userDataSource: UserDao, ticketDataSource : TicketDao, tripDao: TripDao){
     userDataSource.removeUser()
     ticketDataSource.deleteAllTickets()
+    tripDao.deleteAllTrips()
 }
+
+fun isWifiConnected(context: Context): Boolean {
+    val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val network = connectivityManager.activeNetwork ?: return false
+    val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+    return capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
+}
+
+fun isDataConnected(context: Context): Boolean {
+    val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val network = connectivityManager.activeNetwork ?: return false
+    val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+    return capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
+}
+
 

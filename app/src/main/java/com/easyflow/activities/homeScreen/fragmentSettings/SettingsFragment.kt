@@ -22,8 +22,10 @@ class SettingsFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false)
 
         val application = requireNotNull(this.activity).application
+
         val userDataSource = UserDatabase.getDatabase(application).userDao()
         val ticketDataSource = UserDatabase.getDatabase(application).ticketDao()
+        val tripDataSource = UserDatabase.getDatabase(application).tripDao()
 
         val viewModel = ViewModelProvider(this)[SettingsViewModel::class.java]
         binding.viewModel = viewModel
@@ -31,7 +33,7 @@ class SettingsFragment : Fragment() {
         binding.lifecycleOwner = this
 
         binding.buttonLogout.setOnClickListener{
-            viewModel.logout(userDataSource, ticketDataSource)
+            viewModel.logout(userDataSource, ticketDataSource, tripDataSource)
             val intent = Intent(application, SignInActivity::class.java)
             startActivity(intent)
             activity?.finish()

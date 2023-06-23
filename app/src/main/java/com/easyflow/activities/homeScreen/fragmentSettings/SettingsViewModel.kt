@@ -3,6 +3,7 @@ package com.easyflow.activities.homeScreen.fragmentSettings
 import android.widget.CompoundButton
 import androidx.lifecycle.ViewModel
 import com.easyflow.database.TicketDao
+import com.easyflow.database.TripDao
 import com.easyflow.database.UserDao
 import com.easyflow.utils.*
 
@@ -25,8 +26,8 @@ class SettingsViewModel : ViewModel() {
         }
     }
 
-    fun logout(userDataSource: UserDao, ticketDataSource : TicketDao){
-        logUserOut(userDataSource, ticketDataSource)
+    fun logout(userDataSource: UserDao, ticketDataSource : TicketDao, tripDataSource : TripDao){
+        logUserOut(userDataSource, ticketDataSource, tripDataSource)
     }
 
 }

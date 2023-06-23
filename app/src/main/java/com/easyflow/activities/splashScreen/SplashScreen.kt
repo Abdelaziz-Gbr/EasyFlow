@@ -26,29 +26,33 @@ class SplashScreen : AppCompatActivity() {
         )
         val userDao = UserDatabase.getDatabase(this.application).userDao()
         val tripsDao = UserDatabase.getDatabase(this).tripDao()
+
         val viewModelFactory = SplashScreenViewModelFactory(userDao, tripsDao)
         val viewModel = ViewModelProvider(this, viewModelFactory)[SplashScreenViewModel::class.java]
+
         binding.efLogo.alpha = 0f
         viewModel.getUser()
+
         binding.efLogo.animate().setDuration(500).alpha(0.75f)
+
         viewModel.navigateTo.observe(this){ navigate ->
             navigate?.let {
                 binding.efLogo.animate().setDuration(1).alpha(1f).withEndAction{
-                    intent = Intent(this,
-                        when(navigate){
-                        1 -> { SignInActivity::class.java }
-                        2-> {HomeScreen::class.java}
-                        else-> {TripsActivity::class.java}
+                    var intent = Intent(
+                        this,
+                            when(navigate){
+                                2 -> HomeScreen::class.java
+                                3 -> TripsActivity::class.java
+                                else -> SignInActivity::class.java
+                            }
+                        )
+                    val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+                    with(sharedPreferences.edit())
+                    {
+                        putBoolean("offline", navigate != 2)
+                        apply()
                     }
-                    )
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-                    if(navigate == 3){
-                        Toast.makeText(this, "Starting in Offline mode", Toast.LENGTH_SHORT).show()
-                        val sharedPreferences = this.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-                        with(sharedPreferences.edit()){
-                            putBoolean("offline", true)
-                        }
-                    }
                     startActivity(intent)
                     finish()
                 }

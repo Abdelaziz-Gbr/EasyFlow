@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import com.easyflow.R
 import com.easyflow.activities.signIn.signActivity.SignInActivity
@@ -13,8 +14,9 @@ class TripsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_trips)
         val gobackText = findViewById<TextView>(R.id.back_where_text)
-        val sp = this.getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-        val offline = sp.getBoolean("offline", true)
+
+        val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val offline = sharedPreferences.getBoolean("offline", true)
         gobackText.text = if(offline) "go back to sign in screen" else "go back to home screen"
         gobackText.setOnClickListener {
             if(offline){
