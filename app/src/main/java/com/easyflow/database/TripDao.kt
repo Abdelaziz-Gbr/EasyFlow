@@ -9,7 +9,7 @@ interface TripDao {
     suspend fun insert(vararg trip: TripDatabaseModel)
 
     @Query("SELECT * FROM trips")
-    fun getAllTrips(): List<TripDatabaseModel>
+    suspend fun getAllTrips(): List<TripDatabaseModel>
 
     @Query("UPDATE trips SET used=true WHERE id=:tripID")
     suspend fun markTripUsed(tripID: String)

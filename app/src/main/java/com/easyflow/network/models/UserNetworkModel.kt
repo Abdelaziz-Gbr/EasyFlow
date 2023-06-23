@@ -1,5 +1,7 @@
 package com.easyflow.network.models
 
+import com.easyflow.database.models.UserDatabaseModel
+
 data class UserNetworkModel (
     var type: String? = null,
     var active: Boolean? = null,
@@ -14,3 +16,7 @@ data class UserNetworkModel (
     var wallet: Wallet? = null,
     var password: String? = null
         )
+
+fun UserNetworkModel.toDatabaseMode():UserDatabaseModel{
+    return UserDatabaseModel(id = 0, username =  this.username, password = this.password, email = this.email)
+}

@@ -11,6 +11,7 @@ import com.easyflow.R
 import com.easyflow.activities.homeScreen.HomeScreen
 import com.easyflow.activities.signIn.signActivity.SignInActivity
 import com.easyflow.activities.trips.TripsActivity
+import com.easyflow.database.UserDao
 import com.easyflow.database.UserDatabase
 import com.easyflow.databinding.ActivitySplashScreenBinding
 
@@ -25,9 +26,9 @@ class SplashScreen : AppCompatActivity() {
             R.layout.activity_splash_screen
         )
         val userDao = UserDatabase.getDatabase(this.application).userDao()
-        val tripsDao = UserDatabase.getDatabase(this).tripDao()
-
-        val viewModelFactory = SplashScreenViewModelFactory(userDao, tripsDao)
+        val ticketDao = UserDatabase.getDatabase(this).ticketDao()
+        val tripDao = UserDatabase.getDatabase(this).tripDao()
+        val viewModelFactory = SplashScreenViewModelFactory(userDao, ticketDao, tripDao)
         val viewModel = ViewModelProvider(this, viewModelFactory)[SplashScreenViewModel::class.java]
 
         binding.efLogo.alpha = 0f
@@ -41,15 +42,15 @@ class SplashScreen : AppCompatActivity() {
                     var intent = Intent(
                         this,
                             when(navigate){
-                                2 -> HomeScreen::class.java
-                                3 -> TripsActivity::class.java
+                                1 -> HomeScreen::class.java
+                                2 -> TripsActivity::class.java
                                 else -> SignInActivity::class.java
                             }
                         )
                     val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
                     with(sharedPreferences.edit())
                     {
-                        putBoolean("offline", navigate != 2)
+                        putBoolean("offline", navigate != 1)
                         apply()
                     }
                     if(navigate == 3)

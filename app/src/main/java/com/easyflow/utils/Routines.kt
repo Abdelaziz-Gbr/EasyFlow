@@ -11,9 +11,35 @@ import kotlinx.coroutines.runBlocking
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import com.easyflow.database.models.UserDatabaseModel
+import com.easyflow.network.Network
+import com.easyflow.network.models.UserNetworkModel
+import com.easyflow.network.models.toDatabaseMode
 
 
-//todo sign in routine?
+suspend fun signUserIn(user: UserNetworkModel, userDao: UserDao, ticketDao: TicketDao): Int{
+    try {
+        val signIn = Network.easyFlowServices.signIn(user)
+        if(signIn.isSuccessful){
+            val key = signIn.headers()["Authorization"]
+            val userInfoRequest = Network.easyFlowServices.getUserInfo(key!!)
+            if(userInfoRequest.isSuccessful){
+                val userInfo = userInfoRequest.body()
+                UserCache.cacheUser(userInfo)
+                UserKey.value = key
+                userDao.removeUser()
+                ticketDao.deleteAllTickets()
+                FirebaseMessaging.getInstance().subscribeToTopic("${UserCache.username}")
+                userDao.addUser(user.toDatabaseMode())
+                return 1
+            }
+        }
+        return 0
+    }
+    catch (e: Exception){
+        return 2
+    }
+}
 
 fun subscribeToMainFeed(){
     FirebaseMessaging.getInstance().subscribeToTopic("main_topic")

@@ -41,30 +41,30 @@ class SignInFragment : Fragment() {
     }
 
     private fun signIn() {
-        val dataSource = UserDatabase.getDatabase(requireContext()).userDao()
-        val viewModelFactory = SignInViewModelFactory(dataSource)
+        val userDao = UserDatabase.getDatabase(requireContext()).userDao()
+        val ticketDao = UserDatabase.getDatabase(requireContext()).ticketDao()
+
+        val viewModelFactory = SignInViewModelFactory(userDao, ticketDao)
         val viewModel = ViewModelProvider(this, viewModelFactory)[SignInViewModel::class.java]
+
         val userName = binding.username.text.toString()
         val userPassword = binding.userPassword.text.toString()
 
         viewModel.signIn(userName, userPassword)
         viewModel.signInResponse.observe(viewLifecycleOwner) {
                 signResponse ->
-            if (signResponse != null) {
+            signResponse?.let {
                 if(signResponse){
-                    if(binding.staySignedInCheck.isChecked){
-                        viewModel.addUser(UserDatabaseModel(id = 0, username = userName, password = userPassword))
-                    }
-                    val intent = Intent(activity, HomeScreen::class.java)
-                    startActivity(intent)
                     val sharedPreferences = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
                     with(sharedPreferences.edit()){
                         putBoolean("offline", false)
                         apply()
                     }
+                    val intent = Intent(activity, HomeScreen::class.java)
+                    startActivity(intent)
                     activity?.finish()
                 }
-                else {
+                else{
                     Toast.makeText(activity, "username or password are not correct", Toast.LENGTH_LONG).show()
                 }
                 viewModel.onResponseReceived()
