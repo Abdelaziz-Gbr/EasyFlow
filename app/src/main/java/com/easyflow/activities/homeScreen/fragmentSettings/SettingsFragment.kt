@@ -7,9 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import com.easyflow.R
 import com.easyflow.activities.signIn.signActivity.SignInActivity
+import com.easyflow.cache.sharedPreferences
 import com.easyflow.database.UserDatabase
 import com.easyflow.databinding.FragmentSettingsBinding
 
@@ -31,6 +33,8 @@ class SettingsFragment : Fragment() {
         binding.viewModel = viewModel
 
         binding.lifecycleOwner = this
+
+        binding.switchOffers.isChecked = true
 
         binding.buttonLogout.setOnClickListener{
             viewModel.logout(userDataSource, ticketDataSource, tripDataSource)

@@ -4,11 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.easyflow.cache.sharedPreferences
 import com.easyflow.database.TicketDao
 import com.easyflow.database.TripDao
 import com.easyflow.database.UserDao
 import com.easyflow.database.models.toNetworkModel
 import com.easyflow.utils.signUserIn
+import com.easyflow.utils.subscribeToMainFeed
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -19,7 +21,15 @@ class SplashScreenViewModel(private val userDao: UserDao, private val ticketDao:
     val navigateTo : LiveData<Int>
         get() = _navigateTo
 
-    fun getUser(){
+    init {
+        val subMain = sharedPreferences.data.getBoolean("sub_main", true)
+        if(subMain){
+            subscribeToMainFeed()
+        }
+        getUser()
+    }
+
+    private fun getUser(){
         viewModelScope.launch {
             val user = userDao.getUser()
             if(user == null){

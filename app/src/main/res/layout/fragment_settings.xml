@@ -29,6 +29,7 @@
             android:textColorHint="#000"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:checked="@{viewModel.subMain}"
             android:onCheckedChanged="@{viewModel::onSwitchMainCheckedChanged}" />
 
         <androidx.appcompat.widget.SwitchCompat
@@ -44,6 +45,7 @@
             android:textColorHint="#000"
             android:textSize="16sp"
             android:textStyle="bold"
+            android:checked="@{viewModel.subUser}"
             android:onCheckedChanged="@{viewModel::onSwitchUserCheckedChanged}"/>
 
         <Button

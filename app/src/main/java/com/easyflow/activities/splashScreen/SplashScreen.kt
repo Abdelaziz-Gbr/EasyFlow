@@ -11,6 +11,7 @@ import com.easyflow.R
 import com.easyflow.activities.homeScreen.HomeScreen
 import com.easyflow.activities.signIn.signActivity.SignInActivity
 import com.easyflow.activities.trips.TripsActivity
+import com.easyflow.cache.sharedPreferences
 import com.easyflow.database.UserDao
 import com.easyflow.database.UserDatabase
 import com.easyflow.databinding.ActivitySplashScreenBinding
@@ -25,6 +26,7 @@ class SplashScreen : AppCompatActivity() {
             this,
             R.layout.activity_splash_screen
         )
+        sharedPreferences.init(this)
         val userDao = UserDatabase.getDatabase(this.application).userDao()
         val ticketDao = UserDatabase.getDatabase(this).ticketDao()
         val tripDao = UserDatabase.getDatabase(this).tripDao()
@@ -32,7 +34,6 @@ class SplashScreen : AppCompatActivity() {
         val viewModel = ViewModelProvider(this, viewModelFactory)[SplashScreenViewModel::class.java]
 
         binding.efLogo.alpha = 0f
-        viewModel.getUser()
 
         binding.efLogo.animate().setDuration(500).alpha(0.75f)
 
@@ -47,8 +48,7 @@ class SplashScreen : AppCompatActivity() {
                                 else -> SignInActivity::class.java
                             }
                         )
-                    val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
-                    with(sharedPreferences.edit())
+                    with(sharedPreferences.data.edit())
                     {
                         putBoolean("offline", navigate != 1)
                         apply()

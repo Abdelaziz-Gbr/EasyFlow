@@ -11,6 +11,7 @@ import kotlinx.coroutines.runBlocking
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import com.easyflow.cache.sharedPreferences
 import com.easyflow.database.models.UserDatabaseModel
 import com.easyflow.network.Network
 import com.easyflow.network.models.UserNetworkModel
@@ -29,7 +30,7 @@ suspend fun signUserIn(user: UserNetworkModel, userDao: UserDao, ticketDao: Tick
                 UserKey.value = key
                 userDao.removeUser()
                 ticketDao.deleteAllTickets()
-                FirebaseMessaging.getInstance().subscribeToTopic("${UserCache.username}")
+                if(sharedPreferences.data.getBoolean("sub_user", true)) subscribeToUserFeed()
                 userDao.addUser(user.toDatabaseMode())
                 return 1
             }
@@ -47,6 +48,10 @@ fun subscribeToMainFeed(){
                 task ->
             if(task.isSuccessful){
                 Log.d("Firebase_subscription_main", "succeeded")
+                with(sharedPreferences.data.edit()){
+                    putBoolean("sub_main", true)
+                    apply()
+                }
             }
             else{
                 Log.d("Firebase_subscription_main", "failed")
@@ -60,6 +65,10 @@ fun unSubscribeToMainFeed(){
                 task ->
             if(task.isSuccessful){
                 Log.d("Firebase_unsubscription_main", "succeeded")
+                with(sharedPreferences.data.edit()){
+                    putBoolean("sub_main", false)
+                    apply()
+                }
             }
             else{
                 Log.d("Firebase_unsubscription_main", "failed")
@@ -73,6 +82,10 @@ fun subscribeToUserFeed(){
                 task ->
             if(task.isSuccessful){
                 Log.d("Firebase_subscription_user", "succeeded")
+                with(sharedPreferences.data.edit()){
+                    putBoolean("sub_user", true)
+                    apply()
+                }
             }
             else{
                 Log.d("Firebase_subscription_user", "failed")
@@ -86,6 +99,10 @@ fun unSubscribeToUserFeed(){
                 task ->
             if(task.isSuccessful){
                 Log.d("Firebase_unsubscription_user", "succeeded")
+                with(sharedPreferences.data.edit()){
+                    putBoolean("sub_user", false)
+                    apply()
+                }
             }
             else{
                 Log.d("Firebase_unsubscription_user", "failed")
