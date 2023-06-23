@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.easyflow.activities.signIn.register.RegisterViewModel" />
+            type="com.easyflow.activities.signIn.fragmentRegister.RegisterViewModel" />
     </data>
 
     <ScrollView
@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            tools:context=".activities.signIn.register.RegisterFragment"
+            tools:context=".activities.signIn.fragmentRegister.RegisterFragment"
             android:background="@color/main_color">
 
             <TextView

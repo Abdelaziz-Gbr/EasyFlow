@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
     </data>
 
     <LinearLayout
@@ -13,6 +12,15 @@
         android:background="@color/main_color"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/trips_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Please Enter the number of passengers"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passenger_count_layout"
             android:layout_width="match_parent"
@@ -29,6 +37,7 @@
                 android:textColorHint="#000000"
                 android:digits="0123456789" />
         </com.google.android.material.textfield.TextInputLayout>
+
         <Button
             android:id="@+id/get_passernger_count_button"
             android:layout_width="wrap_content"

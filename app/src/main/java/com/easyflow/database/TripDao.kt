@@ -1,6 +1,5 @@
 package com.easyflow.database
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.easyflow.database.models.TripDatabaseModel
 
@@ -10,10 +9,10 @@ interface TripDao {
     suspend fun insert(vararg trip: TripDatabaseModel)
 
     @Query("SELECT * FROM trips")
-    fun getALLTrips(): LiveData<List<TripDatabaseModel>>
+    fun getAllTrips(): List<TripDatabaseModel>
 
     @Query("UPDATE trips SET used=true WHERE id=:tripID")
-    fun markTripUsed(tripID: String)
+    suspend fun markTripUsed(tripID: String)
 
     //@Delete(TripDatabaseModel::class)
     @Query("DELETE FROM trips")

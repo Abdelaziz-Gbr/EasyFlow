@@ -3,27 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-    </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/main_color"
         android:padding="16dp">
-
         <TextView
-            android:id="@+id/trips_title"
-            android:layout_width="match_parent"
+            android:id="@+id/back_where_text"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:gravity="center"
-            android:text="Please Choose one of the following codes"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-
-            android:textStyle="bold" />
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            tools:text="go back to home screen"
+            android:textColor="@color/text_small_color" />
 
         <fragment
             android:id="@+id/trip_view_fragment"
@@ -32,8 +27,6 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             app:defaultNavHost="true"
-            app:navGraph="@navigation/trips_navigation">
-
-        </fragment>
+            app:navGraph="@navigation/trips_navigation"/>
     </RelativeLayout>
 </layout>

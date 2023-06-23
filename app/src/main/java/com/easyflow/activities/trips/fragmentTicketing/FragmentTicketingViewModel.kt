@@ -1,6 +1,7 @@
 package com.easyflow.activities.trips.fragmentTicketing
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.easyflow.cache.UserKey

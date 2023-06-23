@@ -23,7 +23,7 @@
             android:resource="@color/purple_700" />
 
         <activity
-            android:name=".activities.signIn.SignInActivity"
+            android:name=".activities.signIn.signActivity.SignInActivity"
             android:exported="false"
             android:theme="@style/Theme.EasyFlow.SignInActivity" />
         <activity

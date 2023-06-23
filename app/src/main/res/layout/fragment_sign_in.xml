@@ -4,7 +4,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.easyflow.activities.signIn.SignInViewModel" />
+            type="com.easyflow.activities.signIn.fragmentSign.SignInViewModel" />
     </data>
 
     <LinearLayout
@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:orientation="vertical"
-        tools:context=".activities.signIn.SignInFragment"
+        tools:context=".activities.signIn.fragmentSign.SignInFragment"
         android:background="@color/main_color">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -64,7 +64,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
-            android:text="@string/forogt_password" />
+            android:text="@string/forogt_password"
+            android:textColor="@color/text_small_color" />
 
         <Button
             android:id="@+id/signInButton"
@@ -82,7 +83,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="16dp"
-            android:text="@string/register_text" />
+            android:text="@string/register_text"
+            android:textColor="@color/text_small_color" />
 
     </LinearLayout>
 

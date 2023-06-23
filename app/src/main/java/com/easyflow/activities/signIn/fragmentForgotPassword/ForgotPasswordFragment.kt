@@ -1,4 +1,4 @@
-package com.easyflow.activities.signIn
+package com.easyflow.activities.signIn.fragmentForgotPassword
 
 import android.os.Bundle
 import android.view.LayoutInflater

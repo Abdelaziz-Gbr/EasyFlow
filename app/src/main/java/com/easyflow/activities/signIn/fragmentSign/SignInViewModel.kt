@@ -1,4 +1,4 @@
-package com.easyflow.activities.signIn
+package com.easyflow.activities.signIn.fragmentSign
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -43,4 +43,5 @@ class SignInViewModel(private val userDataSource: UserDao): ViewModel() {
     fun onResponseReceived(){
         _signInResponse.value = null
     }
+
 }

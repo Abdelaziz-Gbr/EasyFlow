@@ -1,4 +1,4 @@
-package com.easyflow.activities.signIn
+package com.easyflow.activities.signIn.fragmentSign
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.easyflow.R
 import com.easyflow.activities.homeScreen.HomeScreen
+import com.easyflow.activities.signIn.fragmentSign.SignInFragmentDirections
 import com.easyflow.database.UserDatabase
 import com.easyflow.databinding.FragmentSignInBinding
 import com.easyflow.database.models.UserDatabaseModel

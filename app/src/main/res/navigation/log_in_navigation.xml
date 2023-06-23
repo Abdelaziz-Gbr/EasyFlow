@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.easyflow.activities.signIn.SignInFragment"
+        android:name="com.easyflow.activities.signIn.fragmentSign.SignInFragment"
         android:label="Sign In to EasyFlow"
         tools:layout="@layout/fragment_sign_in">
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.easyflow.activities.signIn.register.RegisterFragment"
+        android:name="com.easyflow.activities.signIn.fragmentRegister.RegisterFragment"
         android:label="Register New User"
         tools:layout="@layout/fragment_register" >
         <action
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
-        android:name="com.easyflow.activities.signIn.ForgotPasswordFragment"
+        android:name="com.easyflow.activities.signIn.fragmentForgotPassword.ForgotPasswordFragment"
         android:label="fragment_forgot_password"
         tools:layout="@layout/fragment_forgot_password" />
 </navigation>

@@ -1,7 +1,5 @@
-package com.easyflow.activities.signIn.register
+package com.easyflow.activities.signIn.fragmentRegister
 
-import android.app.DatePickerDialog
-import android.graphics.Color
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log

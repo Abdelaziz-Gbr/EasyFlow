@@ -1,5 +1,6 @@
 package com.easyflow.activities.trips.fragmentTicketing
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,6 +23,7 @@ class FragmentTicketing : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_ticketing, container, false)
+
         val viewModelFactory = FragmentTicketingViewModelFactory(UserDatabase.getDatabase(requireContext()).tripDao())
         viewModel = ViewModelProvider(this, viewModelFactory)[FragmentTicketingViewModel::class.java]
 

@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.easyflow.R
-import com.easyflow.activities.signIn.SignInActivity
+import com.easyflow.activities.signIn.signActivity.SignInActivity
 import com.easyflow.database.UserDatabase
 import com.easyflow.databinding.FragmentSettingsBinding
 

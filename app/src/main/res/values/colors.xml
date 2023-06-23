@@ -20,5 +20,6 @@
     <color name="text_input_color">#EDE9E9</color>
     <color name="button_background_color">#C4000000</color>
     <color  name="button_text_color">#fff</color>
+    <color name="text_small_color">#555555</color>
 
 </resources>

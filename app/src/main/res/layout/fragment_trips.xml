@@ -17,6 +17,15 @@
         android:gravity="center"
         tools:context=".activities.trips.TripsActivity">
 
+        <TextView
+            android:id="@+id/trips_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Please Choose one of the following codes"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
         <Button
             android:id="@+id/trip_button_1"
             android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package com.easyflow.activities.signIn
+package com.easyflow.activities.signIn.fragmentSign
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
