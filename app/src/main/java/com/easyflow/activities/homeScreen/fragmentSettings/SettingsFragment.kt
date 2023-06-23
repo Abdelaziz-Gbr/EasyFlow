@@ -30,11 +30,10 @@ class SettingsFragment : Fragment() {
         val tripDataSource = UserDatabase.getDatabase(application).tripDao()
 
         val viewModel = ViewModelProvider(this)[SettingsViewModel::class.java]
-        binding.viewModel = viewModel
 
+        binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        binding.switchOffers.isChecked = true
 
         binding.buttonLogout.setOnClickListener{
             viewModel.logout(userDataSource, ticketDataSource, tripDataSource)
