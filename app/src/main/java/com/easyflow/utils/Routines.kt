@@ -113,6 +113,7 @@ fun unSubscribeToUserFeed(){
 fun logUserOut(userDataSource: UserDao, ticketDataSource : TicketDao, tripDao: TripDao){
     runBlocking { dropAllData(userDataSource, ticketDataSource, tripDao) }
     clearCaches()
+    sharedPreferences.data.edit().clear().apply()
 }
 
 fun clearCaches() {

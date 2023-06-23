@@ -3,6 +3,7 @@ package com.easyflow.activities.signIn.fragmentSign
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,6 +27,18 @@ class SignInFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sign_in, container, false)
+        val passwordText = binding.userPassword
+        val showPassword = binding.signPasswordShow
+
+        showPassword.setOnCheckedChangeListener{ view, isChecked ->
+            if(isChecked){
+                passwordText.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            }
+            else {
+                passwordText.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD or InputType.TYPE_CLASS_TEXT
+            }
+            passwordText.setSelection(passwordText.text!!.length)
+        }
         binding.signInButton.setOnClickListener {   signIn()  }
         binding.register.setOnClickListener{    register()    }
         binding.forgotPassword.setOnClickListener{    forgotPassword()    }

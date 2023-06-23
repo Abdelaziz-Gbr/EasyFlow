@@ -51,10 +51,10 @@
                 android:background="@drawable/rounded_corners" />
 
             <CheckBox
-                android:id="@+id/staySignedInCheck"
+                android:id="@+id/sign_password_show"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/stay_signed_in_text" />
+                android:text="@string/show_password_text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
