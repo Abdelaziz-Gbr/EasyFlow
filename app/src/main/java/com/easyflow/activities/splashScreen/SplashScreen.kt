@@ -52,6 +52,8 @@ class SplashScreen : AppCompatActivity() {
                         putBoolean("offline", navigate != 2)
                         apply()
                     }
+                    if(navigate == 3)
+                        Toast.makeText(this, "Starting in offline mode", Toast.LENGTH_SHORT).show()
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                     startActivity(intent)
                     finish()
