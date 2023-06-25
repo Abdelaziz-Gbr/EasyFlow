@@ -1,4 +1,4 @@
-package com.easyflow.activities.homeScreen.fragmentRecharge
+package com.easyflow.activities.services.fragmentRecharge
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

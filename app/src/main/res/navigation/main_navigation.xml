@@ -23,21 +23,12 @@
         <action
             android:id="@+id/action_homeFragment_to_historyFragment"
             app:destination="@id/historyFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_rechargeFragment"
-            app:destination="@id/rechargeFragment" />
     </fragment>
     <fragment
         android:id="@+id/rechargeFragment"
-        android:name="com.easyflow.activities.homeScreen.fragmentRecharge.RechargeFragment"
+        android:name="com.easyflow.activities.services.fragmentRecharge.RechargeFragment"
         android:label="Balance Recharge"
-        tools:layout="@layout/fragment_recharge">
-        <action
-            android:id="@+id/action_rechargeFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/fragmentTicketing"
-            app:popUpToInclusive="true" />
-    </fragment>
+        tools:layout="@layout/fragment_recharge"/>
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.easyflow.activities.homeScreen.fragmentHistory.HistoryFragment"
@@ -55,4 +46,21 @@
             android:name="ticketId"
             app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/servicesFragment"
+        android:name="com.easyflow.activities.services.fragmentsServices.ServicesFragment"
+        android:label="My services"
+        tools:layout="@layout/fragment_services">
+        <action
+            android:id="@+id/action_servicesFragment_to_rechargeFragment"
+            app:destination="@id/rechargeFragment" />
+        <action
+            android:id="@+id/action_servicesFragment_to_plansFragment"
+            app:destination="@id/plansFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/plansFragment"
+        android:name="com.easyflow.activities.services.fragmentPlans.PlansFragment"
+        android:label="fragment_plans"
+        tools:layout="@layout/fragment_plans" />
 </navigation>

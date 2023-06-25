@@ -12,6 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:forceDarkAllowed">false</item>
     </style>
 
     <style name="Theme.EasyFlow.SignInActivity" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
@@ -26,6 +27,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:forceDarkAllowed">false</item>
     </style>
 
     <style name="Theme.EasyFlow.SplashScreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
@@ -40,5 +42,6 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:forceDarkAllowed">false</item>
     </style>
 </resources>

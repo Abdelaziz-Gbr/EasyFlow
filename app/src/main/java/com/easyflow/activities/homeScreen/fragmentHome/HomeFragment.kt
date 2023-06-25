@@ -30,14 +30,15 @@ class HomeFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        viewModel.navigateToRechargeScreen.observe(viewLifecycleOwner){navigateToRecharge ->
+        //todo, after finishing services fragments -> clean this code alone with its view, viewmodel
+        /*viewModel.navigateToRechargeScreen.observe(viewLifecycleOwner){navigateToRecharge ->
             navigateToRecharge?.let {
                 if(navigateToRecharge){
                    view?.findNavController()?.navigate(HomeFragmentDirections.actionHomeFragmentToRechargeFragment())
                     viewModel.onRechargeNavigated()
                 }
             }
-        }
+        }*/
         viewModel.navigateToTripsScreen.observe(viewLifecycleOwner){ navigateToQrScreen ->
             navigateToQrScreen?.let {
                 if(navigateToQrScreen){
