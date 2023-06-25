@@ -17,6 +17,7 @@
     <color name="unselected_item">#a6a6a6</color>
     <color name="main_nav_color">#BFFFFFFF</color>
     <color name="main_color">#EDEDF8</color>
+    <color name="darker_main_color">#75757C</color>
     <color name="text_input_color">#EDE9E9</color>
     <color name="button_background_color">#C4000000</color>
     <color  name="button_text_color">#fff</color>

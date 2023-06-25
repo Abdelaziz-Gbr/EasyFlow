@@ -124,7 +124,7 @@
             android:layout_height="wrap_content"
             android:text="@string/save"
             android:onClick="@{() -> viewModel.saveUser()}"
-            style="@style/myButtonStyle" />
+            style="@style/button_style" />
 
     </LinearLayout>
 

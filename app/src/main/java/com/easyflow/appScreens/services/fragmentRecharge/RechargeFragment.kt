@@ -1,4 +1,4 @@
-package com.easyflow.activities.services.fragmentRecharge
+package com.easyflow.appScreens.services.fragmentRecharge
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -2,7 +2,10 @@ package com.easyflow.utils
 
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.easyflow.appScreens.services.fragmentPlans.PlanListAdapter
 import com.easyflow.database.models.TicketDatabaseModel
+import com.easyflow.network.models.PlanNetworkModel
 
 @BindingAdapter("ticketTime")
 fun TextView.setTicketItemTime(ticket: TicketDatabaseModel?){
@@ -10,6 +13,8 @@ fun TextView.setTicketItemTime(ticket: TicketDatabaseModel?){
         text = convertLongToTime(ticket.startTime)
     }
 }
+
+
 
 @BindingAdapter("ticketPlace")
 fun TextView.setTicketPlace(ticket: TicketDatabaseModel?){
@@ -50,4 +55,24 @@ fun TextView.endPlace(ticket: TicketDatabaseModel?){
     if(ticket != null){
         text = "To: ${ticket.endStation}"
     }
+}
+
+@BindingAdapter("discountRate")
+fun TextView.setDiscount(disRate: Float?){
+    disRate?.let {
+        text = String.format("discount rate: %.1f", disRate*100)
+    }
+}
+
+@BindingAdapter("isPlanAvailable")
+fun TextView.isPlanAvailable(isAvailable: Boolean?){
+    isAvailable?.let {
+        text = if(isAvailable) "You can request a subscribe to this plan." else "this plan is currently unavailable."
+    }
+}
+
+@BindingAdapter("listData")
+fun bindRecyclerView(recyclerView: RecyclerView, data : List<PlanNetworkModel>?){
+    val adapter = recyclerView.adapter as PlanListAdapter
+    adapter.submitList(data)
 }

@@ -45,7 +45,7 @@
             android:layout_gravity="center"
             android:layout_margin="30dp"
             android:text="Go"
-            style="@style/myButtonStyle" />
+            style="@style/button_style" />
 
 
     </LinearLayout>

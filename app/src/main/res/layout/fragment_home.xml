@@ -55,7 +55,7 @@
                 android:layout_marginBottom="16dp"
                 android:onClick="@{() -> viewModel.onNavigateToTripsActivityClicked()}"
                 android:text="@string/start_a_trip"
-                style="@style/myButtonStyle" />
+                style="@style/button_style" />
 
 
             <Button
@@ -65,7 +65,7 @@
                 android:layout_marginBottom="16dp"
                 android:onClick="@{() -> viewModel.onHistoryClicked()}"
                 android:text="@string/view_my_tickets_history"
-                style="@style/myButtonStyle" />
+                style="@style/button_style" />
 
 
         </LinearLayout>

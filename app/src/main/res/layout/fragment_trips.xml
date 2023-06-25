@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            style="@style/myButtonStyle"
+            style="@style/button_style"
             android:text="1st Code"
             android:onClick="@{() -> viewModel.onFirstButtonClicked()}"
             />
@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            style="@style/myButtonStyle"
+            style="@style/button_style"
             android:text="2nd Code"
             android:onClick="@{() -> viewModel.onSecondButtonClicked()}" />
 
@@ -50,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            style="@style/myButtonStyle"
+            style="@style/button_style"
             android:text="3rd Code"
             android:onClick="@{() -> viewModel.onThirdButtonClicked()}" />
 
@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            style="@style/myButtonStyle"
+            style="@style/button_style"
             android:text="4th Code"
             android:onClick="@{() -> viewModel.onFourthButtonClicked()}" />
 
@@ -68,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            style="@style/myButtonStyle"
+            style="@style/button_style"
             android:text="5th Code"
             android:onClick="@{() -> viewModel.onFifthButtonClicked()}" />
     </LinearLayout>

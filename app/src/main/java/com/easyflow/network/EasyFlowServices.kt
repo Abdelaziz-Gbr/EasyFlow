@@ -1,5 +1,8 @@
 package com.easyflow.network
 
+import com.easyflow.cache.UserCache
+import com.easyflow.cache.UserKey
+import com.easyflow.network.models.PlanNetworkModel
 import com.easyflow.network.models.TicketNetworkModel
 import com.easyflow.network.models.UserNetworkModel
 import com.easyflow.network.models.TripNetworkModel
@@ -27,5 +30,7 @@ interface EasyFlowServices {
 
     @GET("passenger/Trips")
     suspend fun getTrips(@Header("Authorization") authKey: String): Response<List<TripNetworkModel>>
+    @GET("plans")
+    suspend fun getAllPlans(@Header("Authorization") authKey: String? = UserKey.value): List<PlanNetworkModel>
 
 }

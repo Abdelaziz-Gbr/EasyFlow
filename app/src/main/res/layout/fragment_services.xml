@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".activities.services.fragmentsServices.ServicesFragment"
+        tools:context=".appScreens.services.fragmentsServices.ServicesFragment"
         android:gravity="center"
         android:padding="16dp"
         android:background="@color/main_color">
@@ -19,19 +19,19 @@
             android:id="@+id/view_plan_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/myButtonStyle"
+            style="@style/button_style"
             android:text="view my plan" />
         <Button
             android:id="@+id/view_all_plans_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/myButtonStyle"
+            style="@style/button_style"
             android:text="view all plans" />
         <Button
             android:id="@+id/recharge_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/myButtonStyle"
+            style="@style/button_style"
             android:text="recharge" />
     </LinearLayout>
 </layout>

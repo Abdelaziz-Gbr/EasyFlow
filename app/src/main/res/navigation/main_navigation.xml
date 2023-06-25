@@ -26,7 +26,7 @@
     </fragment>
     <fragment
         android:id="@+id/rechargeFragment"
-        android:name="com.easyflow.activities.services.fragmentRecharge.RechargeFragment"
+        android:name="com.easyflow.appScreens.services.fragmentRecharge.RechargeFragment"
         android:label="Balance Recharge"
         tools:layout="@layout/fragment_recharge"/>
     <fragment
@@ -48,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/servicesFragment"
-        android:name="com.easyflow.activities.services.fragmentsServices.ServicesFragment"
+        android:name="com.easyflow.appScreens.services.fragmentsServices.ServicesFragment"
         android:label="My services"
         tools:layout="@layout/fragment_services">
         <action
@@ -60,7 +60,7 @@
     </fragment>
     <fragment
         android:id="@+id/plansFragment"
-        android:name="com.easyflow.activities.services.fragmentPlans.PlansFragment"
-        android:label="fragment_plans"
+        android:name="com.easyflow.appScreens.services.fragmentPlans.PlansFragment"
+        android:label="Available Plans"
         tools:layout="@layout/fragment_plans" />
 </navigation>

@@ -31,5 +31,11 @@
     <string name="wallet_balance">your current balance: %d</string>
     <string name="save">save</string>
     <string name="start_a_trip">Start a Trip</string>
-
+    <string name="plan_name">%s Plan</string>
+    <string name="plan_owner">Offered by %s</string>
+    <string name="plan_customers">eligible for %s</string>
+    <string name="plan_duarion">Valid for %s day</string>
+    <string name="max_passengers">maximum no of companions for each ticket: %s</string>
+    <string name="trips_no">Number of Trips under this plan: %s</string>
+    <string name="price_string">price: %s egp.</string>
 </resources>
