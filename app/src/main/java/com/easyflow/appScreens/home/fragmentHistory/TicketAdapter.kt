@@ -1,4 +1,4 @@
-package com.easyflow.activities.homeScreen.fragmentHistory
+package com.easyflow.appScreens.home.fragmentHistory
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.easyflow.database.models.TicketDatabaseModel
 import com.easyflow.databinding.TicketHistoryListItemBinding
 
-class TicketAdapter(val ticketItemListener: TicketItemListener): ListAdapter<TicketDatabaseModel,TicketAdapter.ViewHolder>(TicketDiffCallback()) {
+class TicketAdapter(val ticketItemListener: TicketItemListener): ListAdapter<TicketDatabaseModel, TicketAdapter.ViewHolder>(
+    TicketDiffCallback()
+) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
     }

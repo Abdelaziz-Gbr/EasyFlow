@@ -1,4 +1,4 @@
-package com.easyflow.activities.homeScreen.fragmentHistory
+package com.easyflow.appScreens.home.fragmentHistory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

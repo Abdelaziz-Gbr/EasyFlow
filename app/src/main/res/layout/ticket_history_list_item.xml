@@ -10,7 +10,7 @@
             type="com.easyflow.database.models.TicketDatabaseModel" />
         <variable
             name="clickListener"
-            type="com.easyflow.activities.homeScreen.fragmentHistory.TicketAdapter.TicketItemListener" />
+            type="com.easyflow.appScreens.home.fragmentHistory.TicketAdapter.TicketItemListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -29,6 +29,7 @@ class HomeFragment : Fragment() {
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
         viewModel.navigateToTripsScreen.observe(viewLifecycleOwner){ navigateToQrScreen ->
             navigateToQrScreen?.let {
                 if(navigateToQrScreen){

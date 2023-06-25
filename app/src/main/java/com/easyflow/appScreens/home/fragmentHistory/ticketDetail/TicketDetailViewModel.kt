@@ -1,4 +1,4 @@
-package com.easyflow.activities.homeScreen.fragmentHistory.ticketDetail
+package com.easyflow.appScreens.home.fragmentHistory.ticketDetail
 
 import android.util.Log
 import androidx.lifecycle.MediatorLiveData

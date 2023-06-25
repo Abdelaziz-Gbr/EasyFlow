@@ -1,4 +1,4 @@
-package com.easyflow.activities.homeScreen.fragmentHistory
+package com.easyflow.appScreens.home.fragmentHistory
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -46,7 +46,11 @@ class HistoryFragment : Fragment() {
 
         viewModel.navigateToTicketView.observe(viewLifecycleOwner){ ticketId ->
             if(ticketId != null){
-            this.findNavController().navigate(HistoryFragmentDirections.actionHistoryFragmentToTicketDetail(ticketId))
+            this.findNavController().navigate(
+                HistoryFragmentDirections.actionHistoryFragmentToTicketDetail(
+                    ticketId
+                )
+            )
             viewModel.onTicketViewNavigated()
             }
         }

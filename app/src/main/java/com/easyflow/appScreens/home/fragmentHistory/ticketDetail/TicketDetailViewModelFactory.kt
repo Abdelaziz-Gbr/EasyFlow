@@ -1,4 +1,4 @@
-package com.easyflow.activities.homeScreen.fragmentHistory.ticketDetail
+package com.easyflow.appScreens.home.fragmentHistory.ticketDetail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

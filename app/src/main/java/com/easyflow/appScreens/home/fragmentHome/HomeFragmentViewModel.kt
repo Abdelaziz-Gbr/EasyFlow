@@ -28,7 +28,10 @@ class HomeFragmentViewModel(private val userDao: UserDao): ViewModel() {
     val navigateToHistoryFragment : LiveData<Boolean>
         get () = _navigateToHistoryFragment
 
-
+init {
+    _welcomeText.value = "Hello ${if(UserCache.gender == "M") "mr." else "mrs."} ${UserCache.firstName}."
+    _currentBalance.value = "Current balance: ${UserCache.wallet?.balance} egp."
+}
 
 
     fun onNavigateToTripsActivityClicked(){
