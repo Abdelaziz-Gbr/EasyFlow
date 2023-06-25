@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activities.homeScreen.fragmentHome.HomeFragment">
+    tools:context=".appScreens.home.fragmentHome.HomeFragment">
 
     <data>
         <variable
             name="viewModel"
-            type="com.easyflow.activities.homeScreen.fragmentHome.HomeFragmentViewModel" />
+            type="com.easyflow.appScreens.home.fragmentHome.HomeFragmentViewModel" />
     </data>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
+        android:padding="8dp"
         android:background="@color/main_color"
         >
 
@@ -55,14 +57,6 @@
                 android:text="@string/start_a_trip"
                 style="@style/myButtonStyle" />
 
-            <Button
-                android:id="@+id/navigateToRechargeFragmentButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:onClick="@{() -> viewModel.onNavigteToRechargeClicked()}"
-                android:text="@string/recharge"
-                style="@style/myButtonStyle"/>
 
             <Button
                 android:id="@+id/view_history_btn"

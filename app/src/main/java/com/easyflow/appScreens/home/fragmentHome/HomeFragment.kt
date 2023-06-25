@@ -1,4 +1,4 @@
-package com.easyflow.activities.homeScreen.fragmentHome
+package com.easyflow.appScreens.home.fragmentHome
 
 import android.content.Intent
 import android.os.Bundle
@@ -29,16 +29,6 @@ class HomeFragment : Fragment() {
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-
-        //todo, after finishing services fragments -> clean this code alone with its view, viewmodel
-        /*viewModel.navigateToRechargeScreen.observe(viewLifecycleOwner){navigateToRecharge ->
-            navigateToRecharge?.let {
-                if(navigateToRecharge){
-                   view?.findNavController()?.navigate(HomeFragmentDirections.actionHomeFragmentToRechargeFragment())
-                    viewModel.onRechargeNavigated()
-                }
-            }
-        }*/
         viewModel.navigateToTripsScreen.observe(viewLifecycleOwner){ navigateToQrScreen ->
             navigateToQrScreen?.let {
                 if(navigateToQrScreen){

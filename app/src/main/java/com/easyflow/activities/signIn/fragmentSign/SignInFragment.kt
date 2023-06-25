@@ -13,11 +13,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.easyflow.R
-import com.easyflow.activities.homeScreen.HomeScreen
-import com.easyflow.activities.signIn.fragmentSign.SignInFragmentDirections
+import com.easyflow.appScreens.home.activity.HomeScreen
 import com.easyflow.database.UserDatabase
 import com.easyflow.databinding.FragmentSignInBinding
-import com.easyflow.database.models.UserDatabaseModel
 
 class SignInFragment : Fragment() {
     private lateinit var binding: FragmentSignInBinding

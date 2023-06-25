@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.easyflow.activities.homeScreen.fragmentHome.HomeFragment"
+        android:name="com.easyflow.appScreens.home.fragmentHome.HomeFragment"
         android:label="My Home"
         tools:layout="@layout/fragment_home">
         <action

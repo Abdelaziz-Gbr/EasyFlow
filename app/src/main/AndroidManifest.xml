@@ -27,7 +27,7 @@
             android:exported="false"
             android:theme="@style/Theme.EasyFlow.SignInActivity" />
         <activity
-            android:name=".activities.homeScreen.HomeScreen"
+            android:name=".appScreens.home.activity.HomeScreen"
             android:exported="false"
             android:theme="@style/Theme.EasyFlow" />
         <activity

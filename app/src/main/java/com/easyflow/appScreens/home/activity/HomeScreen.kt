@@ -1,4 +1,4 @@
-package com.easyflow.activities.homeScreen
+package com.easyflow.appScreens.home.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

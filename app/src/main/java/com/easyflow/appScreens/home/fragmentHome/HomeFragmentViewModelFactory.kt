@@ -1,4 +1,4 @@
-package com.easyflow.activities.homeScreen.fragmentHome
+package com.easyflow.appScreens.home.fragmentHome
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

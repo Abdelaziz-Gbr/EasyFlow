@@ -1,4 +1,4 @@
-package com.easyflow.activities.homeScreen.fragmentHome
+package com.easyflow.appScreens.home.fragmentHome
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -24,37 +24,12 @@ class HomeFragmentViewModel(private val userDao: UserDao): ViewModel() {
     val navigateToTripsScreen : LiveData<Boolean>
         get () = _navigateToTripsScreen
 
-    private val _navigateToRechargeScreen = MutableLiveData<Boolean>()
-    val navigateToRechargeScreen : LiveData<Boolean>
-        get () = _navigateToRechargeScreen
-
     private val _navigateToHistoryFragment = MutableLiveData<Boolean>()
     val navigateToHistoryFragment : LiveData<Boolean>
         get () = _navigateToHistoryFragment
 
 
-    init {
-        viewModelScope.launch { getUserInfo() }
 
-    }
-
-
-    private suspend fun getUserInfo(){
-        val auth = UserKey.value
-        val userInfo = Network.easyFlowServices.getUserInfo(auth!!)
-        try{
-            if (userInfo.isSuccessful) {
-                Log.d("user_wallet", userInfo.body()?.wallet?.balance.toString())
-                UserCache.cacheUser(userInfo.body())
-                _welcomeText.value = "mr. ${UserCache.firstName}"
-                val currentAmountString = (UserCache.wallet!!.balance).toString()
-                _currentBalance.value = "current balance = $currentAmountString"
-            }
-        }
-        catch (e: Exception){
-            throw Exception("Failed to Retrieve User Info.")
-        }
-    }
 
     fun onNavigateToTripsActivityClicked(){
         _navigateToTripsScreen.value = true
@@ -62,13 +37,6 @@ class HomeFragmentViewModel(private val userDao: UserDao): ViewModel() {
 
     fun onTripsNavigated(){
         _navigateToTripsScreen.value = false
-    }
-    fun onNavigteToRechargeClicked(){
-        _navigateToRechargeScreen.value = true
-    }
-
-    fun onRechargeNavigated(){
-        _navigateToRechargeScreen.value = false
     }
 
     fun onHistoryClicked(){
