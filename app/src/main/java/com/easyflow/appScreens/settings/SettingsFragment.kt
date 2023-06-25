@@ -1,4 +1,4 @@
-package com.easyflow.activities.homeScreen.fragmentSettings
+package com.easyflow.appScreens.settings
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,11 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import com.easyflow.R
 import com.easyflow.activities.signIn.signActivity.SignInActivity
-import com.easyflow.cache.sharedPreferences
 import com.easyflow.database.UserDatabase
 import com.easyflow.databinding.FragmentSettingsBinding
 

@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.easyflow.activities.homeScreen.fragmentProfile.ProfileFragment"
+        android:name="com.easyflow.appScreens.profile.ProfileFragment"
         android:label="My Profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.easyflow.activities.homeScreen.fragmentSettings.SettingsFragment"
+        android:name="com.easyflow.appScreens.settings.SettingsFragment"
         android:label="Settings"
         tools:layout="@layout/fragment_settings" />
     <fragment

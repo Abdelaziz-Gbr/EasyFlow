@@ -1,7 +1,6 @@
-package com.easyflow.activities.homeScreen.fragmentSettings
+package com.easyflow.appScreens.settings
 
 import android.widget.CompoundButton
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.easyflow.cache.sharedPreferences

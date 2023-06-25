@@ -1,4 +1,4 @@
-package com.easyflow.activities.homeScreen.fragmentProfile
+package com.easyflow.appScreens.profile
 
 import androidx.lifecycle.ViewModel
 import com.easyflow.cache.UserCache

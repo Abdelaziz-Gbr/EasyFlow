@@ -1,4 +1,4 @@
-package com.easyflow.activities.homeScreen.fragmentProfile
+package com.easyflow.appScreens.profile
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
