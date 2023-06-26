@@ -62,5 +62,14 @@
         android:id="@+id/plansFragment"
         android:name="com.easyflow.appScreens.services.fragmentPlans.PlansFragment"
         android:label="Available Plans"
-        tools:layout="@layout/fragment_plans" />
+        tools:layout="@layout/fragment_plans" >
+        <action
+            android:id="@+id/action_plansFragment_to_planDetailsFragment"
+            app:destination="@id/planDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/planDetailsFragment"
+        android:name="com.easyflow.appScreens.services.fragmentPlans.planDetails.PlanDetailsFragment"
+        android:label="fragment_plan_details"
+        tools:layout="@layout/fragment_plan_details" />
 </navigation>
