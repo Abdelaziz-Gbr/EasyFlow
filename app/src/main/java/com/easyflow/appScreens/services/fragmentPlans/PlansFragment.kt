@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.easyflow.R
@@ -26,6 +27,20 @@ class PlansFragment : Fragment() {
         binding.lifecycleOwner = this
 
         binding.plansRv.adapter = PlanListAdapter()
+
+        viewModel.status.observe(viewLifecycleOwner){error ->
+            error?.let {
+                if(error == EasyFlowApiStatus.ERROR) {
+                    Toast.makeText(
+                        requireContext(),
+                        "Failed to Retrieve Plans information, pls try again later",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+
+
 
         return binding.root
     }

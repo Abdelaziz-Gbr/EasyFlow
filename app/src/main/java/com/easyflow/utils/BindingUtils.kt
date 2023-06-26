@@ -1,8 +1,12 @@
 package com.easyflow.utils
 
+import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.easyflow.R
+import com.easyflow.appScreens.services.fragmentPlans.EasyFlowApiStatus
 import com.easyflow.appScreens.services.fragmentPlans.PlanListAdapter
 import com.easyflow.database.models.TicketDatabaseModel
 import com.easyflow.network.models.PlanNetworkModel
@@ -75,4 +79,21 @@ fun TextView.isPlanAvailable(isAvailable: Boolean?){
 fun bindRecyclerView(recyclerView: RecyclerView, data : List<PlanNetworkModel>?){
     val adapter = recyclerView.adapter as PlanListAdapter
     adapter.submitList(data)
+}
+
+@BindingAdapter("easyFlowApiStatus")
+fun bindStatus(statusImageView: ImageView, status: EasyFlowApiStatus?){
+    when(status){
+        EasyFlowApiStatus.LOADING -> {
+            statusImageView.visibility = View.VISIBLE
+            statusImageView.setImageResource(R.drawable.loading_animation)
+        }
+        EasyFlowApiStatus.ERROR ->{
+            statusImageView.visibility = View.VISIBLE
+            statusImageView.setImageResource(R.drawable.ic_connection_error)
+        }
+        else ->{
+            statusImageView.visibility = View.GONE
+        }
+    }
 }

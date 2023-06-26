@@ -8,11 +8,11 @@ import com.easyflow.network.Network
 import com.easyflow.network.models.PlanNetworkModel
 import kotlinx.coroutines.launch
 
+enum class EasyFlowApiStatus{ LOADING, ERROR, DONE}
 class PlansFragmentViewModel: ViewModel() {
-    private val _statusError = MutableLiveData<String>()
-    val statusError : LiveData<String>
-        get() = _statusError
-
+    private val _status = MutableLiveData<EasyFlowApiStatus>()
+    val status: LiveData<EasyFlowApiStatus>
+        get() = _status
 
     private val _plans = MutableLiveData<List<PlanNetworkModel>>()
     val plans:LiveData<List<PlanNetworkModel>>
@@ -20,13 +20,16 @@ class PlansFragmentViewModel: ViewModel() {
 
 
     init {
+        _status.value = EasyFlowApiStatus.LOADING
         viewModelScope.launch {
             try{
                 val plansReq = Network.easyFlowServices.getAllPlans()
+                _status.value = EasyFlowApiStatus.DONE
                 _plans.value = plansReq
             }
             catch (e: Exception){
-                _statusError.value = e.message
+                _status.value = EasyFlowApiStatus.ERROR
+                _plans.value = ArrayList()
             }
         }
     }
