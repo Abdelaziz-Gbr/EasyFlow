@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import com.easyflow.R
 import com.easyflow.databinding.FragmentPlansBinding
 
 class PlansFragment : Fragment() {
@@ -16,7 +18,7 @@ class PlansFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentPlansBinding.inflate(inflater)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_plans,container, false)
 
         viewModel = ViewModelProvider(this)[PlansFragmentViewModel::class.java]
 

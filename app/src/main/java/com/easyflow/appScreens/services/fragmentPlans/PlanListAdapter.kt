@@ -15,6 +15,15 @@ class PlanListAdapter : ListAdapter<PlanNetworkModel, PlanListAdapter.PlanItem>(
             binding.plan = planNetworkModel
             binding.executePendingBindings()
         }
+
+        companion object {
+            fun from(parent: ViewGroup): PlanItem {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = PlanListItemBinding.inflate(layoutInflater, parent, false)
+
+                return PlanItem(binding)
+            }
+        }
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<PlanNetworkModel>() {
@@ -35,7 +44,7 @@ class PlanListAdapter : ListAdapter<PlanNetworkModel, PlanListAdapter.PlanItem>(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlanListAdapter.PlanItem {
-        return PlanItem(PlanListItemBinding.inflate(LayoutInflater.from(parent.context)))
+        return PlanItem.from(parent)
     }
 
     override fun onBindViewHolder(holder: PlanListAdapter.PlanItem, position: Int) {

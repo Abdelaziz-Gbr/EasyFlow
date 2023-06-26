@@ -2,7 +2,8 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".appScreens.services.fragmentPlans.PlansFragment">
+    tools:context=".appScreens.services.fragmentPlans.PlansFragment"
+    >
 
     <data>
         <variable
@@ -16,15 +17,12 @@
         android:layout_height="match_parent"
         android:padding="12dp"
         android:orientation="vertical"
-        android:background="@color/main_color">
-
-
+        android:background="@color/main_color"
+        >
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/plans_rv"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:clipToPadding="false"
-            android:foregroundGravity="center"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

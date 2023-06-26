@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center"
+    >
 
     <data>
         <variable
@@ -9,13 +11,14 @@
             type="com.easyflow.network.models.PlanNetworkModel" />
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:padding="16dp"
         android:layout_margin="8dp"
-        android:background="@drawable/plan_item_background">
+        android:background="@drawable/plan_item_background"
+        android:foregroundGravity="center"
+        >
 
         <TextView
             android:id="@+id/plan_item_name"
@@ -23,7 +26,10 @@
             android:layout_height="wrap_content"
             style="@style/header_title"
             tools:text="Gold Plan"
-            android:text="@{@string/plan_name(plan.name)}"/>
+            android:text="@{@string/plan_name(plan.name)}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
             android:id="@+id/plan_item_owner"
@@ -31,7 +37,11 @@
             android:layout_height="wrap_content"
             style="@style/app_small_header"
             tools:text="offered by:Cairo Government"
-            android:text="@{@string/plan_owner(plan.ownerName)}"/>
+            android:text="@{@string/plan_owner(plan.ownerName)}"
+            app:layout_constraintTop_toBottomOf="@id/plan_item_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"/>
 
         <TextView
             android:id="@+id/plan_item_privilage"
@@ -39,7 +49,11 @@
             android:layout_height="wrap_content"
             style="@style/app_text"
             tools:text="available for customers: Reqular"
-            android:text="@{@string/plan_customers(plan.privilege)}"/>
+            android:text="@{@string/plan_customers(plan.privilege)}"
+            app:layout_constraintTop_toBottomOf="@id/plan_item_owner"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"/>
 
         <TextView
             android:id="@+id/plan_item_discount"
@@ -47,7 +61,11 @@
             android:layout_height="wrap_content"
             style="@style/app_text"
             tools:text="Discount rate: 50 %"
-            app:discountRate = "@{plan.discountRate}"/>
+            app:discountRate="@{plan.discountRate}"
+            app:layout_constraintTop_toBottomOf="@id/plan_item_privilage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"/>
 
         <TextView
             android:id="@+id/plan_item_duration"
@@ -55,7 +73,11 @@
             android:layout_height="wrap_content"
             style="@style/app_text"
             tools:text="Valid For: 30 days"
-            android:text="@{@string/plan_duarion(plan.durationDays)}"/>
+            android:text="@{@string/plan_duarion(plan.durationDays)}"
+            app:layout_constraintTop_toBottomOf="@id/plan_item_discount"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"/>
 
         <TextView
             android:id="@+id/plan_item_max_companion"
@@ -63,7 +85,11 @@
             android:layout_height="wrap_content"
             style="@style/app_text"
             tools:text="maximum no of companions for each ticket: 3"
-            android:text="@{@string/max_passengers(plan.maxCompanion)}"/>
+            android:text="@{@string/max_passengers(plan.maxCompanion)}"
+            app:layout_constraintTop_toBottomOf="@id/plan_item_duration"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"/>
 
         <TextView
             android:id="@+id/plan_item_number_of_trips"
@@ -71,7 +97,11 @@
             android:layout_height="wrap_content"
             style="@style/app_text"
             tools:text="Number of Trips under this plan: 60"
-            android:text="@{@string/trips_no(plan.numberOfTrips)}"/>
+            android:text="@{@string/trips_no(plan.numberOfTrips)}"
+            app:layout_constraintTop_toBottomOf="@id/plan_item_max_companion"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"/>
 
         <TextView
             android:id="@+id/plan_item_available"
@@ -79,29 +109,11 @@
             android:layout_height="wrap_content"
             style="@style/app_text"
             tools:text="Available"
-            app:isPlanAvailable="@{plan.available}"/>
+            app:isPlanAvailable="@{plan.available}"
+            app:layout_constraintTop_toBottomOf="@id/plan_item_number_of_trips"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/plan_item_price"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                style="@style/app_small_header"
-                tools:text="total price = 20.0 egp"
-                android:text="@{@string/price_string(plan.price)}"/>
-
-            <Button
-                android:id="@+id/plan_item_button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                style="@style/button_style"
-                android:text="More info" />
-        </LinearLayout>
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
