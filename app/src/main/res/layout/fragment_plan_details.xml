@@ -92,6 +92,12 @@
             app:isPlanAvailable="@{plan.available}"
             android:layout_marginTop="8dp"
             android:layout_marginStart="8dp"/>
-
+        <Button
+            android:id="@+id/sub_to_plan_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/button_style"
+            android:text="Subscribe to this plan"
+            android:layout_gravity="center_horizontal"/>
     </LinearLayout>
 </layout>

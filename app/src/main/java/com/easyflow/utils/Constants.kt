@@ -6,3 +6,6 @@ object Constants {
     const val channelName = "com.easyflow.firebaseMessagingService"
 
 }
+
+
+enum class ApiCallStatus{LOADING, DONE, ERROR}

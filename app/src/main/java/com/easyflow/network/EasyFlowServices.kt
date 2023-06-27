@@ -2,10 +2,7 @@ package com.easyflow.network
 
 import com.easyflow.cache.UserCache
 import com.easyflow.cache.UserKey
-import com.easyflow.network.models.PlanNetworkModel
-import com.easyflow.network.models.TicketNetworkModel
-import com.easyflow.network.models.UserNetworkModel
-import com.easyflow.network.models.TripNetworkModel
+import com.easyflow.network.models.*
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -32,5 +29,11 @@ interface EasyFlowServices {
     suspend fun getTrips(@Header("Authorization") authKey: String): Response<List<TripNetworkModel>>
     @GET("plans")
     suspend fun getAllPlans(@Header("Authorization") authKey: String? = UserKey.value): List<PlanNetworkModel>
+
+    @POST("passenger/subscribe")
+    suspend fun subscribeToPlan(
+        @Header("Authorization") authKey: String? = UserKey.value,
+        @Body planSubscriptionModel: PlanSubscriptionModel
+    ): Response<ResponseBody>
 
 }
