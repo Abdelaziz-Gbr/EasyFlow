@@ -48,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/servicesFragment"
-        android:name="com.easyflow.appScreens.services.fragmentsServices.ServicesFragment"
+        android:name="com.easyflow.appScreens.home.fragmentsServices.ServicesFragment"
         android:label="My services"
         tools:layout="@layout/fragment_services">
         <action
@@ -70,6 +70,10 @@
     <fragment
         android:id="@+id/planDetailsFragment"
         android:name="com.easyflow.appScreens.services.fragmentPlans.planDetails.PlanDetailsFragment"
-        android:label="fragment_plan_details"
-        tools:layout="@layout/fragment_plan_details" />
+        android:label="Plan Details"
+        tools:layout="@layout/fragment_plan_details">
+        <argument
+            android:name="selectedPlan"
+            app:argType="com.easyflow.network.models.PlanNetworkModel" />
+    </fragment>
 </navigation>

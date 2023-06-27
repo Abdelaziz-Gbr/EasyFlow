@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.easyflow.R
 import com.easyflow.databinding.FragmentPlansBinding
 
@@ -26,7 +27,9 @@ class PlansFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        binding.plansRv.adapter = PlanListAdapter()
+        binding.plansRv.adapter = PlanListAdapter(PlanListAdapter.OnClickListener {
+            viewModel.displayPlanDetails(it)
+        })
 
         viewModel.status.observe(viewLifecycleOwner){error ->
             error?.let {
@@ -37,6 +40,13 @@ class PlansFragment : Fragment() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+            }
+        }
+
+        viewModel.navigateToPlanDetail.observe(viewLifecycleOwner){
+            it?.let {
+                findNavController().navigate(PlansFragmentDirections.actionPlansFragmentToPlanDetailsFragment(it))
+                viewModel.onPlanDetailsNavigated()
             }
         }
 

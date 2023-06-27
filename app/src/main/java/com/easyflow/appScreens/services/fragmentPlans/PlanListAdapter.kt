@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.easyflow.databinding.PlanListItemBinding
 import com.easyflow.network.models.PlanNetworkModel
 
-class PlanListAdapter : ListAdapter<PlanNetworkModel, PlanListAdapter.PlanItem>(DiffCallback) {
+class PlanListAdapter(private val onClickListener: OnClickListener) : ListAdapter<PlanNetworkModel, PlanListAdapter.PlanItem>(DiffCallback) {
     class PlanItem(private var binding: PlanListItemBinding):
     RecyclerView.ViewHolder(binding.root){
-        fun bind(planNetworkModel: PlanNetworkModel){
+        fun bind(planNetworkModel: PlanNetworkModel, onClickListener: OnClickListener){
             binding.plan = planNetworkModel
+            binding.planViewDetailsBtn.setOnClickListener { onClickListener.onClick(planNetworkModel) }
             binding.executePendingBindings()
         }
 
@@ -43,12 +44,19 @@ class PlanListAdapter : ListAdapter<PlanNetworkModel, PlanListAdapter.PlanItem>(
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlanListAdapter.PlanItem {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlanItem {
         return PlanItem.from(parent)
     }
 
-    override fun onBindViewHolder(holder: PlanListAdapter.PlanItem, position: Int) {
+    override fun onBindViewHolder(holder: PlanItem, position: Int) {
         val itemPlan = getItem(position)
-        holder.bind(itemPlan)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(itemPlan)
+        }
+        holder.bind(itemPlan, onClickListener)
+    }
+
+    class OnClickListener(val clickListener: (plan: PlanNetworkModel) -> Unit){
+        fun onClick(plan: PlanNetworkModel) = clickListener(plan)
     }
 }

@@ -6,14 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.easyflow.R
+import com.easyflow.databinding.FragmentPlanDetailsBinding
 
 class PlanDetailsFragment : Fragment() {
+    private lateinit var binding: FragmentPlanDetailsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_plan_details, container, false)
+
+        binding = FragmentPlanDetailsBinding.inflate(inflater)
+        val selectedPlan = PlanDetailsFragmentArgs.fromBundle(requireArguments()).selectedPlan
+        binding.plan = selectedPlan
+        return binding.root
     }
 }

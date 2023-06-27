@@ -19,6 +19,11 @@ class PlansFragmentViewModel: ViewModel() {
         get() = _plans
 
 
+    private val _navigateToPlanDetail = MutableLiveData<PlanNetworkModel?>()
+    val navigateToPlanDetail : LiveData<PlanNetworkModel?>
+        get() = _navigateToPlanDetail
+
+
     init {
         _status.value = EasyFlowApiStatus.LOADING
         viewModelScope.launch {
@@ -32,5 +37,13 @@ class PlansFragmentViewModel: ViewModel() {
                 _plans.value = ArrayList()
             }
         }
+    }
+
+    fun displayPlanDetails(plan: PlanNetworkModel){
+        _navigateToPlanDetail.value = plan
+    }
+
+    fun onPlanDetailsNavigated(){
+        _navigateToPlanDetail.value = null
     }
 }

@@ -1,4 +1,4 @@
-package com.easyflow.appScreens.services.fragmentsServices
+package com.easyflow.appScreens.home.fragmentsServices
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

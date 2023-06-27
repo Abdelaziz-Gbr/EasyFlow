@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".appScreens.services.fragmentsServices.ServicesFragment"
+        tools:context=".appScreens.home.fragmentsServices.ServicesFragment"
         android:gravity="center"
         android:padding="16dp"
         android:background="@color/main_color">

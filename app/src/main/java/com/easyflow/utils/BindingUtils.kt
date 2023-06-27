@@ -64,7 +64,7 @@ fun TextView.endPlace(ticket: TicketDatabaseModel?){
 @BindingAdapter("discountRate")
 fun TextView.setDiscount(disRate: Float?){
     disRate?.let {
-        text = String.format("discount rate: %.1f", disRate*100)
+        text = String.format("discount rate: %.1f%%", disRate*100)
     }
 }
 
