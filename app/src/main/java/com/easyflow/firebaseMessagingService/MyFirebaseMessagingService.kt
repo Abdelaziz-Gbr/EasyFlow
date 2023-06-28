@@ -23,7 +23,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         subscribeToMainFeed()
     }
     override fun onMessageReceived(message: RemoteMessage) {
-        Log.d("firebase", "message Received")
         if(message.notification != null){
             generateNotification(message.notification!!.title!!, message.notification!!.body!!)
         }
@@ -63,10 +62,10 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     private fun getRemoteViews(title: String, message: String): RemoteViews? {
-        val remoteView = RemoteViews("com.easyflow.firebaseMessagingService", R.layout.notification)
+        val remoteView = RemoteViews(applicationContext.packageName, R.layout.notification)
         remoteView.setTextViewText(R.id.notification_title, title)
         remoteView.setTextViewText(R.id.notification_message, message)
-        remoteView.setImageViewResource(R.id.notification_image, R.drawable.easyflow_colored_logo)
+        remoteView.setImageViewResource(R.id.notification_image, R.drawable.easyflow_logo)
 
         return remoteView
     }

@@ -3,6 +3,7 @@ package com.easyflow.activities.splashScreen
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -13,6 +14,7 @@ import com.easyflow.activities.trips.TripsActivity
 import com.easyflow.cache.sharedPreferences
 import com.easyflow.database.UserDatabase
 import com.easyflow.databinding.ActivitySplashScreenBinding
+import com.google.firebase.messaging.FirebaseMessaging
 
 //todo maybe the splash screen is not relative anymore and should be replaced with the main activity?
 class SplashScreen : AppCompatActivity() {
