@@ -33,15 +33,6 @@
             android:layout_marginTop="8dp"
             android:layout_marginStart="8dp"/>
 
-        <TextView
-            android:id="@+id/plan_item_privilage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/app_text"
-            tools:text="available for customers: Reqular"
-            android:text="@{@string/plan_customers(plan.privilege)}"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="8dp"/>
 
         <TextView
             android:id="@+id/plan_item_discount"

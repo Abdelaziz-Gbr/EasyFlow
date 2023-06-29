@@ -8,7 +8,6 @@ data class PlanNetworkModel(
     val name: String,
     val ownerName: String,
     val price: Float,
-    val privilege: String,
     val discountRate: Float,
     val durationDays: Int,
     val maxCompanion: String,
@@ -19,7 +18,6 @@ data class PlanNetworkModel(
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readFloat(),
-        parcel.readString()!!,
         parcel.readFloat(),
         parcel.readInt(),
         parcel.readString()!!,
@@ -32,7 +30,6 @@ data class PlanNetworkModel(
         parcel.writeString(name)
         parcel.writeString(ownerName)
         parcel.writeFloat(price)
-        parcel.writeString(privilege)
         parcel.writeFloat(discountRate)
         parcel.writeInt(durationDays)
         parcel.writeString(maxCompanion)
