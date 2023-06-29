@@ -1,8 +1,10 @@
 package com.easyflow.utils
 
+import android.os.Build
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.easyflow.R
@@ -10,11 +12,16 @@ import com.easyflow.appScreens.services.fragmentPlans.EasyFlowApiStatus
 import com.easyflow.appScreens.services.fragmentPlans.PlanListAdapter
 import com.easyflow.database.models.TicketDatabaseModel
 import com.easyflow.network.models.PlanNetworkModel
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
+@RequiresApi(Build.VERSION_CODES.O)
 @BindingAdapter("ticketTime")
 fun TextView.setTicketItemTime(ticket: TicketDatabaseModel?){
-    if(ticket != null){
-        text = convertLongToTime(ticket.startTime)
+    ticket?.let {
+        val dateTime = LocalDateTime.parse(ticket.startTime, DateTimeFormatter.ISO_DATE_TIME)
+        val formatter = DateTimeFormatter.ofPattern("MMM d, yyyy\nh:mm a")
+        text = dateTime.format(formatter)
     }
 }
 
@@ -30,7 +37,7 @@ fun TextView.setTicketPlace(ticket: TicketDatabaseModel?){
 @BindingAdapter("ticketPrice")
 fun TextView.setTicketPrice(ticket: TicketDatabaseModel?){
     if(ticket != null){
-        text = "${ticket.price} EGP."
+        text = "Total Price: ${ticket.price} EGP."
     }
 }
 @BindingAdapter("ticketId")
@@ -42,8 +49,8 @@ fun TextView.setTicketId(ticket: TicketDatabaseModel?){
 
 @BindingAdapter("ticketStatus")
 fun TextView.setTicketStatus(ticket: TicketDatabaseModel?){
-    if(ticket != null){
-        text = "Status: ${ticket.status}"
+    ticket?.let {
+        text = "status: ${ticket.status}"
     }
 }
 

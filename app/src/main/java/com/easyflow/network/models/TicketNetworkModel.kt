@@ -4,8 +4,8 @@ import com.easyflow.database.models.TicketDatabaseModel
 
 data class TicketNetworkModel (
     val id: String,
-    val startTime: Long,
-    val endTime: Long,
+    val startTime: String,
+    val endTime: String,
     val status: String,
     val startStation: String,
     val price: Float,

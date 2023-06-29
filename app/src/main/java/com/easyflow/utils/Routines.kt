@@ -18,7 +18,7 @@ import com.easyflow.network.models.UserNetworkModel
 import com.easyflow.network.models.toDatabaseMode
 
 
-suspend fun signUserIn(user: UserNetworkModel, userDao: UserDao, ticketDao: TicketDao): Int{
+suspend fun signUserIn(user: UserNetworkModel, userDao: UserDao, ticketDao: TicketDao, fromSplashScreen: Boolean = false): Int{
     try {
         val signIn = Network.easyFlowServices.signIn(user)
         if(signIn.isSuccessful){
@@ -28,10 +28,12 @@ suspend fun signUserIn(user: UserNetworkModel, userDao: UserDao, ticketDao: Tick
                 val userInfo = userInfoRequest.body()
                 UserCache.cacheUser(userInfo)
                 UserKey.value = key
-                userDao.removeUser()
-                ticketDao.deleteAllTickets()
                 if(sharedPreferences.data.getBoolean("sub_user", true)) subscribeToUserFeed()
-                userDao.addUser(user.toDatabaseMode())
+                if (!fromSplashScreen) {
+                    userDao.removeUser()
+                    ticketDao.deleteAllTickets()
+                    userDao.addUser(user.toDatabaseMode())
+                }
                 return 1
             }
         }

@@ -36,7 +36,7 @@ class SplashScreenViewModel(private val userDao: UserDao, private val ticketDao:
                 _navigateTo.value = 0
                 return@launch
             }
-            val signedIn = signUserIn(user.toNetworkModel(), userDao, ticketDao)
+            val signedIn = signUserIn(user.toNetworkModel(), userDao, ticketDao, true)
             if(signedIn != 2){
                 _navigateTo.value = signedIn
             }

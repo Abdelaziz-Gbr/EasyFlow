@@ -8,7 +8,7 @@ import com.easyflow.database.models.TicketDatabaseModel
 import com.easyflow.database.models.TripDatabaseModel
 import com.easyflow.database.models.UserDatabaseModel
 
-@Database(entities = [UserDatabaseModel::class, TicketDatabaseModel::class, TripDatabaseModel::class], version = 5, exportSchema = false)
+@Database(entities = [UserDatabaseModel::class, TicketDatabaseModel::class, TripDatabaseModel::class], version = 6, exportSchema = false)
 abstract class UserDatabase: RoomDatabase() {
     abstract fun userDao(): UserDao
 

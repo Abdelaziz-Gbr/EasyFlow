@@ -8,8 +8,8 @@ import com.easyflow.network.models.TicketNetworkModel
 data class TicketDatabaseModel (
     @PrimaryKey(autoGenerate = false)
     val id: String,
-    val startTime: Long,
-    val endTime: Long,
+    val startTime: String,
+    val endTime: String,
     val status: String,
     val startStation: String,
     val price: Float,
