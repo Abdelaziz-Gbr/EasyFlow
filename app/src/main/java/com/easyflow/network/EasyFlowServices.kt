@@ -10,25 +10,32 @@ import retrofit2.http.*
 interface EasyFlowServices {
 
     @POST("login")
-    suspend fun signIn(@Body userInfo: UserNetworkModel) : Response<ResponseBody>
+    suspend fun signIn(
+        @Body userInfo: UserNetworkModel) : Response<ResponseBody>
 
     @POST("Register")
-    suspend fun register(@Body user: UserNetworkModel) : Response<ResponseBody>
+    suspend fun register(
+        @Body user: UserNetworkModel) : Response<ResponseBody>
 
     @GET("passenger/profile")
-    suspend fun getUserInfo(@Header("Authorization") authKey : String) : Response<UserNetworkModel>
+    suspend fun getUserInfo(
+        @Header("Authorization") authKey : String) : Response<UserNetworkModel>
 
     @PUT("passenger/recharge/{amount}")
-    suspend fun recharge(@Path("amount") amount: Float,
-                         @Header("Authorization") authKey: String): Response<ResponseBody>
+    suspend fun recharge(
+        @Path("amount") amount: Float,
+        @Header("Authorization") authKey: String): Response<ResponseBody>
 
     @GET("passenger/history")
-    suspend fun getAllTickets(@Header("Authorization") authKey: String): Response<List<TicketNetworkModel>>
+    suspend fun getAllTickets(
+        @Header("Authorization") authKey: String): Response<List<TicketNetworkModel>>
 
     @GET("passenger/Trips")
-    suspend fun getTrips(@Header("Authorization") authKey: String): Response<List<TripNetworkModel>>
+    suspend fun getTrips(
+        @Header("Authorization") authKey: String): Response<List<TripNetworkModel>>
     @GET("plans")
-    suspend fun getAllPlans(@Header("Authorization") authKey: String? = UserKey.value): List<PlanNetworkModel>
+    suspend fun getAllPlans(
+        @Header("Authorization") authKey: String? = UserKey.value): List<PlanNetworkModel>
 
     @POST("passenger/subscribe")
     suspend fun subscribeToPlan(
@@ -36,4 +43,7 @@ interface EasyFlowServices {
         @Body planSubscriptionModel: PlanSubscriptionModel
     ): Response<ResponseBody>
 
+    @GET("passenger/subscriptions")
+    suspend fun getUserSubscriptions(
+        @Header("Authorization") authKey: String? = UserKey.value): Response<List<UserPlan>>
 }
