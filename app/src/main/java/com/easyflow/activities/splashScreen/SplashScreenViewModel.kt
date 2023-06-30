@@ -51,7 +51,5 @@ class SplashScreenViewModel(private val userDao: UserDao, private val ticketDao:
             }
         }
     }
-    fun onUserGot(){
-        _navigateTo.value = 0
-    }
+
 }
