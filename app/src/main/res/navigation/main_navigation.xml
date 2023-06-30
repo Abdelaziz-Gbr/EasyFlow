@@ -48,7 +48,7 @@
     </fragment>
     <fragment
         android:id="@+id/servicesFragment"
-        android:name="com.easyflow.appScreens.home.fragmentsServices.ServicesFragment"
+        android:name="com.easyflow.appScreens.services.fragmentsServices.ServicesFragment"
         android:label="My services"
         tools:layout="@layout/fragment_services">
         <action
@@ -57,6 +57,9 @@
         <action
             android:id="@+id/action_servicesFragment_to_plansFragment"
             app:destination="@id/plansFragment" />
+        <action
+            android:id="@+id/action_servicesFragment_to_userSubscriptionsFragment"
+            app:destination="@id/userSubscriptionsFragment" />
     </fragment>
     <fragment
         android:id="@+id/plansFragment"
@@ -76,4 +79,9 @@
             android:name="selectedPlan"
             app:argType="com.easyflow.network.models.PlanNetworkModel" />
     </fragment>
+    <fragment
+        android:id="@+id/userSubscriptionsFragment"
+        android:name="com.easyflow.appScreens.services.fragmentUserSubscription.UserSubscriptionsFragment"
+        android:label="my subscriptions"
+        tools:layout="@layout/fragment_user_subscriptions" />
 </navigation>

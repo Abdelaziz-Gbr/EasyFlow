@@ -10,8 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.easyflow.R
 import com.easyflow.appScreens.services.fragmentPlans.EasyFlowApiStatus
 import com.easyflow.appScreens.services.fragmentPlans.PlanListAdapter
+import com.easyflow.appScreens.services.fragmentUserSubscription.subscriptionsListAdapter
 import com.easyflow.database.models.TicketDatabaseModel
 import com.easyflow.network.models.PlanNetworkModel
+import com.easyflow.network.models.UserPlan
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -86,6 +88,29 @@ fun TextView.isPlanAvailable(isAvailable: Boolean?){
 fun bindRecyclerView(recyclerView: RecyclerView, data : List<PlanNetworkModel>?){
     val adapter = recyclerView.adapter as PlanListAdapter
     adapter.submitList(data)
+}
+
+@BindingAdapter("subData")
+fun bindSubData(recyclerView: RecyclerView, data : List<UserPlan>?){
+    val adapter = recyclerView.adapter as subscriptionsListAdapter
+    adapter.submitList(data)
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+@BindingAdapter("exprDate")
+fun TextView.setExprDate(exprDate: String?){
+    exprDate?.let {
+        val dateTime = LocalDateTime.parse(exprDate, DateTimeFormatter.ISO_DATE_TIME)
+        val formatter = DateTimeFormatter.ofPattern("MMM d @ h:mm a")
+        text =  "Expire Date: ${dateTime.format(formatter)}"
+    }
+}
+
+@BindingAdapter("noSubs")
+fun TextView.setVis(visiable: Boolean){
+    visibility =
+        if (visiable) View.VISIBLE
+        else View.GONE
 }
 
 @BindingAdapter("easyFlowApiStatus")

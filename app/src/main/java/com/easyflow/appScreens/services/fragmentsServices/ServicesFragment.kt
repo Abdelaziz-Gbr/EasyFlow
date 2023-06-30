@@ -1,11 +1,10 @@
-package com.easyflow.appScreens.home.fragmentsServices
+package com.easyflow.appScreens.services.fragmentsServices
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.easyflow.databinding.FragmentServicesBinding
 
@@ -23,7 +22,7 @@ class ServicesFragment : Fragment() {
             findNavController().navigate(ServicesFragmentDirections.actionServicesFragmentToPlansFragment())
         }
         binding.viewPlanBtn.setOnClickListener {
-            Toast.makeText(requireContext(), "on work", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(ServicesFragmentDirections.actionServicesFragmentToUserSubscriptionsFragment())
         }
         return binding.root
     }
