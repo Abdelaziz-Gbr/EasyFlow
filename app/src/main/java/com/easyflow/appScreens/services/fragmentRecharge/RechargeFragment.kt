@@ -21,12 +21,18 @@ class RechargeFragment : Fragment() {
         val viewModel = ViewModelProvider(this)[RechargeFragmentViewModel::class.java]
         binding.rechargeButton.setOnClickListener{
             val amount = binding.rechargeAmount.text.toString().toFloat()
-            viewModel.recharge(amount)
-            //todo view ProgressBar
-        }
+            if(amount < 1){
+                Toast.makeText(requireContext(), "amount to recharge should be more than 0.",Toast.LENGTH_SHORT).show()
+            }
+            else{
+                viewModel.recharge(amount)
+                //todo view ProgressBar}
+            }
+    }
+
         viewModel.rechargeStatus.observe(viewLifecycleOwner){
-            succeeded ->
-            if(succeeded != null){
+                succeeded ->
+            succeeded?.let{
                 if(succeeded)
                 {
                     Toast.makeText(requireContext(), "Recharge Succeeded!", Toast.LENGTH_LONG).show()
@@ -38,6 +44,4 @@ class RechargeFragment : Fragment() {
             }
         }
         return binding.root
-    }
-
-}
+}}

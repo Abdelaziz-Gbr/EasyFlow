@@ -18,7 +18,10 @@
             android:layout_margin="8dp"
             android:padding="16dp"
             android:hint="enter amount to recharge"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:inputType="number"
+            android:textColorHint="#000000"
+            android:digits="0123456789" />
 
         <Button
             android:id="@+id/recharge_button"
