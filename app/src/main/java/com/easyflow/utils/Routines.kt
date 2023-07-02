@@ -37,6 +37,9 @@ suspend fun signUserIn(user: UserNetworkModel, userDao: UserDao, ticketDao: Tick
                 return 1
             }
         }
+        else if (signIn.code() ==  502){
+            return 2
+        }
         return 0
     }
     catch (e: Exception){
