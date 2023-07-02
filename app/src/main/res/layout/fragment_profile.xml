@@ -1,5 +1,4 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
         <variable
@@ -22,9 +21,11 @@
             android:hint="@string/username_text">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:text="@={viewModel.username}"
+                android:id="@+id/profile_username"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:text="@={viewModel.username}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -35,9 +36,10 @@
             android:hint="@string/first_name">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:text="@={viewModel.firstName}"
+                android:id="@+id/profile_firstname"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="@={viewModel.firstName}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -48,9 +50,10 @@
             android:hint="@string/last_name">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:text="@={viewModel.lastName}"
+                android:id="@+id/profile_lastname"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="@={viewModel.lastName}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -61,9 +64,10 @@
             android:hint="@string/email">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:text="@={viewModel.email}"
+                android:id="@+id/profile_email"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="@={viewModel.email}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,9 +78,10 @@
             android:hint="@string/phone_number_text">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:text="@={viewModel.phoneNumber}"
+                android:id="@+id/profile_phone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:text="@={viewModel.phoneNumber}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -123,7 +128,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/save"
-            android:onClick="@{() -> viewModel.saveUser()}"
             style="@style/button_style" />
 
     </LinearLayout>

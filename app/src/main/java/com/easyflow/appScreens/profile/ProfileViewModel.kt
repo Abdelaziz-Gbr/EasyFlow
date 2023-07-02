@@ -1,7 +1,16 @@
 package com.easyflow.appScreens.profile
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.easyflow.cache.UserCache
+import com.easyflow.network.Network
+import com.easyflow.network.models.ProfileUpdateNetworkModel
+import com.easyflow.network.models.ServerResponse
+import com.google.gson.Gson
+import kotlinx.coroutines.launch
+import okhttp3.ResponseBody
 
 
 class ProfileViewModel : ViewModel() {
@@ -42,6 +51,10 @@ class ProfileViewModel : ViewModel() {
             UserCache.gender = value
         }
 
+    private val _updateResponse = MutableLiveData<String?>()
+    val updateResponse : LiveData<String?>
+        get() = _updateResponse
+
     fun onGenderChanged(isChecked: Boolean, gender: String) {
         if (isChecked) {
             this.gender = gender
@@ -59,5 +72,22 @@ class ProfileViewModel : ViewModel() {
 
     fun isMale(): Boolean = UserCache.gender == "M"
     fun isFemale(): Boolean = UserCache.gender == "F"
+    fun updateProfile(profileUpdateNetworkModel: ProfileUpdateNetworkModel) {
+        viewModelScope.launch{
+            try {
+                val response = Network.easyFlowServices.updateUserProfile(profileUpdateNetworkModel = profileUpdateNetworkModel)
+                if(response.isSuccessful){
+                    _updateResponse.value = response.body()!!.message
+                }
+                else{
+                    _updateResponse.value = Gson().fromJson(response.errorBody()!!.charStream(), ServerResponse::class.java).message
+                }
+            }
+            catch (e: Exception){
+                _updateResponse.value = "error occured please try again later"
+            }
+        }
+
+    }
 
 }

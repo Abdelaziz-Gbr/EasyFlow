@@ -1,6 +1,5 @@
 package com.easyflow.network
 
-import com.easyflow.cache.UserCache
 import com.easyflow.cache.UserKey
 import com.easyflow.network.models.*
 import okhttp3.ResponseBody
@@ -46,4 +45,10 @@ interface EasyFlowServices {
     @GET("passenger/subscriptions")
     suspend fun getUserSubscriptions(
         @Header("Authorization") authKey: String? = UserKey.value): Response<List<UserPlan>>
+
+    @PUT("passenger/updateProfile")
+    suspend fun updateUserProfile(
+        @Header("Authorization") authKey: String? = UserKey.value,
+        @Body profileUpdateNetworkModel: ProfileUpdateNetworkModel
+    ):Response<ServerResponse>
 }
