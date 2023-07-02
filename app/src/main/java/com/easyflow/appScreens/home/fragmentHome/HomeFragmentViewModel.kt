@@ -50,4 +50,8 @@ init {
         _navigateToHistoryFragment.value = false
     }
 
+    fun updateBalance() {
+        _currentBalance.value = "Current balance: ${UserCache.wallet?.balance} egp."
+    }
+
 }
