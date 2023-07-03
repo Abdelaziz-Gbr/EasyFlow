@@ -51,4 +51,7 @@ interface EasyFlowServices {
         @Header("Authorization") authKey: String? = UserKey.value,
         @Body profileUpdateNetworkModel: ProfileUpdateNetworkModel
     ):Response<ServerResponse>
+
+    @POST("reset")
+    suspend fun sendResetPasswordRequest(@Body email: String):Response<ResponseBody>
 }
