@@ -13,6 +13,7 @@ import com.easyflow.appScreens.services.fragmentPlans.PlanListAdapter
 import com.easyflow.appScreens.services.fragmentUserSubscription.subscriptionsListAdapter
 import com.easyflow.database.models.TicketDatabaseModel
 import com.easyflow.network.models.PlanNetworkModel
+import com.easyflow.network.models.TicketNetworkModel
 import com.easyflow.network.models.UserPlan
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -126,6 +127,15 @@ fun bindStatus(statusImageView: ImageView, status: EasyFlowApiStatus?){
         }
         else ->{
             statusImageView.visibility = View.GONE
+        }
+    }
+}
+
+@BindingAdapter("setOwnerLogo")
+fun bindOwnerLogo(ownerLogo : ImageView, ownerName: TicketDatabaseModel){
+    when(ownerName){
+        else ->{
+            ownerLogo.setImageResource(R.drawable.ic_plan)
         }
     }
 }

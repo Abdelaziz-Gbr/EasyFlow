@@ -21,31 +21,14 @@
         android:label="My Home"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_homeFragment_to_historyFragment"
-            app:destination="@id/historyFragment" />
+            android:id="@+id/action_homeFragment_to_rechargeFragment"
+            app:destination="@id/rechargeFragment" />
     </fragment>
     <fragment
         android:id="@+id/rechargeFragment"
         android:name="com.easyflow.appScreens.services.fragmentRecharge.RechargeFragment"
         android:label="Balance Recharge"
         tools:layout="@layout/fragment_recharge"/>
-    <fragment
-        android:id="@+id/historyFragment"
-        android:name="com.easyflow.appScreens.home.fragmentHistory.HistoryFragment"
-        android:label="Tickets History"
-        tools:layout="@layout/fragment_history">
-        <action
-            android:id="@+id/action_historyFragment_to_ticketDetail"
-            app:destination="@id/ticketDetail" />
-    </fragment>
-    <fragment
-        android:id="@+id/ticketDetail"
-        android:name="com.easyflow.appScreens.home.fragmentHistory.ticketDetail.TicketDetail"
-        android:label="Ticket Details">
-        <argument
-            android:name="ticketId"
-            app:argType="string" />
-    </fragment>
     <fragment
         android:id="@+id/servicesFragment"
         android:name="com.easyflow.appScreens.services.fragmentsServices.ServicesFragment"

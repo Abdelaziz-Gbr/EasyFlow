@@ -8,27 +8,25 @@
         <variable
             name="ticket"
             type="com.easyflow.database.models.TicketDatabaseModel" />
-        <variable
-            name="clickListener"
-            type="com.easyflow.appScreens.home.fragmentHistory.TicketAdapter.TicketItemListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:layout_margin="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/ticket_background"
-        android:onClick="@{() -> clickListener.onClick(ticket)}">
+        android:padding="8dp">
 
         <ImageView
             android:id="@+id/ticket_item_image"
             android:layout_width="50dp"
             android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ticket_item_price"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@+id/ticket_item_price"
-            app:srcCompat="@drawable/ticket_route" />
+            setOwnerLogo="@{ticket}"
+            tools:src="@drawable/ic_plan"/>
 
         <TextView
             android:id="@+id/ticket_item_time"
@@ -37,9 +35,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ticket_item_image"
             app:layout_constraintTop_toTopOf="@+id/ticket_item_image"
-            tools:text="Monday Trip"
             app:ticketTime="@{ticket}"
-            />
+            tools:text="Monday Trip" />
 
         <TextView
             android:id="@+id/ticket_item_place"
@@ -49,9 +46,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ticket_item_image"
             app:layout_constraintTop_toBottomOf="@+id/ticket_item_time"
-            tools:text="from eltahrir square to elshiekh zayed."
             app:ticketPlace="@{ticket}"
-            />
+            tools:text="from eltahrir square to elshiekh zayed." />
 
         <TextView
             android:id="@+id/ticket_item_price"
@@ -61,7 +57,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/ticket_item_image"
             app:layout_constraintTop_toBottomOf="@+id/ticket_item_place"
-            tools:text="price: 20 EGP"
-            app:ticketPrice="@{ticket}"/>
+            app:ticketPrice="@{ticket}"
+            tools:text="price: 20 EGP" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,4 +1,4 @@
-package com.easyflow.appScreens.home.fragmentHistory
+package com.easyflow.appScreens.home.fragmentHome
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.easyflow.database.models.TicketDatabaseModel
 import com.easyflow.databinding.TicketHistoryListItemBinding
 
-class TicketAdapter(val ticketItemListener: TicketItemListener): ListAdapter<TicketDatabaseModel, TicketAdapter.ViewHolder>(
+class TicketAdapter(): ListAdapter<TicketDatabaseModel, TicketAdapter.ViewHolder>(
     TicketDiffCallback()
 ) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -17,13 +17,12 @@ class TicketAdapter(val ticketItemListener: TicketItemListener): ListAdapter<Tic
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item, ticketItemListener)
+        holder.bind(item)
     }
 
     class ViewHolder private constructor(val binding: TicketHistoryListItemBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(ticket: TicketDatabaseModel, ticketItemListener: TicketItemListener) {
+        fun bind(ticket: TicketDatabaseModel) {
             binding.ticket = ticket
-            binding.clickListener = ticketItemListener
             binding.executePendingBindings()
         }
 
@@ -53,8 +52,5 @@ class TicketAdapter(val ticketItemListener: TicketItemListener): ListAdapter<Tic
             return oldItem == newItem
         }
 
-    }
-    class TicketItemListener(val clickListener: (ticketId: String) -> Unit){
-        fun onClick(ticket: TicketDatabaseModel) = clickListener(ticket.id)
     }
 }

@@ -1,21 +1,18 @@
 package com.easyflow.appScreens.home.fragmentHome
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.easyflow.network.Network
 import com.easyflow.cache.UserCache
 import com.easyflow.cache.UserKey
-import com.easyflow.database.UserDao
+import com.easyflow.database.TicketDao
+import com.easyflow.network.models.toDatabaseDomain
 import kotlinx.coroutines.launch
 
-class HomeFragmentViewModel(private val userDao: UserDao): ViewModel() {
-    private val _welcomeText = MutableLiveData<String>()
-    val welcomeText : LiveData<String>
-        get() = _welcomeText
-
+class HomeFragmentViewModel(private val ticketDao: TicketDao): ViewModel() {
     private val _currentBalance = MutableLiveData<String>()
     val currentBalance : LiveData<String>
         get() = _currentBalance
@@ -24,13 +21,14 @@ class HomeFragmentViewModel(private val userDao: UserDao): ViewModel() {
     val navigateToTripsScreen : LiveData<Boolean>
         get () = _navigateToTripsScreen
 
-    private val _navigateToHistoryFragment = MutableLiveData<Boolean>()
-    val navigateToHistoryFragment : LiveData<Boolean>
-        get () = _navigateToHistoryFragment
+    private val _navigateToRecharge = MutableLiveData<Boolean>()
+    val navigateToRecharge : LiveData<Boolean>
+        get() = _navigateToRecharge
+
+    val tickets = ticketDao.getAllTickets()
 
 init {
-    _welcomeText.value = "Hello ${if(UserCache.gender == "M") "mr." else "mrs."} ${UserCache.firstName}."
-    _currentBalance.value = "Current balance: ${UserCache.wallet?.balance} egp."
+    updateBalance()
 }
 
 
@@ -42,16 +40,30 @@ init {
         _navigateToTripsScreen.value = false
     }
 
-    fun onHistoryClicked(){
-        _navigateToHistoryFragment.value = true
+    fun onNavigateToRechargeClicked(){
+        _navigateToRecharge.value = true
     }
 
-    fun onHistoryNavigated(){
-        _navigateToHistoryFragment.value = false
+    fun onRechargedNavigated(){
+        _navigateToRecharge.value = false
     }
-
     fun updateBalance() {
-        _currentBalance.value = "Current balance: ${UserCache.wallet?.balance} egp."
+        _currentBalance.value = "${UserCache.wallet?.balance}"
+    }
+    fun refreshTickets(swipeRefreshLayout: SwipeRefreshLayout) {
+        //get tickets from the internet
+        viewModelScope.launch {
+            val ticketsResponse = Network.easyFlowServices.getAllTickets(UserKey.value!!)
+            if (ticketsResponse.isSuccessful) {
+                val tickets = ticketsResponse.body()
+                if(tickets != null){
+                    ticketDao.insert(*tickets.map {
+                        it.toDatabaseDomain()
+                    }.toTypedArray())
+                }
+            }
+            swipeRefreshLayout.isRefreshing = false
+        }
     }
 
 }

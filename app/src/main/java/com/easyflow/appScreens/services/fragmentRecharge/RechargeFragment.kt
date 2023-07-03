@@ -35,10 +35,10 @@ class RechargeFragment : Fragment() {
             succeeded?.let{
                 if(succeeded)
                 {
-                    Toast.makeText(requireContext(), "Recharge Succeeded!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), "Recharge Succeeded!", Toast.LENGTH_SHORT).show()
                 }
                 else{
-                    Toast.makeText(requireContext(), "Recharge Failed!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), "Recharge Failed!", Toast.LENGTH_SHORT).show()
                 }
                 viewModel.onRechargeStatusReceived()
             }
