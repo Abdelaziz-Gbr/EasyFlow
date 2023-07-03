@@ -1,10 +1,14 @@
 package com.easyflow.activities.splashScreen
 
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.easyflow.R
@@ -34,6 +38,7 @@ class SplashScreen : AppCompatActivity() {
         val viewModel = ViewModelProvider(this, viewModelFactory)[SplashScreenViewModel::class.java]
 
         binding.efLogo.alpha = 0f
+
 
         binding.efLogo.animate().setDuration(500).alpha(0.75f)
 
