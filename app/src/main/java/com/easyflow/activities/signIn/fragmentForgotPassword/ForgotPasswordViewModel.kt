@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 class ForgotPasswordViewModel : ViewModel() {
     fun sendUserReset(email : String){
         viewModelScope.launch{
-            Network.easyFlowServices.sendResetPasswordRequest(email)
+            Network.easyFlowServices.sendResetPasswordRequest(UserNetworkModel(email = email))
         }
     }
 }

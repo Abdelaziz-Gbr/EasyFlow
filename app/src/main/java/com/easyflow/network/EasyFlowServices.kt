@@ -53,5 +53,5 @@ interface EasyFlowServices {
     ):Response<ServerResponse>
 
     @POST("reset")
-    suspend fun sendResetPasswordRequest(@Body email: String):Response<ResponseBody>
+    suspend fun sendResetPasswordRequest(@Body email: UserNetworkModel):Response<ResponseBody>
 }
