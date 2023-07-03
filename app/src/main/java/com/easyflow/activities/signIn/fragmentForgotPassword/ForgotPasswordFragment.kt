@@ -31,10 +31,15 @@ class ForgotPasswordFragment : Fragment() {
         binding.lifecycleOwner = this
 
         binding.forgotButton.setOnClickListener{
-            //todo send the username to the server to process password recovery
-            val email = binding.forgotpasswordEmail.text.toString().replace("\"", "")
+            val email = binding.forgotpasswordEmail.text.toString()
             viewModel.sendUserReset(email)
             binding.forgotPasswordTextView.visibility = View.VISIBLE
+        }
+        viewModel.emailFound.observe(viewLifecycleOwner){msg->
+            msg?.let {
+                Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+                viewModel.onMsgRecieved()
+            }
         }
         return binding.root
     }
