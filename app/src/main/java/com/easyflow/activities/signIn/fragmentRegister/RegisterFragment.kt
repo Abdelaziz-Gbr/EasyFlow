@@ -22,7 +22,6 @@ class RegisterFragment : Fragment() {
     private lateinit var viewModel : RegisterViewModel
     private var userHasPickedDate : Boolean = false
     private var cal: Calendar = Calendar.getInstance()
-    private val dateFormat = SimpleDateFormat("dd.MM.yyyy")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -69,7 +68,7 @@ class RegisterFragment : Fragment() {
             viewModel.register(user)
         }
         else{
-            Toast.makeText(requireContext(), "please fill all the above slots", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), "please fill all the above slots", Toast.LENGTH_SHORT).show()
         }
         viewModel.registerResponse.observe(viewLifecycleOwner){ response ->
             if(response != null){
@@ -78,12 +77,12 @@ class RegisterFragment : Fragment() {
                     //todo add loading effect.
                     }
                     RegisterStatus.OK -> {
-                        Toast.makeText(requireContext(), "Sign up Successful", Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(), "Sign up Successful", Toast.LENGTH_SHORT).show()
                         view?.findNavController()?.navigate(RegisterFragmentDirections.actionRegisterFragmentToSignInFragment())
                     }
                     else -> {
                         viewModel.registerErrorMessage.observe(viewLifecycleOwner){msg->
-                            if(msg != null)Toast.makeText(requireContext(), "error: $msg", Toast.LENGTH_LONG).show()
+                            if(msg != null)Toast.makeText(requireContext(), "error: $msg", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }

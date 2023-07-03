@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
 object Network{
     private val logging = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
     private val okHttpBuilder = OkHttpClient.Builder()
-        .connectTimeout(1500, TimeUnit.MILLISECONDS)
+        .connectTimeout(5000, TimeUnit.MILLISECONDS)
         .addInterceptor(logging)
     private val client = okHttpBuilder.build()
 
