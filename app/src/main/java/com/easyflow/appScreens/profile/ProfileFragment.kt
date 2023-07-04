@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.easyflow.R
 import com.easyflow.databinding.FragmentProfileBinding
 import com.easyflow.network.models.ProfileUpdateNetworkModel
@@ -42,6 +43,7 @@ class ProfileFragment : Fragment() {
             viewModel.updateProfile(profileUpdateNetworkModel)
         }
 
+        binding.changePasswordBtn.setOnClickListener { findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToUpdatePasswordFragment()) }
         return binding.root
     }
 

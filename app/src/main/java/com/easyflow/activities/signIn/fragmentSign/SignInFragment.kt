@@ -28,7 +28,7 @@ class SignInFragment : Fragment() {
         val passwordText = binding.userPassword
         val showPassword = binding.signPasswordShow
 
-        showPassword.setOnCheckedChangeListener{ view, isChecked ->
+        showPassword.setOnCheckedChangeListener{ _, isChecked ->
             if(isChecked){
                 passwordText.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
             }

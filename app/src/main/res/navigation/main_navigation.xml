@@ -9,7 +9,14 @@
         android:id="@+id/profileFragment"
         android:name="com.easyflow.appScreens.profile.ProfileFragment"
         android:label="My Profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_updatePasswordFragment"
+            app:destination="@id/updatePasswordFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_updatePinFragment"
+            app:destination="@id/updatePinFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.easyflow.appScreens.settings.SettingsFragment"
@@ -80,4 +87,14 @@
             android:name="userPlan"
             app:argType="com.easyflow.network.models.UserPlan" />
     </fragment>
+    <fragment
+        android:id="@+id/updatePasswordFragment"
+        android:name="com.easyflow.appScreens.settings.updatePassword.UpdatePasswordFragment"
+        android:label="Update Password"
+        tools:layout="@layout/fragment_update_password" />
+    <fragment
+        android:id="@+id/updatePinFragment"
+        android:name="com.easyflow.appScreens.settings.updatePin.UpdatePinFragment"
+        android:label="Update Pin"
+        tools:layout="@layout/fragment_update_pin" />
 </navigation>

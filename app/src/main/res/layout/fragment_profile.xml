@@ -129,6 +129,29 @@
             android:layout_height="wrap_content"
             android:text="@string/save"
             style="@style/button_style" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <Button
+                android:id="@+id/change_password_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/button_style"
+                android:layout_weight="0.5"
+                android:text="change password"
+                android:layout_marginEnd="4dp"
+                />
+            <Button
+                android:id="@+id/update_pin_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/button_style"
+                android:layout_weight="0.5"
+                android:text="update pin"
+                android:layout_marginStart="4dp"/>
+        </LinearLayout>
 
     </LinearLayout>
 
