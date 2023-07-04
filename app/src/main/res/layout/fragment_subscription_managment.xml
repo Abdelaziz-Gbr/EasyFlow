@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.easyflow.appScreens.services.fragmentUserSubscription.planManagment.SubManagmentViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        tools:context=".appScreens.services.fragmentUserSubscription.planManagment.SubscriptionManagmentFragment"
+        android:background="@color/main_color"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/user_sub_owner_logo"
+            android:src="@drawable/ic_plan"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_gravity="center_horizontal"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/app_text"
+            tools:text = "Plan Owner Name: Cairo Covernment"
+            android:text="@{`Plan Owner Name: ` + viewModel.subscription.planOwnerName}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/app_text"
+            tools:text = "Plan Name: Silver plan"
+            android:text="@{`Plan Name: ` + viewModel.subscription.planName}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/app_text"
+            tools:text = "Remaining Trips: 120"
+            android:text="@{`Remaining Trips: ` + viewModel.subscription.remainingTrips}" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/app_text"
+            tools:text = "Expire Date: Sep 10 2023 @ 11:50 bm"
+            exprDate="@{viewModel.subscription.expireDate}" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch_subscription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="make this plan repurchasable"
+            android:textAppearance="@style/app_text"
+            android:checked="@{viewModel.subscription.repurchase}"
+            android:onCheckedChanged="@{(buttonView, isChecked) -> viewModel.onSwitchCheckedChanged(buttonView, isChecked)}" />
+
+    </LinearLayout>
+</layout>

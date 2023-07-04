@@ -54,4 +54,11 @@ interface EasyFlowServices {
 
     @POST("reset")
     suspend fun sendResetPasswordRequest(@Body email: UserNetworkModel):Response<ResponseBody>
+
+    @PUT("passenger/subscription/repurchase/{owner-name}/{plan-name}")
+    suspend fun reverseSubscriptionRepurchase(
+        @Path("owner-name") ownerName: String,
+        @Path("plan-name") planName: String,
+        @Header("Authorization") authKey: String? = UserKey.value
+    ):Response<ResponseBody>
 }

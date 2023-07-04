@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
             name="subscription"
             type="com.easyflow.network.models.UserPlan" />
+        <variable
+            name="clickListener"
+            type="com.easyflow.appScreens.services.fragmentUserSubscription.SubscriptionsListAdapter.ManageSubscriptionClickListener" />
 
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:padding="8dp"
         android:background="@drawable/plan_item_background"
-        android:layout_margin="16dp"
+        android:layout_margin="8dp"
         android:orientation="vertical">
 
         <TextView
@@ -46,13 +50,30 @@
             style="@style/app_text"
             tools:text = "Expire Date: Sep 10 2023 @ 11:50 bm"
             exprDate="@{subscription.expireDate}" />
-
-        <TextView
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/app_text"
-            tools:text = "Repurchase = false"
-            android:text="@{`Repurchase: ` + subscription.repurchase}" />
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Click Here To manage"
+                android:textAppearance="@style/app_text"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/manage_plan_ic"
+                />
+            <ImageView
+                android:id="@+id/manage_plan_ic"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/right_arrow_ic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 
 

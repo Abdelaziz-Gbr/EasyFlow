@@ -17,6 +17,13 @@ class UserSubscriptionsFragmentViewModel: ViewModel() {
     val noSubs : LiveData<Boolean>
         get() = _noSubs
 
+    private val _error = MutableLiveData<Boolean>()
+    val error : LiveData<Boolean>
+        get() = _error
+
+    private val _managePlan = MutableLiveData<UserPlan?>()
+    val managePlan : LiveData<UserPlan?>
+        get() = _managePlan
     init {
         viewModelScope.launch { getSubs() }
     }
@@ -37,5 +44,17 @@ class UserSubscriptionsFragmentViewModel: ViewModel() {
         catch (e: Exception){
             _subscriptions.value = ArrayList()
         }
+    }
+
+    fun onErrorRecieved() {
+        _error.value = false
+    }
+
+    fun navigateToManagePlanClicked(userPlane: UserPlan) {
+        _managePlan.value = userPlane
+    }
+
+    fun onManagePlanNavigated(){
+        _managePlan.value = null
     }
 }

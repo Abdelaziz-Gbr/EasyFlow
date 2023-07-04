@@ -66,5 +66,18 @@
         android:id="@+id/userSubscriptionsFragment"
         android:name="com.easyflow.appScreens.services.fragmentUserSubscription.UserSubscriptionsFragment"
         android:label="my subscriptions"
-        tools:layout="@layout/fragment_user_subscriptions" />
+        tools:layout="@layout/fragment_user_subscriptions" >
+        <action
+            android:id="@+id/action_userSubscriptionsFragment_to_subscriptionManagmentFragment"
+            app:destination="@id/subscriptionManagmentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/subscriptionManagmentFragment"
+        android:name="com.easyflow.appScreens.services.fragmentUserSubscription.planManagment.SubscriptionManagmentFragment"
+        android:label="Subscription Managment"
+        tools:layout="@layout/fragment_subscription_managment">
+        <argument
+            android:name="userPlan"
+            app:argType="com.easyflow.network.models.UserPlan" />
+    </fragment>
 </navigation>

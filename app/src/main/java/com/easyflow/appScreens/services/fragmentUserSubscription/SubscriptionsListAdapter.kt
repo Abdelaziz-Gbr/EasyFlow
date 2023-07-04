@@ -8,13 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.easyflow.databinding.UserSubscriptionListItemBinding
 import com.easyflow.network.models.UserPlan
 
-class subscriptionsListAdapter: ListAdapter<UserPlan, subscriptionsListAdapter.SubscriptionListItem>(DiffCallback) {
+class SubscriptionsListAdapter(private val manageSubscriptionClickListener: ManageSubscriptionClickListener): ListAdapter<UserPlan, SubscriptionsListAdapter.SubscriptionListItem>(DiffCallback) {
     class SubscriptionListItem(
         private var binding: UserSubscriptionListItemBinding)
         :RecyclerView.ViewHolder(binding.root)
     {
-            fun bind(userPlan: UserPlan){
+            fun bind(userPlan: UserPlan, myManageSubscriptionClickListener: ManageSubscriptionClickListener){
                 binding.subscription = userPlan
+                //binding.clickListener = myManageSubscriptionClickListener
                 binding.executePendingBindings()
             }
         companion object{
@@ -28,6 +29,11 @@ class subscriptionsListAdapter: ListAdapter<UserPlan, subscriptionsListAdapter.S
                 return SubscriptionListItem(binding)
             }
         }
+
+    }
+
+    class ManageSubscriptionClickListener(val clickListener: (userPlane: UserPlan) -> Unit){
+        fun onClick(userPlane: UserPlan) = clickListener(userPlane)
 
     }
 
@@ -51,6 +57,7 @@ class subscriptionsListAdapter: ListAdapter<UserPlan, subscriptionsListAdapter.S
 
     override fun onBindViewHolder(holder: SubscriptionListItem, position: Int) {
         val sub = getItem(position)
-        holder.bind(sub)
+        holder.itemView.setOnClickListener { manageSubscriptionClickListener.onClick(sub) }
+        holder.bind(sub, manageSubscriptionClickListener)
     }
 }

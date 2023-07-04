@@ -3,6 +3,7 @@ package com.easyflow.utils
 import android.os.Build
 import android.view.View
 import android.widget.ImageView
+import android.widget.Switch
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.databinding.BindingAdapter
@@ -10,10 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.easyflow.R
 import com.easyflow.appScreens.services.fragmentPlans.EasyFlowApiStatus
 import com.easyflow.appScreens.services.fragmentPlans.PlanListAdapter
-import com.easyflow.appScreens.services.fragmentUserSubscription.subscriptionsListAdapter
+import com.easyflow.appScreens.services.fragmentUserSubscription.SubscriptionsListAdapter
 import com.easyflow.database.models.TicketDatabaseModel
 import com.easyflow.network.models.PlanNetworkModel
-import com.easyflow.network.models.TicketNetworkModel
 import com.easyflow.network.models.UserPlan
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -93,7 +93,7 @@ fun bindRecyclerView(recyclerView: RecyclerView, data : List<PlanNetworkModel>?)
 
 @BindingAdapter("subData")
 fun bindSubData(recyclerView: RecyclerView, data : List<UserPlan>?){
-    val adapter = recyclerView.adapter as subscriptionsListAdapter
+    val adapter = recyclerView.adapter as SubscriptionsListAdapter
     adapter.submitList(data)
 }
 
@@ -138,4 +138,9 @@ fun bindOwnerLogo(ownerLogo : ImageView, ownerName: TicketDatabaseModel){
             ownerLogo.setImageResource(R.drawable.ic_plan)
         }
     }
+}
+
+@BindingAdapter("Repurchased")
+fun Switch.isPlanRepurchased(repurchased : Boolean){
+    isChecked = repurchased
 }
