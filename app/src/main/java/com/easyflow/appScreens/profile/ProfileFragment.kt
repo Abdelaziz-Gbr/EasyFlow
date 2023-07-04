@@ -44,6 +44,7 @@ class ProfileFragment : Fragment() {
         }
 
         binding.changePasswordBtn.setOnClickListener { findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToUpdatePasswordFragment()) }
+        binding.updatePinBtn.setOnClickListener { findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToUpdatePinFragment()) }
         return binding.root
     }
 

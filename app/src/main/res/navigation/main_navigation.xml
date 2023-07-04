@@ -89,12 +89,12 @@
     </fragment>
     <fragment
         android:id="@+id/updatePasswordFragment"
-        android:name="com.easyflow.appScreens.settings.updatePassword.UpdatePasswordFragment"
+        android:name="com.easyflow.appScreens.profile.updatePassword.UpdatePasswordFragment"
         android:label="Update Password"
         tools:layout="@layout/fragment_update_password" />
     <fragment
         android:id="@+id/updatePinFragment"
-        android:name="com.easyflow.appScreens.settings.updatePin.UpdatePinFragment"
+        android:name="com.easyflow.appScreens.profile.updatePin.UpdatePinFragment"
         android:label="Update Pin"
         tools:layout="@layout/fragment_update_pin" />
 </navigation>

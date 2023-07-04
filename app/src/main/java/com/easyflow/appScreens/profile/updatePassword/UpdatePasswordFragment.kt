@@ -1,4 +1,4 @@
-package com.easyflow.appScreens.settings.updatePassword
+package com.easyflow.appScreens.profile.updatePassword
 
 import android.os.Bundle
 import android.text.InputType
