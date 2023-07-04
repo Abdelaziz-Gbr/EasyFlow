@@ -75,6 +75,16 @@
             android:layout_marginStart="8dp"/>
 
         <TextView
+            android:id="@+id/plan_item_priv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/app_text"
+            tools:text="Available for: Army"
+            android:text="@{`Available for:` + plan.privilegeName}"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"/>
+
+        <TextView
             android:id="@+id/plan_item_available"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

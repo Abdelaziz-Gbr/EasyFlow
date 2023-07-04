@@ -38,7 +38,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/plan_view_details_btn"
-            android:src="@drawable/ic_plan"
+            tools:src="@drawable/ic_plan"
+            setOwnerLogo="@{plan.ownerName}"
             />
 
         <Button

@@ -12,7 +12,8 @@ data class PlanNetworkModel(
     val durationDays: Int,
     val maxCompanion: String,
     val numberOfTrips: Int,
-    val available: Boolean
+    val available: Boolean,
+    val privilegeName: String
 ):Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
@@ -22,7 +23,8 @@ data class PlanNetworkModel(
         parcel.readInt(),
         parcel.readString()!!,
         parcel.readInt(),
-        parcel.readByte() != 0.toByte()
+        parcel.readByte() != 0.toByte(),
+        parcel.readString()!!
     ) {
     }
 
@@ -35,6 +37,7 @@ data class PlanNetworkModel(
         parcel.writeString(maxCompanion)
         parcel.writeInt(numberOfTrips)
         parcel.writeByte(if (available) 1 else 0)
+        parcel.writeString(privilegeName)
     }
 
     override fun describeContents(): Int {

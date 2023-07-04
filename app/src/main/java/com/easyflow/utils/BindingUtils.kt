@@ -92,7 +92,7 @@ fun TextView.setDiscount(disRate: Float?){
 @BindingAdapter("isPlanAvailable")
 fun TextView.isPlanAvailable(isAvailable: Boolean?){
     isAvailable?.let {
-        text = if(isAvailable) "You can request a subscribe to this plan." else "this plan is currently unavailable."
+        text = if(isAvailable) "This plan is currently available." else "this plan is currently unavailable."
     }
 }
 

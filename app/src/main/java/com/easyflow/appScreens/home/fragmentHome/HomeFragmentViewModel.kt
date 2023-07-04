@@ -29,6 +29,12 @@ class HomeFragmentViewModel(private val ticketDao: TicketDao): ViewModel() {
 
 init {
     updateBalance()
+    viewModelScope.launch {
+        val currentTickets = tickets.value
+        if(currentTickets == null){
+            refreshTickets(null)
+        }
+    }
 }
 
 
@@ -50,7 +56,7 @@ init {
     fun updateBalance() {
         _currentBalance.value = "${UserCache.wallet?.balance}"
     }
-    fun refreshTickets(swipeRefreshLayout: SwipeRefreshLayout) {
+    fun refreshTickets(swipeRefreshLayout: SwipeRefreshLayout?) {
         //get tickets from the internet
         viewModelScope.launch {
             val ticketsResponse = Network.easyFlowServices.getAllTickets(UserKey.value!!)
@@ -62,7 +68,7 @@ init {
                     }.toTypedArray())
                 }
             }
-            swipeRefreshLayout.isRefreshing = false
+            swipeRefreshLayout?.isRefreshing = false
         }
     }
 
