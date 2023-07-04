@@ -66,4 +66,14 @@ interface EasyFlowServices {
     suspend fun getOwnerImage(
         @Path("owner-name") ownerName: String,
         @Header("Authorization") authKey: String? = UserKey.value):Response<ResponseBody>
+
+    @PUT("passenger/set-pin")
+    suspend fun setPin(
+        @Body pin: String,
+        @Header("Authorization") authKey: String? = UserKey.value):Response<ServerResponse>
+
+    @PUT("passenger/password")
+    suspend fun updatePassword(
+        @Body updatePasswordModel: UpdatePasswordModel,
+        @Header("Authorization") authKey: String? = UserKey.value):Response<ServerResponse>
 }

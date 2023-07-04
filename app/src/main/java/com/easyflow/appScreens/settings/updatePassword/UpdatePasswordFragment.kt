@@ -51,8 +51,13 @@ class UpdatePasswordFragment : Fragment() {
                 Toast.makeText(requireContext(), "new password should be equal to password Confirmation.", Toast.LENGTH_SHORT).show()
             }
             else{
-                //viewModel.updatePassword(oldPassword.text.toString(), newPassword.text.toString())
-                Toast.makeText(requireContext(), "password update success.", Toast.LENGTH_SHORT).show()
+                viewModel.updatePassword(oldPassword.text.toString(), newPassword.text.toString(), newPasswordConfrimation.text.toString())
+            }
+        }
+        viewModel.res.observe(viewLifecycleOwner){msg->
+            msg?.let {
+                Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+                viewModel.onMsgRecieved()
             }
         }
         return binding.root
