@@ -13,9 +13,10 @@ data class TicketDatabaseModel (
     val status: String,
     val startStation: String,
     val price: Float,
-    val endStation: String
+    val endStation: String,
+    val ownerName: String
         )
 
 fun TicketDatabaseModel.toNetworkDomain(): TicketNetworkModel{
-    return TicketNetworkModel(id, startTime, endTime, status, startStation, price, endStation)
+    return TicketNetworkModel(id, startTime, endTime, status, startStation, price, endStation, ownerName)
 }

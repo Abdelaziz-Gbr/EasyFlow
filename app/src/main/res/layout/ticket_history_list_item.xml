@@ -25,7 +25,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/ticket_item_price"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            setOwnerLogo="@{ticket}"
+            setOwnerLogo="@{ticket.ownerName}"
             tools:src="@drawable/ic_plan"/>
 
         <TextView

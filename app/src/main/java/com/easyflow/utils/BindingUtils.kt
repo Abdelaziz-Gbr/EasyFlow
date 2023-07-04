@@ -1,22 +1,33 @@
 package com.easyflow.utils
 
 import android.os.Build
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.Switch
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.RequestOptions
 import com.easyflow.R
 import com.easyflow.appScreens.services.fragmentPlans.EasyFlowApiStatus
 import com.easyflow.appScreens.services.fragmentPlans.PlanListAdapter
 import com.easyflow.appScreens.services.fragmentUserSubscription.SubscriptionsListAdapter
+import com.easyflow.cache.UserKey
 import com.easyflow.database.models.TicketDatabaseModel
 import com.easyflow.network.models.PlanNetworkModel
 import com.easyflow.network.models.UserPlan
+import com.easyflow.utils.Constants.serverBaseURL
+import java.io.File
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import okhttp3.Headers
+
 
 @RequiresApi(Build.VERSION_CODES.O)
 @BindingAdapter("ticketTime")
@@ -132,12 +143,15 @@ fun bindStatus(statusImageView: ImageView, status: EasyFlowApiStatus?){
 }
 
 @BindingAdapter("setOwnerLogo")
-fun bindOwnerLogo(ownerLogo : ImageView, ownerName: TicketDatabaseModel){
-    when(ownerName){
-        else ->{
-            ownerLogo.setImageResource(R.drawable.ic_plan)
-        }
-    }
+fun bindOwnerLogo(ownerImageView : ImageView, ownerName: String){
+
+    val imgUrl = serverBaseURL+"passenger/owner/image/${ownerName}"
+    val glideUrl = GlideUrl(imgUrl) { mapOf(Pair("Authorization", "${UserKey.value}")) }
+    Glide.with(ownerImageView.context)
+        .load(glideUrl)
+        .error(R.drawable.ic_plan)
+        .into(ownerImageView)
+
 }
 
 @BindingAdapter("Repurchased")
