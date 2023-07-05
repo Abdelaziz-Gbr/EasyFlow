@@ -40,9 +40,9 @@ class UpdatePasswordFragment : Fragment() {
                 newPasswordConfrimation.inputType = InputType.TYPE_CLASS_TEXT
             }
             else{
-                oldPassword.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
-                newPassword.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
-                newPasswordConfrimation.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD
+                oldPassword.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD or InputType.TYPE_CLASS_TEXT
+                newPassword.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD or InputType.TYPE_CLASS_TEXT
+                newPasswordConfrimation.inputType = InputType.TYPE_TEXT_VARIATION_PASSWORD or InputType.TYPE_CLASS_TEXT
             }
         }
 
