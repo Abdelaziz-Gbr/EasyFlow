@@ -22,7 +22,7 @@ class QRCodeGenerator {
         val bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565)
         try {
             //don't pass time from user phone instead make the machine put its own time.
-            val bitMatrix = writer.encode("trip_id:${tripID}, count:${passengerCount}", BarcodeFormat.QR_CODE, width, height)
+            val bitMatrix = writer.encode("{\"trip_id\":\"${tripID}\", \"count\":\"${passengerCount}\"}", BarcodeFormat.QR_CODE, width, height)
             for(x in 0 until width){
                 for(y in 0 until height){
                     bmp.setPixel(x, y, if(bitMatrix[x, y]) Color.BLACK else Color.WHITE)
