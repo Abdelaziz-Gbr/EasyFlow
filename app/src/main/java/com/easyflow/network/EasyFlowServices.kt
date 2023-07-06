@@ -60,7 +60,7 @@ interface EasyFlowServices {
         @Path("owner-name") ownerName: String,
         @Path("plan-name") planName: String,
         @Header("Authorization") authKey: String? = UserKey.value
-    ):Response<ResponseBody>
+    ):Response<ServerResponse>
 
     @PUT("passenger/set-pin")
     suspend fun setPin(
@@ -71,4 +71,10 @@ interface EasyFlowServices {
     suspend fun updatePassword(
         @Body updatePasswordModel: UpdatePasswordModel,
         @Header("Authorization") authKey: String? = UserKey.value):Response<ServerResponse>
+    @PUT("passenger/subscription/repurchase/{owner-name}/{plan-name}")
+    suspend fun reNewPlan(
+        @Path("owner-name") ownerName: String,
+        @Path("plan-name") planName: String,
+        @Header("Authorization") authKey: String? = UserKey.value
+    ):Response<ServerResponse>
 }

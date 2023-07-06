@@ -7,15 +7,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.easyflow.network.Network
 import com.easyflow.network.models.UserPlan
-import com.easyflow.utils.subscribeToMainFeed
-import com.easyflow.utils.unSubscribeToMainFeed
 import kotlinx.coroutines.launch
 
 class SubManagmentViewModel: ViewModel() {
 
-    private val _error = MutableLiveData<Boolean>()
-    val error : LiveData<Boolean>
-        get() = _error
+    private val _msg = MutableLiveData<String?>()
+    val msg : LiveData<String?>
+        get() = _msg
 
     val subscription = MutableLiveData<UserPlan>()
 
@@ -25,25 +23,39 @@ class SubManagmentViewModel: ViewModel() {
     fun onSwitchCheckedChanged(buttonView: CompoundButton, isChecked: Boolean) {
         reversePlanSub()
     }
-    fun reversePlanSub(){
+    private fun reversePlanSub(){
         viewModelScope.launch {
             try {
                 val userPlan = subscription.value
                 val res = Network.easyFlowServices.reverseSubscriptionRepurchase(
                     ownerName = userPlan!!.planOwnerName,
-                    planName = userPlan!!.planName
+                    planName = userPlan.planName
                 )
-                if(!res.isSuccessful){
-                    _error.value = true
-                }
+                _msg.value = res.body()!!.message
             }
             catch (e: Exception){
-                _error.value = true
+                _msg.value = "sorry something went wrong please try again later."
             }
         }
     }
 
-    fun onErrorRecieved() {
-        _error.value = false
+    fun onMsgRecieved() {
+        _msg.value = null
+    }
+
+    fun renewSubscription() {
+        viewModelScope.launch {
+            val currentPlan = subscription.value
+            try{
+                val renewResponse = Network.easyFlowServices.reNewPlan(
+                    currentPlan!!.planOwnerName,
+                    currentPlan.planName
+                )
+                _msg.value = renewResponse.body()!!.message
+            }
+            catch (e: Exception){
+                _msg.value = "sorry something went wrong please try again later."
+            }
+        }
     }
 }

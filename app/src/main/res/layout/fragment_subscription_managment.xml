@@ -60,7 +60,15 @@
             android:text="make this plan repurchasable"
             android:textAppearance="@style/app_text"
             android:checked="@{viewModel.subscription.repurchase}"
-            android:onCheckedChanged="@{(buttonView, isChecked) -> viewModel.onSwitchCheckedChanged(buttonView, isChecked)}" />
+            android:onCheckedChanged="@{(buttonView, isChecked) -> viewModel.onSwitchCheckedChanged(buttonView, isChecked)}"/>
+
+        <Button
+            android:id="@+id/renew_plan_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/button_style"
+            android:layout_gravity="center_horizontal"
+            android:text="renew subscription"/>
 
     </LinearLayout>
 </layout>

@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.widget.SwitchCompat
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -34,18 +34,28 @@ class SubscriptionManagmentFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        viewModel.error.observe(viewLifecycleOwner){error ->
-            error?.let {
-                if(error) {
-                    Toast.makeText(
-                        requireContext(),
-                        "sorry an error occurred, please try again later.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    val switch = binding.switchSubscription as SwitchCompat
-                    switch.isChecked= false
-                    viewModel.onErrorRecieved()
+        viewModel.msg.observe(viewLifecycleOwner){ serverMsg ->
+            serverMsg?.let {
+                Toast.makeText(
+                    requireContext(),
+                    serverMsg,
+                    Toast.LENGTH_SHORT
+                ).show()
+                viewModel.onMsgRecieved()
+            }
+        }
+
+        binding.renewPlanBtn.setOnClickListener {
+            val builder = AlertDialog.Builder(requireContext())
+            with(builder){
+                setTitle("Renew subscription?")
+                setMessage("This will remove any current remanining trips")
+                setPositiveButton("Renew") { _, _ ->
+                    viewModel.renewSubscription()
                 }
+                setNegativeButton("Cancel"){_,_ ->
+                }
+                show()
             }
         }
 
