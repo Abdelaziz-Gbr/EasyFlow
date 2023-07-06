@@ -1,6 +1,5 @@
 package com.easyflow.activities.trips.fragmentTrips
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,8 +8,8 @@ import com.easyflow.database.TripDao
 import kotlinx.coroutines.launch
 
 class TripsFragmentViewModel(private val tripsDao: TripDao) : ViewModel() {
-    private val _tripID = MutableLiveData<String>()
-    val tripID : LiveData<String>
+    private val _tripID = MutableLiveData<String?>()
+    val tripID : LiveData<String?>
         get() = _tripID
 
 
@@ -58,5 +57,9 @@ class TripsFragmentViewModel(private val tripsDao: TripDao) : ViewModel() {
             }
         }
 
+    }
+
+    fun onTripNavigated() {
+        _tripID.value = null
     }
 }

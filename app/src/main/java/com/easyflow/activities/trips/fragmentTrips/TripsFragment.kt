@@ -5,12 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.easyflow.R
-import com.easyflow.activities.trips.fragmentTrips.TripsFragmentArgs
 import com.easyflow.database.UserDatabase
 import com.easyflow.databinding.FragmentTripsBinding
 
@@ -36,6 +34,7 @@ class TripsFragment : Fragment() {
         viewModel.tripID.observe(viewLifecycleOwner){tripId ->
             tripId?.let {
                 findNavController().navigate(TripsFragmentDirections.actionTripsFragmentToQRCodeFragment(tripID = tripId, count = passengersCount))
+                viewModel.onTripNavigated()
             }
         }
 
