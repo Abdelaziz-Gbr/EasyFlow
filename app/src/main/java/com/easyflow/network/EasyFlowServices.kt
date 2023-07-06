@@ -18,7 +18,7 @@ interface EasyFlowServices {
 
     @GET("passenger/profile")
     suspend fun getUserInfo(
-        @Header("Authorization") authKey : String) : Response<UserNetworkModel>
+        @Header("Authorization") authKey : String? = UserKey.value) : Response<UserNetworkModel>
 
     @PUT("passenger/recharge/{amount}")
     suspend fun recharge(

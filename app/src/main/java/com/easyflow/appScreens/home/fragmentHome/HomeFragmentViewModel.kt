@@ -59,17 +59,29 @@ init {
     fun refreshTickets(swipeRefreshLayout: SwipeRefreshLayout?) {
         //get tickets from the internet
         viewModelScope.launch {
-            val ticketsResponse = Network.easyFlowServices.getAllTickets(UserKey.value!!)
-            if (ticketsResponse.isSuccessful) {
-                val tickets = ticketsResponse.body()
-                if(tickets != null){
-                    ticketDao.insert(*tickets.map {
-                        it.toDatabaseDomain()
-                    }.toTypedArray())
-                }
-            }
+            updateUserInfo()
+            updateTickets()
             swipeRefreshLayout?.isRefreshing = false
         }
+    }
+
+    private suspend fun updateTickets() {
+        val ticketsResponse = Network.easyFlowServices.getAllTickets(UserKey.value!!)
+        if (ticketsResponse.isSuccessful) {
+            val tickets = ticketsResponse.body()
+            if (tickets != null) {
+                ticketDao.insert(*tickets.map {
+                    it.toDatabaseDomain()
+                }.toTypedArray())
+            }
+        }
+    }
+
+    private suspend fun updateUserInfo() {
+        val userInfoRequest = Network.easyFlowServices.getUserInfo()
+        val userInfo = userInfoRequest.body()
+        UserCache.cacheUser(userInfo)
+        updateBalance()
     }
 
 }

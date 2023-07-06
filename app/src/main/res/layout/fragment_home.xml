@@ -21,107 +21,114 @@
         android:paddingTop="16dp"
         android:paddingEnd="8dp">
 
-        <LinearLayout
-            android:id="@+id/home_buttons_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:orientation="horizontal">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/balance_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="75dp"
-                android:layout_weight="0.25"
-                android:background="@drawable/plan_item_background"
-                android:onClick="@{() -> viewModel.onNavigateToRechargeClicked()}"
-                >
-
-                <ImageView
-                    android:id="@+id/balance_ic"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/money_ic"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/current_balance_view" />
-
-                <TextView
-                    android:id="@+id/balance_text_view"
-                    style="@style/header_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Balance"
-                    app:layout_constraintStart_toEndOf="@id/balance_ic"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/current_balance_view"
-                    />
-
-                <TextView
-                    android:id="@+id/current_balance_view"
-                    style="@style/app_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{viewModel.currentBalance}"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:padding="8dp"
-                    tools:text="12.32 egp" />
-
-                <ImageView
-                    android:id="@+id/balance_nav_ic"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/right_arrow_ic"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/balance_text_view" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/trip_layout"
-                android:layout_width="wrap_content"
-                android:layout_height="75dp"
-                android:layout_marginStart="8dp"
-                android:layout_weight="0.75"
-                android:background="@drawable/plan_item_background"
-                android:onClick="@{() -> viewModel.onNavigateToTripsActivityClicked()}"
-                >
-
-                <TextView
-                    android:id="@+id/trip_texT_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Start a trip"
-                    android:textColor="@color/black"
-                    android:textSize="30sp"
-                    android:textStyle="bold|italic"
-                    android:paddingStart="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/trip_nav_ic"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:src="@drawable/right_arrow_ic"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </LinearLayout>
-
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/ticket_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/ticket_history_list_item" />
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:baselineAligned="false"
+                    android:id="@+id/home_buttons_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="horizontal">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/balance_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="75dp"
+                        android:layout_weight="0.25"
+                        android:background="@drawable/plan_item_background"
+                        android:onClick="@{() -> viewModel.onNavigateToRechargeClicked()}"
+                        >
+
+                        <ImageView
+                            android:id="@+id/balance_ic"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/money_ic"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toTopOf="@id/current_balance_view" />
+
+                        <TextView
+                            android:id="@+id/balance_text_view"
+                            style="@style/header_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Balance"
+                            app:layout_constraintStart_toEndOf="@id/balance_ic"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toTopOf="@id/current_balance_view"
+                            />
+
+                        <TextView
+                            android:id="@+id/current_balance_view"
+                            style="@style/app_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewModel.currentBalance}"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            android:padding="8dp"
+                            tools:text="12.32 egp" />
+
+                        <ImageView
+                            android:id="@+id/balance_nav_ic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/right_arrow_ic"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/balance_text_view" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/trip_layout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="75dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="0.75"
+                        android:background="@drawable/plan_item_background"
+                        android:onClick="@{() -> viewModel.onNavigateToTripsActivityClicked()}"
+                        >
+
+                        <TextView
+                            android:id="@+id/trip_texT_view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Start a trip"
+                            android:textColor="@color/black"
+                            android:textSize="30sp"
+                            android:textStyle="bold|italic"
+                            android:paddingStart="8dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/trip_nav_ic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:src="@drawable/right_arrow_ic"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/ticket_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/ticket_history_list_item" />
+            </LinearLayout>
+
+
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>
 </layout>
