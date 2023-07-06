@@ -5,7 +5,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/splash_screen_color"
+        android:background="@color/main_color"
         tools:context=".SplashScreen">
 
         <ImageView
@@ -13,7 +13,7 @@
             android:layout_width="250dp"
             android:layout_height="250dp"
             android:layout_centerInParent="true"
-            android:background="@color/splash_screen_color"
-            android:src="@drawable/easyflow_colored_logo" />
+            android:background="@color/main_color"
+            android:src="@mipmap/easyflow_logo_circled_foreground"/>
     </RelativeLayout>
 </layout>
