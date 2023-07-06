@@ -12,7 +12,6 @@ import com.easyflow.cache.sharedPreferences
 import com.easyflow.network.Network
 import com.easyflow.network.models.UserNetworkModel
 import com.easyflow.network.models.toDatabaseMode
-import java.net.SocketTimeoutException
 
 
 suspend fun signUserIn(user: UserNetworkModel, userDao: UserDao, ticketDao: TicketDao, fromSplashScreen: Boolean = false): Int{
