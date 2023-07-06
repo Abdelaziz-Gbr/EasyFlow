@@ -1,14 +1,9 @@
 package com.easyflow.activities.splashScreen
 
-import android.app.NotificationManager
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.Settings
-import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.easyflow.R
@@ -18,9 +13,7 @@ import com.easyflow.activities.trips.TripsActivity
 import com.easyflow.cache.sharedPreferences
 import com.easyflow.database.UserDatabase
 import com.easyflow.databinding.ActivitySplashScreenBinding
-import com.google.firebase.messaging.FirebaseMessaging
 
-//todo maybe the splash screen is not relative anymore and should be replaced with the main activity?
 class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         //initialize the view
@@ -45,7 +38,7 @@ class SplashScreen : AppCompatActivity() {
         viewModel.navigateTo.observe(this){ navigate ->
             navigate?.let {
                 binding.efLogo.animate().setDuration(1).alpha(1f).withEndAction{
-                    var intent = Intent(
+                    val intent = Intent(
                         this,
                             when(navigate){
                                 1 -> HomeScreen::class.java

@@ -1,7 +1,9 @@
 package com.easyflow.activities.signIn.fragmentSign
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.text.InputType
 import android.view.LayoutInflater
@@ -9,12 +11,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.PermissionChecker
+import androidx.core.content.PermissionChecker.checkSelfPermission
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.easyflow.R
 import com.easyflow.appScreens.home.activity.HomeScreen
+import com.easyflow.cache.sharedPreferences
 import com.easyflow.database.UserDatabase
 import com.easyflow.databinding.FragmentSignInBinding
 
@@ -29,6 +34,23 @@ class SignInFragment : Fragment() {
         val passwordText = binding.userPassword
         val showPassword = binding.signPasswordShow
         (activity as AppCompatActivity).supportActionBar?.hide()
+        if(Build.VERSION.SDK_INT >= 33){
+            val firstTime = sharedPreferences.data.getBoolean("first_time", true)
+            if (firstTime && checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.POST_NOTIFICATIONS
+                ) != PermissionChecker.PERMISSION_GRANTED
+            ) {
+                requireActivity().requestPermissions(
+                    arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                    100
+                )
+            }
+            with(sharedPreferences.data.edit()) {
+                putBoolean("first_time", false)
+                apply()
+            }
+        }
         showPassword.setOnCheckedChangeListener{ _, isChecked ->
             if(isChecked){
                 passwordText.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
