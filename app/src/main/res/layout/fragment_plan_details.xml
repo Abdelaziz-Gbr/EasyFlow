@@ -93,6 +93,16 @@
             app:isPlanAvailable="@{plan.available}"
             android:layout_marginTop="8dp"
             android:layout_marginStart="8dp"/>
+        <TextView
+            android:id="@+id/plan_item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/app_text"
+            tools:text="price: 23 egp."
+            android:text="@{`price: ` + plan.price + ` egp`}"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"/>
+
         <Button
             android:id="@+id/sub_to_plan_btn"
             android:layout_width="wrap_content"
