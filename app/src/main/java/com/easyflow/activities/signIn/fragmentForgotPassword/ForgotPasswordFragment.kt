@@ -5,15 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.easyflow.R
 import com.easyflow.databinding.FragmentForgotPasswordBinding
-import com.easyflow.network.Network
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class ForgotPasswordFragment : Fragment() {
     override fun onCreateView(
@@ -26,6 +23,7 @@ class ForgotPasswordFragment : Fragment() {
             container,
             false
         )
+        (activity as AppCompatActivity).supportActionBar?.show()
         val viewModel = ViewModelProvider(this)[ForgotPasswordViewModel::class.java]
         binding.viewModel = viewModel
         binding.lifecycleOwner = this

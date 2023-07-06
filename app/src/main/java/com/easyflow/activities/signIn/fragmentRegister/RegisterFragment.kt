@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -31,8 +32,8 @@ class RegisterFragment : Fragment() {
         viewModel = RegisterViewModel()
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-
-        val dateSetListener = DatePicker.OnDateChangedListener { view, year, monthOfYear, dayOfMonth ->
+        (activity as AppCompatActivity).supportActionBar?.show()
+        val dateSetListener = DatePicker.OnDateChangedListener { _, year, monthOfYear, dayOfMonth ->
             cal.set(Calendar.YEAR, year)
             cal.set(Calendar.MONTH, monthOfYear)
             cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
@@ -92,9 +93,9 @@ class RegisterFragment : Fragment() {
 
     }
     private fun getUser(): UserNetworkModel? {
-        var user: UserNetworkModel?
-        var gender = if (binding.maleRadioButton.isChecked) "M" else "F"
-        var birthDate = SimpleDateFormat("yyyy-MM-dd").format(cal.time)
+        val user: UserNetworkModel?
+        val gender = if (binding.maleRadioButton.isChecked) "M" else "F"
+        val birthDate = SimpleDateFormat("yyyy-MM-dd").format(cal.time)
         Log.d("birthDate", birthDate)
         if (checkForValidInput()) {
             Toast.makeText(requireContext(), "please fill all the info above.", Toast.LENGTH_SHORT)
