@@ -10,7 +10,6 @@ import com.easyflow.network.models.ProfileUpdateNetworkModel
 import com.easyflow.network.models.ServerResponse
 import com.google.gson.Gson
 import kotlinx.coroutines.launch
-import okhttp3.ResponseBody
 
 
 class ProfileViewModel : ViewModel() {
@@ -84,6 +83,10 @@ class ProfileViewModel : ViewModel() {
             }
         }
 
+    }
+
+    fun onUpdateResponseReceived() {
+        _updateResponse.value = null
     }
 
 }

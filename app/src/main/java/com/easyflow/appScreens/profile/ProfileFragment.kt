@@ -30,6 +30,7 @@ class ProfileFragment : Fragment() {
         viewModel.updateResponse.observe(viewLifecycleOwner){response ->
             response?.let {
                 Toast.makeText(requireContext(), response, Toast.LENGTH_LONG).show()
+                viewModel.onUpdateResponseReceived()
             }
         }
 
