@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/main_color"
+        android:background="#C1C4C6"
         tools:context=".SplashScreen">
 
         <ImageView
             android:id="@+id/ef_logo"
-            android:layout_width="350dp"
-            android:layout_height="350dp"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
             android:layout_centerInParent="true"
-            android:src="@drawable/easyflow_logo"
-            android:background="@color/main_color" />
+            android:background="#C1C4C6"
+            android:src="@drawable/easyflow_colored_logo" />
     </RelativeLayout>
 </layout>
