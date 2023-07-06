@@ -11,10 +11,7 @@ import com.easyflow.database.UserDao
 import com.easyflow.database.models.toNetworkModel
 import com.easyflow.utils.signUserIn
 import com.easyflow.utils.subscribeToMainFeed
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import okhttp3.internal.wait
 
 class SplashScreenViewModel(private val userDao: UserDao, private val ticketDao: TicketDao, private val tripDao: TripDao): ViewModel() {
     private val _navigateTo = MutableLiveData<Int>()
@@ -38,6 +35,11 @@ class SplashScreenViewModel(private val userDao: UserDao, private val ticketDao:
             }
             val signedIn = signUserIn(user.toNetworkModel(), userDao, ticketDao, true)
             if(signedIn != 2){
+                if(signedIn == 0){
+                    ticketDao.deleteAllTickets()
+                    tripDao.deleteAllTrips()
+                    userDao.removeUser()
+                }
                 _navigateTo.value = signedIn
             }
             else{

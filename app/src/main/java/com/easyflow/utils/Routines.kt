@@ -8,14 +8,11 @@ import com.easyflow.database.TripDao
 import com.easyflow.database.UserDao
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.runBlocking
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import com.easyflow.cache.sharedPreferences
-import com.easyflow.database.models.UserDatabaseModel
 import com.easyflow.network.Network
 import com.easyflow.network.models.UserNetworkModel
 import com.easyflow.network.models.toDatabaseMode
+import java.net.SocketTimeoutException
 
 
 suspend fun signUserIn(user: UserNetworkModel, userDao: UserDao, ticketDao: TicketDao, fromSplashScreen: Boolean = false): Int{
@@ -42,8 +39,12 @@ suspend fun signUserIn(user: UserNetworkModel, userDao: UserDao, ticketDao: Tick
         }
         return 0
     }
-    catch (e: Exception){
+    catch (e: SocketTimeoutException){
         return 2
+    }
+    catch (e: Exception){
+        //not a time out exception -> delete all data.
+        return 0
     }
 }
 
@@ -131,6 +132,7 @@ suspend fun dropAllData(userDataSource: UserDao, ticketDataSource : TicketDao, t
     ticketDataSource.deleteAllTickets()
     tripDao.deleteAllTrips()
 }
+/*
 
 fun isWifiConnected(context: Context): Boolean {
     val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -147,3 +149,4 @@ fun isDataConnected(context: Context): Boolean {
 }
 
 
+*/
