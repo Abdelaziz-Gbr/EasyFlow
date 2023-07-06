@@ -1,6 +1,5 @@
 package com.easyflow.cache
 
-import com.easyflow.database.models.UserDatabaseModel
 import com.easyflow.network.models.UserNetworkModel
 import com.easyflow.network.models.Wallet
 
@@ -48,5 +47,8 @@ object UserCache {
 
     fun addBalance(amount: Float){
         wallet!!.balance += amount
+    }
+    fun subtractBalance(amount: Float){
+        wallet!!.balance -= amount
     }
 }

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.easyflow.cache.UserCache
 import com.easyflow.network.Network
 import com.easyflow.network.models.PlanNetworkModel
 import com.easyflow.network.models.PlanSubscriptionModel
@@ -23,6 +24,9 @@ class PlanDetailsFragmentViewModel : ViewModel() {
                         planName = plan.name
                     )
                 )
+                if(subResponse.isSuccessful){
+                    UserCache.subtractBalance(plan.price)
+                }
                 _planSubscripe.value = subResponse.body()!!.message
             }
             catch (e: Exception){
