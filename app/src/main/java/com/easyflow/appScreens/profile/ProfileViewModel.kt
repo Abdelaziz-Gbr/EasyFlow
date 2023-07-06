@@ -61,10 +61,6 @@ class ProfileViewModel : ViewModel() {
         }
     }
 
-    fun saveUser() {
-        //todo make api call to server to save the changes.
-    }
-
 
     fun getWalletBalance(): String {
         return "Current balance: ${UserCache.wallet?.balance ?: 0f}"
