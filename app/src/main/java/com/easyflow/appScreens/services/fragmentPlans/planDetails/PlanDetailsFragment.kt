@@ -35,7 +35,6 @@ class PlanDetailsFragment : Fragment() {
                     show()
                 }
             }
-            viewModel.onResponseRecieved()
 
         }
         return binding.root
