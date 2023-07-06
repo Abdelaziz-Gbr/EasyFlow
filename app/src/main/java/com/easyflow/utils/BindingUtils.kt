@@ -147,16 +147,3 @@ fun bindOwnerLogo(ownerImageView : ImageView, ownerName: String){
         .into(ownerImageView)
 
 }
-
-@BindingAdapter("Repurchased")
-fun Switch.isPlanRepurchased(repurchased : Boolean){
-    isChecked = repurchased
-}
-
-@BindingAdapter("setLogo")
-fun ImageView.getSignLogo(logo: String){
-    Glide.with(context)
-        .load(R.drawable.easyflow_colored_logo)
-        .centerCrop()
-        .into(this)
-}
