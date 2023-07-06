@@ -7,17 +7,15 @@ import androidx.lifecycle.viewModelScope
 import com.easyflow.network.Network
 import com.easyflow.network.models.PlanNetworkModel
 import com.easyflow.network.models.PlanSubscriptionModel
-import com.easyflow.utils.ApiCallStatus
 import kotlinx.coroutines.launch
 
 
 class PlanDetailsFragmentViewModel : ViewModel() {
-    private val _subscribeCallStatus = MutableLiveData<ApiCallStatus?>()
-    val subscribeCallStatus : LiveData<ApiCallStatus?>
-        get() = _subscribeCallStatus
+    private val _planSubscripe = MutableLiveData<String?>()
+    val planSubscripe : LiveData<String?>
+        get() = _planSubscripe
     fun subscripeToPlan(plan : PlanNetworkModel){
         viewModelScope.launch {
-            _subscribeCallStatus.value = ApiCallStatus.LOADING
             try {
                 val subResponse = Network.easyFlowServices.subscribeToPlan(
                     planSubscriptionModel = PlanSubscriptionModel(
@@ -25,17 +23,15 @@ class PlanDetailsFragmentViewModel : ViewModel() {
                         planName = plan.name
                     )
                 )
-                if(subResponse.isSuccessful){
-                    _subscribeCallStatus.value = ApiCallStatus.DONE
-                }
+                _planSubscripe.value = subResponse.message()
             }
             catch (e: Exception){
-                _subscribeCallStatus.value = ApiCallStatus.ERROR
+                _planSubscripe.value = "ann error occured, please try again later."
             }
         }
     }
 
     fun onResponseRecieved() {
-        _subscribeCallStatus.value = null
+        _planSubscripe.value = null
     }
 }

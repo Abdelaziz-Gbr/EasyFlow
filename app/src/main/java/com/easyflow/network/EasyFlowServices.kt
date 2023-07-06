@@ -40,7 +40,7 @@ interface EasyFlowServices {
     suspend fun subscribeToPlan(
         @Header("Authorization") authKey: String? = UserKey.value,
         @Body planSubscriptionModel: PlanSubscriptionModel
-    ): Response<ResponseBody>
+    ): Response<ServerResponse>
 
     @GET("passenger/subscriptions")
     suspend fun getUserSubscriptions(
@@ -61,11 +61,6 @@ interface EasyFlowServices {
         @Path("plan-name") planName: String,
         @Header("Authorization") authKey: String? = UserKey.value
     ):Response<ResponseBody>
-
-    @GET("passenger/owner/image/{owner-name}")
-    suspend fun getOwnerImage(
-        @Path("owner-name") ownerName: String,
-        @Header("Authorization") authKey: String? = UserKey.value):Response<ResponseBody>
 
     @PUT("passenger/set-pin")
     suspend fun setPin(
