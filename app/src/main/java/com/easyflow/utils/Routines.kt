@@ -39,12 +39,8 @@ suspend fun signUserIn(user: UserNetworkModel, userDao: UserDao, ticketDao: Tick
         }
         return 0
     }
-    catch (e: SocketTimeoutException){
-        return 2
-    }
     catch (e: Exception){
-        //not a time out exception -> delete all data.
-        return 0
+        return 2
     }
 }
 
