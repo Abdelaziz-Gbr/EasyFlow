@@ -7,14 +7,12 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.util.Log
-import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.easyflow.R
 import com.easyflow.activities.splashScreen.SplashScreen
 import com.easyflow.utils.Constants.channelID
 import com.easyflow.utils.Constants.channelName
 import com.easyflow.utils.subscribeToMainFeed
-import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -24,11 +22,11 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         subscribeToMainFeed()
     }
     override fun onMessageReceived(message: RemoteMessage) {
-        if(message.notification != null){
-            Log.d("firebase", "recieved")
-            generateNotification(message.notification!!.title!!, message.notification!!.body!!)
-        }else{
-            Log.d("firebase", "message is null")
+        message.notification?.apply {
+            val myTag = tag?: "0"
+            val myTitle = title?: "Easy Flow"
+            val myBody = body?: "check the app for updates"
+            generateNotification(myTag.toInt(), myTitle, myBody)
         }
     }
 
@@ -37,14 +35,14 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         Log.d("FireBase_Token", token)
     }
 
-    private fun generateNotification(title: String, message: String){
+    private fun generateNotification(tag: Int, title: String, message: String){
 
         val intent = Intent(this, SplashScreen::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
-        var builder : NotificationCompat.Builder = NotificationCompat.Builder(applicationContext, channelID)
+        val builder : NotificationCompat.Builder = NotificationCompat.Builder(applicationContext, channelID)
             .setSmallIcon(R.drawable.easyflow_logo)
             .setContentTitle(title)
             .setContentText(message)
@@ -63,7 +61,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             notificationManager.createNotificationChannel(notificationChannel)
         }
 
-        notificationManager.notify(0, builder.build())
+        notificationManager.notify(tag , builder.build())
     }
 
 }
