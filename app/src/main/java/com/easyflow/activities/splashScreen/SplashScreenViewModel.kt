@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.easyflow.cache.sharedPreferences
+import com.easyflow.cache.SharedPreferences
 import com.easyflow.database.TicketDao
 import com.easyflow.database.TripDao
 import com.easyflow.database.UserDao
@@ -19,7 +19,7 @@ class SplashScreenViewModel(private val userDao: UserDao, private val ticketDao:
         get() = _navigateTo
 
     init {
-        val subMain = sharedPreferences.data.getBoolean("sub_main", true)
+        val subMain = SharedPreferences.data.getBoolean("sub_main", true)
         if(subMain){
             subscribeToMainFeed()
         }

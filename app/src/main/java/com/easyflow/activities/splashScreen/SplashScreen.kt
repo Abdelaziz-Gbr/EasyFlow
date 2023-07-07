@@ -10,7 +10,7 @@ import com.easyflow.R
 import com.easyflow.appScreens.home.activity.HomeScreen
 import com.easyflow.activities.signIn.signActivity.SignInActivity
 import com.easyflow.activities.trips.TripsActivity
-import com.easyflow.cache.sharedPreferences
+import com.easyflow.cache.SharedPreferences
 import com.easyflow.database.UserDatabase
 import com.easyflow.databinding.ActivitySplashScreenBinding
 
@@ -23,7 +23,7 @@ class SplashScreen : AppCompatActivity() {
             this,
             R.layout.activity_splash_screen
         )
-        sharedPreferences.init(this)
+        SharedPreferences.init(this)
         val userDao = UserDatabase.getDatabase(this.application).userDao()
         val ticketDao = UserDatabase.getDatabase(this).ticketDao()
         val tripDao = UserDatabase.getDatabase(this).tripDao()
@@ -46,12 +46,12 @@ class SplashScreen : AppCompatActivity() {
                                 else -> SignInActivity::class.java
                             }
                         )
-                    with(sharedPreferences.data.edit())
+                    with(SharedPreferences.data.edit())
                     {
                         putBoolean("offline", navigate != 1)
                         apply()
                     }
-                    if(navigate == 3)
+                    if(navigate == 2)
                         Toast.makeText(this, "Starting in offline mode", Toast.LENGTH_SHORT).show()
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                     startActivity(intent)

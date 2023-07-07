@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/app_text"
-            tools:text = "Expire Date: Sep 10 2023 @ 11:50 bm"
+            tools:text = "Expire Date: Sep 10 2023"
             exprDate="@{viewModel.subscription.expireDate}" />
 
         <androidx.appcompat.widget.SwitchCompat

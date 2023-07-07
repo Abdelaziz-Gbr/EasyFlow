@@ -8,7 +8,7 @@ import com.easyflow.database.TripDao
 import com.easyflow.database.UserDao
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.runBlocking
-import com.easyflow.cache.sharedPreferences
+import com.easyflow.cache.SharedPreferences
 import com.easyflow.network.Network
 import com.easyflow.network.models.UserNetworkModel
 import com.easyflow.network.models.toDatabaseMode
@@ -24,7 +24,7 @@ suspend fun signUserIn(user: UserNetworkModel, userDao: UserDao, ticketDao: Tick
                 val userInfo = userInfoRequest.body()
                 UserCache.cacheUser(userInfo)
                 UserKey.value = key
-                if(sharedPreferences.data.getBoolean("sub_user", true)) subscribeToUserFeed()
+                if(SharedPreferences.data.getBoolean("sub_user", true)) subscribeToUserFeed()
                 if (!fromSplashScreen) {
                     userDao.removeUser()
                     ticketDao.deleteAllTickets()
@@ -49,7 +49,7 @@ fun subscribeToMainFeed(){
                 task ->
             if(task.isSuccessful){
                 Log.d("Firebase_subscription_main", "succeeded")
-                with(sharedPreferences.data.edit()){
+                with(SharedPreferences.data.edit()){
                     putBoolean("sub_main", true)
                     apply()
                 }
@@ -66,7 +66,7 @@ fun unSubscribeToMainFeed(){
                 task ->
             if(task.isSuccessful){
                 Log.d("Firebase_unsubscription_main", "succeeded")
-                with(sharedPreferences.data.edit()){
+                with(SharedPreferences.data.edit()){
                     putBoolean("sub_main", false)
                     apply()
                 }
@@ -83,7 +83,7 @@ fun subscribeToUserFeed(){
                 task ->
             if(task.isSuccessful){
                 Log.d("Firebase_subscription_user", "succeeded")
-                with(sharedPreferences.data.edit()){
+                with(SharedPreferences.data.edit()){
                     putBoolean("sub_user", true)
                     apply()
                 }
@@ -100,7 +100,7 @@ fun unSubscribeToUserFeed(){
                 task ->
             if(task.isSuccessful){
                 Log.d("Firebase_unsubscription_user", "succeeded")
-                with(sharedPreferences.data.edit()){
+                with(SharedPreferences.data.edit()){
                     putBoolean("sub_user", false)
                     apply()
                 }
@@ -114,7 +114,7 @@ fun unSubscribeToUserFeed(){
 fun logUserOut(userDataSource: UserDao, ticketDataSource : TicketDao, tripDao: TripDao){
     runBlocking { dropAllData(userDataSource, ticketDataSource, tripDao) }
     clearCaches()
-    sharedPreferences.data.edit().clear().apply()
+    SharedPreferences.data.edit().clear().apply()
 }
 
 fun clearCaches() {

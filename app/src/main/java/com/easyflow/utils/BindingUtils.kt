@@ -83,7 +83,7 @@ fun bindSubData(recyclerView: RecyclerView, data : List<UserPlan>?){
 fun TextView.setExprDate(exprDate: String?){
     exprDate?.let {
         val dateTime = LocalDateTime.parse(exprDate, DateTimeFormatter.ISO_DATE_TIME)
-        val formatter = DateTimeFormatter.ofPattern("MMM d @ h:mm a")
+        val formatter = DateTimeFormatter.ofPattern("d MMM yyyy")
         text =  "Expire Date: ${dateTime.format(formatter)}"
     }
 }

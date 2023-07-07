@@ -3,7 +3,7 @@ package com.easyflow.appScreens.settings
 import android.widget.CompoundButton
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.easyflow.cache.sharedPreferences
+import com.easyflow.cache.SharedPreferences
 import com.easyflow.database.TicketDao
 import com.easyflow.database.TripDao
 import com.easyflow.database.UserDao
@@ -16,8 +16,8 @@ class SettingsViewModel : ViewModel() {
     var subUser = MutableLiveData<Boolean>(false)
 
     init {
-        subMain.value = sharedPreferences.data.getBoolean("sub_main", true)
-        subUser.value = sharedPreferences.data.getBoolean("sub_user", true)
+        subMain.value = SharedPreferences.data.getBoolean("sub_main", true)
+        subUser.value = SharedPreferences.data.getBoolean("sub_user", true)
     }
     fun onSwitchMainCheckedChanged(switch: CompoundButton, checked: Boolean) {
         if (checked) {

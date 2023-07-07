@@ -19,7 +19,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.easyflow.R
 import com.easyflow.appScreens.home.activity.HomeScreen
-import com.easyflow.cache.sharedPreferences
+import com.easyflow.cache.SharedPreferences
 import com.easyflow.database.UserDatabase
 import com.easyflow.databinding.FragmentSignInBinding
 
@@ -35,7 +35,7 @@ class SignInFragment : Fragment() {
         val showPassword = binding.signPasswordShow
         (activity as AppCompatActivity).supportActionBar?.hide()
         if(Build.VERSION.SDK_INT >= 33){
-            val firstTime = sharedPreferences.data.getBoolean("first_time", true)
+            val firstTime = SharedPreferences.data.getBoolean("first_time", true)
             if (firstTime && checkSelfPermission(
                     requireContext(),
                     Manifest.permission.POST_NOTIFICATIONS
@@ -46,7 +46,7 @@ class SignInFragment : Fragment() {
                     100
                 )
             }
-            with(sharedPreferences.data.edit()) {
+            with(SharedPreferences.data.edit()) {
                 putBoolean("first_time", false)
                 apply()
             }

@@ -3,7 +3,7 @@ package com.easyflow.cache
 import android.content.Context
 import android.content.SharedPreferences
 
-object sharedPreferences {
+object SharedPreferences {
 
     private lateinit var applicationContext: Context
     val data: SharedPreferences by lazy {
