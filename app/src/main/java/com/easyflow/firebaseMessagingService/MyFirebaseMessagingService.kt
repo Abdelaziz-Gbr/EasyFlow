@@ -23,10 +23,16 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
     override fun onMessageReceived(message: RemoteMessage) {
         message.notification?.apply {
-            val myTag = tag?: "0"
+            val recievedTag = tag?: "0"
+            val myTag =
+                try {
+                recievedTag.toInt()
+            } catch (e: java.lang.NumberFormatException){
+                0
+            }
             val myTitle = title?: "Easy Flow"
             val myBody = body?: "check the app for updates"
-            generateNotification(myTag.toInt(), myTitle, myBody)
+            generateNotification(myTag, myTitle, myBody)
         }
     }
 
