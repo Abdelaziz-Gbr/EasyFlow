@@ -77,4 +77,10 @@ interface EasyFlowServices {
         @Path("plan-name") planName: String,
         @Header("Authorization") authKey: String? = UserKey.value
     ):Response<ServerResponse>
+
+    @GET("passenger/owner/image/{owner-name}")
+    suspend fun getOwnerImage(
+        @Path("owner-name") ownerName: String,
+        @Header("Authorization") authKey: String? = UserKey.value
+    ):Response<ResponseBody>
 }

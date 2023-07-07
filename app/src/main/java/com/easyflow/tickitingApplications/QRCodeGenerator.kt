@@ -4,17 +4,13 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.compose.ui.Modifier
-import com.easyflow.cache.UserCache
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.WriterException
-import com.google.zxing.common.BitMatrix
 import com.google.zxing.qrcode.QRCodeWriter
-import java.time.LocalDateTime
 
 
-const val width = 500
-const val height = 500
+const val width = 800
+const val height = 800
 class QRCodeGenerator {
     @RequiresApi(Build.VERSION_CODES.O)
     fun getQrCode(tripID: String, passengerCount: Int): Bitmap{

@@ -1,24 +1,27 @@
 package com.easyflow.utils
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.view.View
 import android.widget.ImageView
-import android.widget.Switch
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.model.GlideUrl
 import com.easyflow.R
 import com.easyflow.appScreens.services.fragmentPlans.EasyFlowApiStatus
 import com.easyflow.appScreens.services.fragmentPlans.PlanListAdapter
 import com.easyflow.appScreens.services.fragmentUserSubscription.SubscriptionsListAdapter
-import com.easyflow.cache.UserKey
 import com.easyflow.database.models.TicketDatabaseModel
+import com.easyflow.network.Network
 import com.easyflow.network.models.PlanNetworkModel
 import com.easyflow.network.models.UserPlan
-import com.easyflow.utils.Constants.serverBaseURL
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.io.File
+import java.io.FileOutputStream
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -46,33 +49,6 @@ fun TextView.setTicketPlace(ticket: TicketDatabaseModel?){
 fun TextView.setTicketPrice(ticket: TicketDatabaseModel?){
     if(ticket != null){
         text = "Total Price: ${ticket.price} EGP."
-    }
-}
-@BindingAdapter("ticketId")
-fun TextView.setTicketId(ticket: TicketDatabaseModel?){
-    if(ticket != null){
-        text = "Ticket Id: ${ticket.id}"
-    }
-}
-
-@BindingAdapter("ticketStatus")
-fun TextView.setTicketStatus(ticket: TicketDatabaseModel?){
-    ticket?.let {
-        text = "status: ${ticket.status}"
-    }
-}
-
-@BindingAdapter("startStation")
-fun TextView.fromPlace(ticket: TicketDatabaseModel?){
-    if(ticket != null){
-        text = "From: ${ticket.startStation}"
-    }
-}
-
-@BindingAdapter("endStation")
-fun TextView.endPlace(ticket: TicketDatabaseModel?){
-    if(ticket != null){
-        text = "To: ${ticket.endStation}"
     }
 }
 
@@ -138,12 +114,31 @@ fun bindStatus(statusImageView: ImageView, status: EasyFlowApiStatus?){
 
 @BindingAdapter("setOwnerLogo")
 fun bindOwnerLogo(ownerImageView : ImageView, ownerName: String){
-
-    val imgUrl = serverBaseURL+"passenger/owner/image/${ownerName}"
-    val glideUrl = GlideUrl(imgUrl) { mapOf(Pair("Authorization", "${UserKey.value}")) }
-    Glide.with(ownerImageView.context)
-        .load(glideUrl)
-        .error(R.drawable.ic_plan)
-        .into(ownerImageView)
-
+    val coroutineScope = CoroutineScope(Dispatchers.Main)
+    val cacheDir = ownerImageView.context.cacheDir
+    val imgCachedFile = File(cacheDir, ownerName)
+    try{
+        if (imgCachedFile.isFile) {
+            val imgBitmap = BitmapFactory.decodeFile(imgCachedFile.absolutePath)
+            ownerImageView.setImageBitmap(imgBitmap)
+        } else {
+            coroutineScope.launch {
+                val ownerImgReq = Network.easyFlowServices.getOwnerImage(ownerName)
+                if (ownerImgReq.isSuccessful && ownerImgReq.body()!!.contentLength() > 0) {
+                    val imgByteStream = ownerImgReq.body()!!.byteStream()
+                    val imgBitMap = BitmapFactory.decodeStream(imgByteStream)
+                    ownerImageView.setImageBitmap(imgBitMap)
+                    val cacheOutputStream = FileOutputStream(imgCachedFile)
+                    imgBitMap.compress(Bitmap.CompressFormat.PNG, 100, cacheOutputStream)
+                    cacheOutputStream.close()
+                }
+                else{
+                    ownerImageView.setImageResource(R.drawable.ic_plan)
+                }
+            }
+        }
+    }
+    catch (e: Exception){
+        ownerImageView.setImageResource(R.drawable.ic_plan)
+    }
 }
