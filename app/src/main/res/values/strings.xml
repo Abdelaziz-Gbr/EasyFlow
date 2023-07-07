@@ -10,7 +10,7 @@
     <string name="recharge">Recharge</string>
     <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
-    <string name="username_text">Username</string>
+    <string name="username_text">username</string>
     <string name="phone_number_text">phone number</string>
     <string name="male_text">male</string>
     <string name="female_text">female</string>
@@ -38,4 +38,7 @@
     <string name="max_passengers">maximum no of companions for each ticket: %s</string>
     <string name="trips_no">Number of Trips under this plan: %s</string>
     <string name="price_string">price: %s egp.</string>
+    <string name="please_enter_the_number_of_passengers">Please Enter the number of passengers</string>
+    <string name="enter_the_number_of_passengers">Enter the number of passengers</string>
+    <string name="_1">1</string>
 </resources>

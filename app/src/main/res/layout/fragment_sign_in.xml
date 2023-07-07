@@ -22,15 +22,6 @@
             android:src="@mipmap/easyflow_logo_circled_foreground"
             />
 
-        <TextView
-            style="@style/app_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"
-            android:text="Enter the following credentials to Log In"
-            android:textStyle="italic|bold" />
-
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/usernameInputLayout"

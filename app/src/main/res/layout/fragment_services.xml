@@ -20,13 +20,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/button_style"
-            android:text="view my plan" />
+            android:text="subscriptions" />
         <Button
             android:id="@+id/view_all_plans_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/button_style"
-            android:text="view all plans" />
+            android:text="plans" />
         <Button
             android:id="@+id/recharge_btn"
             android:layout_width="match_parent"

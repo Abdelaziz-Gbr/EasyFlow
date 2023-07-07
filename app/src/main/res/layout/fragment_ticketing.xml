@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Please Enter the number of passengers"
+            android:text="@string/please_enter_the_number_of_passengers"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:hint="Enter The number Of Passengers for this Ticket">
+            android:hint="@string/enter_the_number_of_passengers">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passenger_count"
@@ -35,6 +35,7 @@
                 android:background="@drawable/rounded_corners"
                 android:inputType="number"
                 android:textColorHint="#000000"
+                android:text="@string/_1"
                 android:digits="0123456789" />
         </com.google.android.material.textfield.TextInputLayout>
 
