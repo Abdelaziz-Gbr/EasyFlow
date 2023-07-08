@@ -32,7 +32,6 @@ class SubManagmentViewModel: ViewModel() {
                     planName = userPlan.planName
                 )
                 _msg.value = res.body()!!.message
-                subscription.value?.repurchase = !(subscription.value?.repurchase)!!
             }
             catch (e: Exception){
                 _msg.value = "sorry something went wrong please try again later."

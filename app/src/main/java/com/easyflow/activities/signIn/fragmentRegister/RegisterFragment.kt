@@ -15,6 +15,7 @@ import androidx.navigation.findNavController
 import com.easyflow.R
 import com.easyflow.databinding.FragmentRegisterBinding
 import com.easyflow.network.models.UserNetworkModel
+import com.easyflow.utils.LoadingDialog
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
@@ -22,6 +23,8 @@ class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
     private lateinit var viewModel : RegisterViewModel
     private var userHasPickedDate : Boolean = false
+    private lateinit var loadingDialog : LoadingDialog
+
     private var cal: Calendar = Calendar.getInstance()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +32,7 @@ class RegisterFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register, container, false)
+        loadingDialog = LoadingDialog(requireActivity())
         viewModel = RegisterViewModel()
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -49,7 +53,7 @@ class RegisterFragment : Fragment() {
         val passwordText = binding.passwordRegister
         val showPassword = binding.cbShowPassword
 
-        showPassword.setOnCheckedChangeListener{ view, isChecked ->
+        showPassword.setOnCheckedChangeListener{ _, isChecked ->
             if(isChecked){
                 passwordText.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
             }
@@ -58,7 +62,32 @@ class RegisterFragment : Fragment() {
             }
             passwordText.setSelection(passwordText.text!!.length)
         }
-        binding.registerButton.setOnClickListener {  register()   }
+        binding.registerButton.setOnClickListener {
+            register()
+        }
+
+
+        viewModel.registerResponse.observe(viewLifecycleOwner){ response ->
+            if(response != null){
+                when(response){
+                    RegisterStatus.LOADING ->{
+                        loadingDialog.startLoadingAnimation()
+                    }
+                    RegisterStatus.OK -> {
+                        loadingDialog.endLoadingAnimation()
+                        Toast.makeText(requireContext(), "Sign up Successful", Toast.LENGTH_SHORT).show()
+                        view?.findNavController()?.navigate(RegisterFragmentDirections.actionRegisterFragmentToSignInFragment())
+                    }
+                    else -> {
+                        loadingDialog.endLoadingAnimation()
+                        viewModel.registerErrorMessage.observe(viewLifecycleOwner){msg->
+                            if(msg != null)Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+                viewModel.onRegistered()
+            }
+        }
         return binding.root
     }
 
@@ -70,25 +99,6 @@ class RegisterFragment : Fragment() {
         }
         else{
             Toast.makeText(requireContext(), "please fill all the above slots", Toast.LENGTH_SHORT).show()
-        }
-        viewModel.registerResponse.observe(viewLifecycleOwner){ response ->
-            if(response != null){
-                when(response){
-                    RegisterStatus.LOADING -> {
-                    //todo add loading effect.
-                    }
-                    RegisterStatus.OK -> {
-                        Toast.makeText(requireContext(), "Sign up Successful", Toast.LENGTH_SHORT).show()
-                        view?.findNavController()?.navigate(RegisterFragmentDirections.actionRegisterFragmentToSignInFragment())
-                    }
-                    else -> {
-                        viewModel.registerErrorMessage.observe(viewLifecycleOwner){msg->
-                            if(msg != null)Toast.makeText(requireContext(), "error: $msg", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
-                viewModel.onRegistered()
-            }
         }
 
     }

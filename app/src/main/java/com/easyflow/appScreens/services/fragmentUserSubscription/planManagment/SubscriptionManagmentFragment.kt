@@ -12,11 +12,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.easyflow.R
 import com.easyflow.databinding.FragmentSubscriptionManagmentBinding
+import com.easyflow.utils.LoadingDialog
 
 class SubscriptionManagmentFragment : Fragment() {
 
     private lateinit var binding : FragmentSubscriptionManagmentBinding
     private lateinit var viewModel : SubManagmentViewModel
+    private lateinit var loadingDialog: LoadingDialog
     private val args by navArgs<SubscriptionManagmentFragmentArgs>()
 
     override fun onCreateView(
@@ -30,12 +32,14 @@ class SubscriptionManagmentFragment : Fragment() {
             false)
 
         viewModel = ViewModelProvider(this)[SubManagmentViewModel::class.java]
+
         viewModel.setUserSubscription(args.userPlan)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
         viewModel.msg.observe(viewLifecycleOwner){ serverMsg ->
             serverMsg?.let {
+                loadingDialog?.endLoadingAnimation()
                 Toast.makeText(
                     requireContext(),
                     serverMsg,
@@ -46,11 +50,14 @@ class SubscriptionManagmentFragment : Fragment() {
         }
 
         binding.renewPlanBtn.setOnClickListener {
+
             val builder = AlertDialog.Builder(requireContext())
             with(builder){
                 setTitle("Renew subscription?")
                 setMessage("This will remove any current remanining trips")
                 setPositiveButton("Renew") { _, _ ->
+                    loadingDialog = LoadingDialog(requireActivity())
+                    loadingDialog.startLoadingAnimation()
                     viewModel.renewSubscription()
                 }
                 setNegativeButton("Cancel"){_,_ ->

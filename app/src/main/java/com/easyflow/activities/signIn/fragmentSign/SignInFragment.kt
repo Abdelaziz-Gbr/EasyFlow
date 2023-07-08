@@ -22,6 +22,7 @@ import com.easyflow.appScreens.home.activity.HomeScreen
 import com.easyflow.cache.SharedPreferences
 import com.easyflow.database.UserDatabase
 import com.easyflow.databinding.FragmentSignInBinding
+import com.easyflow.utils.LoadingDialog
 
 class SignInFragment : Fragment() {
     private lateinit var binding: FragmentSignInBinding
@@ -75,6 +76,9 @@ class SignInFragment : Fragment() {
     }
 
     private fun signIn() {
+        val loadingDialog = LoadingDialog(requireActivity())
+        loadingDialog.startLoadingAnimation()
+
         val userDao = UserDatabase.getDatabase(requireContext()).userDao()
         val ticketDao = UserDatabase.getDatabase(requireContext()).ticketDao()
 
@@ -88,6 +92,7 @@ class SignInFragment : Fragment() {
         viewModel.signInResponse.observe(viewLifecycleOwner) {
                 signResponse ->
             signResponse?.let {
+                loadingDialog.endLoadingAnimation()
                 if(signResponse){
                     val sharedPreferences = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
                     with(sharedPreferences.edit()){

@@ -10,8 +10,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.easyflow.R
 import com.easyflow.databinding.FragmentRechargeBinding
+import com.easyflow.utils.LoadingDialog
 
 class RechargeFragment : Fragment() {
+    private lateinit var loadingDialog: LoadingDialog
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -19,20 +21,22 @@ class RechargeFragment : Fragment() {
         // Inflate the layout for this fragment
         val binding = DataBindingUtil.inflate<FragmentRechargeBinding>(inflater, R.layout.fragment_recharge, container, false)
         val viewModel = ViewModelProvider(this)[RechargeFragmentViewModel::class.java]
+        loadingDialog = LoadingDialog(requireActivity())
         binding.rechargeButton.setOnClickListener{
             val amount = binding.rechargeAmount.text.toString().toFloat()
             if(amount < 1){
                 Toast.makeText(requireContext(), "amount to recharge should be more than 0.",Toast.LENGTH_SHORT).show()
             }
             else{
+                loadingDialog.startLoadingAnimation()
                 viewModel.recharge(amount)
-                //todo view ProgressBar}
             }
     }
 
         viewModel.rechargeStatus.observe(viewLifecycleOwner){
                 succeeded ->
             succeeded?.let{
+                loadingDialog.endLoadingAnimation()
                 if(succeeded)
                 {
                     Toast.makeText(requireContext(), "Recharge Succeeded!", Toast.LENGTH_SHORT).show()

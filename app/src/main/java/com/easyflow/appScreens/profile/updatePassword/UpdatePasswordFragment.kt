@@ -11,11 +11,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.easyflow.R
 import com.easyflow.databinding.FragmentUpdatePasswordBinding
+import com.easyflow.utils.LoadingDialog
 
 class UpdatePasswordFragment : Fragment() {
     private lateinit var binding : FragmentUpdatePasswordBinding
     private lateinit var viewModel: UpdatePasswordViewModel
-
+    private lateinit var loadingDialog : LoadingDialog
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,7 +28,7 @@ class UpdatePasswordFragment : Fragment() {
             container,
             false)
         viewModel = ViewModelProvider(this)[UpdatePasswordViewModel::class.java]
-
+        loadingDialog = LoadingDialog(requireActivity())
         val oldPassword = binding.oldPassword
         val newPassword = binding.newPassword
         val newPasswordConfrimation = binding.newPasswordReconferm
@@ -51,11 +52,13 @@ class UpdatePasswordFragment : Fragment() {
                 Toast.makeText(requireContext(), "new password should be equal to password Confirmation.", Toast.LENGTH_SHORT).show()
             }
             else{
+                loadingDialog.startLoadingAnimation()
                 viewModel.updatePassword(oldPassword.text.toString(), newPassword.text.toString(), newPasswordConfrimation.text.toString())
             }
         }
         viewModel.res.observe(viewLifecycleOwner){msg->
             msg?.let {
+                loadingDialog.endLoadingAnimation()
                 Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
                 viewModel.onMsgRecieved()
             }
