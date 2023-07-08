@@ -2,7 +2,6 @@ package com.easyflow.activities.signIn.fragmentRegister
 
 import android.os.Bundle
 import android.text.InputType
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,9 +33,12 @@ class RegisterFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register, container, false)
         loadingDialog = LoadingDialog(requireActivity())
         viewModel = RegisterViewModel()
+
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
         (activity as AppCompatActivity).supportActionBar?.show()
+
         val dateSetListener = DatePicker.OnDateChangedListener { _, year, monthOfYear, dayOfMonth ->
             cal.set(Calendar.YEAR, year)
             cal.set(Calendar.MONTH, monthOfYear)
@@ -106,7 +108,6 @@ class RegisterFragment : Fragment() {
         val user: UserNetworkModel?
         val gender = if (binding.maleRadioButton.isChecked) "M" else "F"
         val birthDate = SimpleDateFormat("yyyy-MM-dd").format(cal.time)
-        Log.d("birthDate", birthDate)
         if (checkForValidInput()) {
             Toast.makeText(requireContext(), "please fill all the info above.", Toast.LENGTH_SHORT)
                 .show()

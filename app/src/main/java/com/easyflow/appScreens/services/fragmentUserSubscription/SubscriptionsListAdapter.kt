@@ -13,9 +13,8 @@ class SubscriptionsListAdapter(private val manageSubscriptionClickListener: Mana
         private var binding: UserSubscriptionListItemBinding)
         :RecyclerView.ViewHolder(binding.root)
     {
-            fun bind(userPlan: UserPlan, myManageSubscriptionClickListener: ManageSubscriptionClickListener){
+            fun bind(userPlan: UserPlan){
                 binding.subscription = userPlan
-                //binding.clickListener = myManageSubscriptionClickListener
                 binding.executePendingBindings()
             }
         companion object{
@@ -32,8 +31,8 @@ class SubscriptionsListAdapter(private val manageSubscriptionClickListener: Mana
 
     }
 
-    class ManageSubscriptionClickListener(val clickListener: (userPlane: UserPlan) -> Unit){
-        fun onClick(userPlane: UserPlan) = clickListener(userPlane)
+    class ManageSubscriptionClickListener(val clickListener: (position: Int) -> Unit){
+        fun onClick(planPosition: Int) = clickListener(planPosition)
 
     }
 
@@ -57,7 +56,7 @@ class SubscriptionsListAdapter(private val manageSubscriptionClickListener: Mana
 
     override fun onBindViewHolder(holder: SubscriptionListItem, position: Int) {
         val sub = getItem(position)
-        holder.itemView.setOnClickListener { manageSubscriptionClickListener.onClick(sub) }
-        holder.bind(sub, manageSubscriptionClickListener)
+        holder.itemView.setOnClickListener { manageSubscriptionClickListener.onClick(position) }
+        holder.bind(sub)
     }
 }

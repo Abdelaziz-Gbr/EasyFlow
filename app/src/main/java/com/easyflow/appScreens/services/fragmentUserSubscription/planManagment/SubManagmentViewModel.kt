@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.easyflow.network.Network
 import com.easyflow.network.models.UserPlan
+import com.easyflow.network.models.getRepurchasReveresed
+import com.easyflow.utils.PlanChanged
 import kotlinx.coroutines.launch
 
 class SubManagmentViewModel: ViewModel() {
@@ -31,6 +33,9 @@ class SubManagmentViewModel: ViewModel() {
                     ownerName = userPlan!!.planOwnerName,
                     planName = userPlan.planName
                 )
+                if(res.isSuccessful){
+                    PlanChanged.plan.value = userPlan.getRepurchasReveresed()
+                }
                 _msg.value = res.body()!!.message
             }
             catch (e: Exception){

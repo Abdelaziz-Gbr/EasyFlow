@@ -9,21 +9,19 @@ import com.easyflow.network.models.UserPlan
 import kotlinx.coroutines.launch
 
 class UserSubscriptionsFragmentViewModel: ViewModel() {
-    private val _subscriptions = MutableLiveData<List<UserPlan>>()
-    val subscriptions : LiveData<List<UserPlan>>
+    private val _subscriptions = MutableLiveData<MutableList<UserPlan>>()
+    val subscriptions : LiveData<MutableList<UserPlan>>
         get() = _subscriptions
 
     private val _noSubs = MutableLiveData<Boolean>(true)
     val noSubs : LiveData<Boolean>
         get() = _noSubs
 
-    private val _error = MutableLiveData<Boolean>()
-    val error : LiveData<Boolean>
-        get() = _error
-
     private val _managePlan = MutableLiveData<UserPlan?>()
     val managePlan : LiveData<UserPlan?>
         get() = _managePlan
+
+    var lastPosition = -1
     init {
         viewModelScope.launch { getSubs() }
     }
@@ -34,7 +32,7 @@ class UserSubscriptionsFragmentViewModel: ViewModel() {
             if (subsResponse.isSuccessful) {
                 if(subsResponse.body()!!.isNotEmpty()) {
                     _noSubs.value = false
-                    _subscriptions.value = subsResponse.body()
+                    _subscriptions.value = subsResponse.body() as MutableList<UserPlan>?
                 }
             }
             else{
@@ -46,15 +44,17 @@ class UserSubscriptionsFragmentViewModel: ViewModel() {
         }
     }
 
-    fun onErrorRecieved() {
-        _error.value = false
-    }
-
-    fun navigateToManagePlanClicked(userPlane: UserPlan) {
-        _managePlan.value = userPlane
+    fun navigateToManagePlanClicked(position: Int) {
+        lastPosition = position
+        _managePlan.value = _subscriptions.value!![position]
     }
 
     fun onManagePlanNavigated(){
         _managePlan.value = null
+    }
+
+    fun addPlan(plan: UserPlan) {
+
+        _subscriptions.value?.set(lastPosition, plan)
     }
 }

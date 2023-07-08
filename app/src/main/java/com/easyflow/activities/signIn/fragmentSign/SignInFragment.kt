@@ -26,32 +26,28 @@ import com.easyflow.utils.LoadingDialog
 
 class SignInFragment : Fragment() {
     private lateinit var binding: FragmentSignInBinding
-
+    private lateinit var viewModel: SignInViewModel
+    private lateinit var loadingDialog : LoadingDialog
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sign_in, container, false)
+        (activity as AppCompatActivity).supportActionBar?.hide()
+
+        if(Build.VERSION.SDK_INT >= 33){
+            askForNotificationPermission()
+        }
+        loadingDialog = LoadingDialog(requireActivity())
+        val userDao = UserDatabase.getDatabase(requireContext()).userDao()
+        val ticketDao = UserDatabase.getDatabase(requireContext()).ticketDao()
+
+        val viewModelFactory = SignInViewModelFactory(userDao, ticketDao)
+        viewModel = ViewModelProvider(this, viewModelFactory)[SignInViewModel::class.java]
+
         val passwordText = binding.userPassword
         val showPassword = binding.signPasswordShow
-        (activity as AppCompatActivity).supportActionBar?.hide()
-        if(Build.VERSION.SDK_INT >= 33){
-            val firstTime = SharedPreferences.data.getBoolean("first_time", true)
-            if (firstTime && checkSelfPermission(
-                    requireContext(),
-                    Manifest.permission.POST_NOTIFICATIONS
-                ) != PermissionChecker.PERMISSION_GRANTED
-            ) {
-                requireActivity().requestPermissions(
-                    arrayOf(Manifest.permission.POST_NOTIFICATIONS),
-                    100
-                )
-            }
-            with(SharedPreferences.data.edit()) {
-                putBoolean("first_time", false)
-                apply()
-            }
-        }
+
         showPassword.setOnCheckedChangeListener{ _, isChecked ->
             if(isChecked){
                 passwordText.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
@@ -61,34 +57,13 @@ class SignInFragment : Fragment() {
             }
             passwordText.setSelection(passwordText.text!!.length)
         }
-        binding.signInButton.setOnClickListener {   signIn()  }
+        binding.signInButton.setOnClickListener {
+            loadingDialog.startLoadingAnimation()
+            signIn()  }
         binding.register.setOnClickListener{    register()    }
         binding.forgotPassword.setOnClickListener{    forgotPassword()    }
-        return binding.root
-    }
 
-    private fun forgotPassword() {
-        findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToForgotPasswordFragment())
-    }
 
-    private fun register() {
-        findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToRegisterFragment())
-    }
-
-    private fun signIn() {
-        val loadingDialog = LoadingDialog(requireActivity())
-        loadingDialog.startLoadingAnimation()
-
-        val userDao = UserDatabase.getDatabase(requireContext()).userDao()
-        val ticketDao = UserDatabase.getDatabase(requireContext()).ticketDao()
-
-        val viewModelFactory = SignInViewModelFactory(userDao, ticketDao)
-        val viewModel = ViewModelProvider(this, viewModelFactory)[SignInViewModel::class.java]
-
-        val userName = binding.username.text.toString()
-        val userPassword = binding.userPassword.text.toString()
-
-        viewModel.signIn(userName, userPassword)
         viewModel.signInResponse.observe(viewLifecycleOwner) {
                 signResponse ->
             signResponse?.let {
@@ -104,11 +79,47 @@ class SignInFragment : Fragment() {
                     activity?.finish()
                 }
                 else{
-                    Toast.makeText(activity, "username or password are not correct", Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity, "username or password are not correct", Toast.LENGTH_SHORT).show()
                 }
                 viewModel.onResponseReceived()
             }
         }
+
+        return binding.root
+    }
+
+    private fun askForNotificationPermission() {
+        val firstTime = SharedPreferences.data.getBoolean("first_time", true)
+        if (firstTime && checkSelfPermission(
+                requireContext(),
+                Manifest.permission.POST_NOTIFICATIONS
+            ) != PermissionChecker.PERMISSION_GRANTED
+        ) {
+            requireActivity().requestPermissions(
+                arrayOf(Manifest.permission.POST_NOTIFICATIONS),
+                100
+            )
+        }
+        with(SharedPreferences.data.edit()) {
+            putBoolean("first_time", false)
+            apply()
+        }
+    }
+
+    private fun forgotPassword() {
+        findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToForgotPasswordFragment())
+    }
+
+    private fun register() {
+        findNavController().navigate(SignInFragmentDirections.actionSignInFragmentToRegisterFragment())
+    }
+
+    private fun signIn() {
+
+        val userName = binding.username.text.toString()
+        val userPassword = binding.userPassword.text.toString()
+
+        viewModel.signIn(userName, userPassword)
 
     }
 

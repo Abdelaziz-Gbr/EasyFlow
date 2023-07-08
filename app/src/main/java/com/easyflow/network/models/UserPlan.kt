@@ -40,4 +40,8 @@ data class UserPlan (
             return arrayOfNulls(size)
         }
     }
+
+}
+fun UserPlan.getRepurchasReveresed(): UserPlan{
+    return UserPlan(!repurchase, remainingTrips,planOwnerName,planName,expireDate)
 }

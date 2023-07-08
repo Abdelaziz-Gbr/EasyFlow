@@ -1,17 +1,16 @@
 package com.easyflow.appScreens.services.fragmentUserSubscription
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.easyflow.R
 import com.easyflow.databinding.FragmentUserSubscriptionsBinding
+import com.easyflow.utils.PlanChanged
 
 class UserSubscriptionsFragment : Fragment() {
     private lateinit var binding : FragmentUserSubscriptionsBinding
@@ -37,11 +36,11 @@ class UserSubscriptionsFragment : Fragment() {
                 viewModel.onManagePlanNavigated()
             }
         }
-        viewModel.error.observe(viewLifecycleOwner){error ->
-            error?.let {
-                Toast.makeText(requireContext(), "an error occurred please try again later.", Toast.LENGTH_SHORT).show()
-                viewModel.onErrorRecieved()
+        PlanChanged.plan.observe(viewLifecycleOwner){   plan->
+            plan?.let {
+                viewModel.addPlan(plan)
             }
+
         }
         return binding.root
     }
