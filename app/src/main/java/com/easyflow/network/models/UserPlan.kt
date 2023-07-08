@@ -4,7 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 
 data class UserPlan (
-    val repurchase: Boolean,
+    var repurchase: Boolean,
     val remainingTrips: Int,
     val planOwnerName: String,
     val planName: String,
