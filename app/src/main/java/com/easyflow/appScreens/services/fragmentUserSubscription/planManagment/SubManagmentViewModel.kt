@@ -1,6 +1,5 @@
 package com.easyflow.appScreens.services.fragmentUserSubscription.planManagment
 
-import android.widget.CompoundButton
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,19 +13,23 @@ import kotlinx.coroutines.launch
 
 class SubManagmentViewModel: ViewModel() {
 
-    private val _msg = MutableLiveData<String?>()
-    val msg : LiveData<String?>
-        get() = _msg
+    private val _reSubMsg = MutableLiveData<String?>()
+    val reSubMsg : LiveData<String?>
+        get() = _reSubMsg
+
+    private val _rePurMsg = MutableLiveData<Boolean?>()
+    val rePurMsg : LiveData<Boolean?>
+        get() = _rePurMsg
 
     val subscription = MutableLiveData<UserPlan>()
 
     fun setUserSubscription(userPlan: UserPlan){
         subscription.value = userPlan
     }
-    fun onSwitchCheckedChanged(buttonView: CompoundButton, isChecked: Boolean) {
+    /*fun onSwitchCheckedChanged(buttonView: CompoundButton, isChecked: Boolean) {
         reversePlanSub()
-    }
-    private fun reversePlanSub(){
+    }*/
+    fun reversePlanSub(){
         viewModelScope.launch {
             try {
                 val userPlan = subscription.value
@@ -36,17 +39,20 @@ class SubManagmentViewModel: ViewModel() {
                 )
                 if(res.isSuccessful && res.body()!!.status == StatusCode.from(200).name){
                     PlanChanged.plan.value = userPlan.getRepurchasReveresed()
+                    _rePurMsg.value = true
                 }
-                _msg.value = res.body()!!.message
+                else{
+                    _rePurMsg.value = false
+                }
             }
             catch (e: Exception){
-                _msg.value = "sorry something went wrong please try again later."
+                _rePurMsg.value = false
             }
         }
     }
 
-    fun onMsgRecieved() {
-        _msg.value = null
+    fun onResubMsgReceived() {
+        _reSubMsg.value = null
     }
 
     fun renewSubscription() {
@@ -57,11 +63,15 @@ class SubManagmentViewModel: ViewModel() {
                     currentPlan!!.planOwnerName,
                     currentPlan.planName
                 )
-                _msg.value = renewResponse.body()!!.message
+                _reSubMsg.value = renewResponse.body()!!.message
             }
             catch (e: Exception){
-                _msg.value = "sorry something went wrong please try again later."
+                _reSubMsg.value = "sorry something went wrong please try again later."
             }
         }
+    }
+
+    fun onRepurchasedReceived() {
+        _rePurMsg.value = null
     }
 }

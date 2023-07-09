@@ -3,6 +3,7 @@ package com.easyflow.appScreens.services.fragmentUserSubscription.planManagment
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -34,13 +35,15 @@ class SubscriptionManagmentFragment : Fragment() {
             false)
 
         viewModel = ViewModelProvider(this)[SubManagmentViewModel::class.java]
+        loadingDialog = LoadingDialog(requireActivity())
 
         viewModel.setUserSubscription(args.userPlan)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        viewModel.msg.observe(viewLifecycleOwner){ serverMsg ->
+        viewModel.reSubMsg.observe(viewLifecycleOwner){ serverMsg ->
             serverMsg?.let {
+                loadingDialog.endLoadingAnimation()
                 val snackbar = Snackbar.make(
                     requireView(),
                     serverMsg,
@@ -51,24 +54,39 @@ class SubscriptionManagmentFragment : Fragment() {
                 }
                 val handler = Handler(Looper.getMainLooper())
                 handler.post(runnable)
-                viewModel.onMsgRecieved()
+                viewModel.onResubMsgReceived()
             }
         }
 
-        binding.renewPlanBtn.setOnClickListener {
+        binding.switchSubscription.setOnClickListener{
+            loadingDialog.startLoadingAnimation()
+            viewModel.reversePlanSub()
+        }
 
+        binding.renewPlanBtn.setOnClickListener {
             val builder = AlertDialog.Builder(requireContext())
             with(builder){
                 setTitle("Renew subscription?")
                 setMessage("This will remove any current remanining trips")
                 setPositiveButton("Renew") { _, _ ->
-                    loadingDialog = LoadingDialog(requireActivity())
                     loadingDialog.startLoadingAnimation()
                     viewModel.renewSubscription()
                 }
                 setNegativeButton("Cancel"){_,_ ->
                 }
                 show()
+            }
+        }
+
+        viewModel.rePurMsg.observe(viewLifecycleOwner){done->
+            done?.let {
+                loadingDialog.endLoadingAnimation()
+                Log.d("isDone", "$done")
+                if(!done){
+                    val oldState = binding.switchSubscription.isChecked
+                    binding.switchSubscription.isChecked = !oldState
+                }
+                viewModel.onRepurchasedReceived()
             }
         }
 
