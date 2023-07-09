@@ -6,7 +6,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.easyflow.R
@@ -28,6 +27,13 @@ class HomeScreen : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         binding.bottomNavView.setupWithNavController(navController)
+        binding.bottomNavView.setOnItemReselectedListener { it->
+            navController.navigate(it.itemId)
+        }
+        binding.bottomNavView.setOnItemSelectedListener { it->
+            navController.navigate(it.itemId)
+            true
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -9,6 +9,7 @@ import com.easyflow.network.Network
 import com.easyflow.network.models.UserPlan
 import com.easyflow.network.models.getRepurchasReveresed
 import com.easyflow.utils.PlanChanged
+import com.easyflow.utils.StatusCode
 import kotlinx.coroutines.launch
 
 class SubManagmentViewModel: ViewModel() {
@@ -33,7 +34,7 @@ class SubManagmentViewModel: ViewModel() {
                     ownerName = userPlan!!.planOwnerName,
                     planName = userPlan.planName
                 )
-                if(res.isSuccessful){
+                if(res.isSuccessful && res.body()!!.status == StatusCode.from(200).name){
                     PlanChanged.plan.value = userPlan.getRepurchasReveresed()
                 }
                 _msg.value = res.body()!!.message
