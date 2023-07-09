@@ -31,7 +31,7 @@ class PlanDetailsFragmentViewModel : ViewModel() {
                 _planSubscripe.value = subResponse.body()!!.message
             }
             catch (e: Exception){
-                _planSubscripe.value = "ann error occured, please try again later."
+                _planSubscripe.value = "an error occured, please try again later."
             }
         }
     }
