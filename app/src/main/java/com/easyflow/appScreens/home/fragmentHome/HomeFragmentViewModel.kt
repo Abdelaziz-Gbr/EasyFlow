@@ -11,6 +11,7 @@ import com.easyflow.cache.UserKey
 import com.easyflow.database.TicketDao
 import com.easyflow.network.models.toDatabaseDomain
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class HomeFragmentViewModel(private val ticketDao: TicketDao): ViewModel() {
     private val _currentBalance = MutableLiveData<String>()
@@ -59,8 +60,11 @@ init {
     fun refreshTickets(swipeRefreshLayout: SwipeRefreshLayout?) {
         //get tickets from the internet
         viewModelScope.launch {
-            updateUserInfo()
-            updateTickets()
+            try{
+                updateUserInfo()
+                updateTickets()
+            }
+            catch (e: Exception){}
             swipeRefreshLayout?.isRefreshing = false
         }
     }

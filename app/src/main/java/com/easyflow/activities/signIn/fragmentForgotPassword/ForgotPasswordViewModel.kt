@@ -15,10 +15,15 @@ class ForgotPasswordViewModel : ViewModel() {
         get() = _emailFound
     fun sendUserReset(email : String){
         viewModelScope.launch {
-            val req =
-                Network.easyFlowServices.sendResetPasswordRequest(UserNetworkModel(email = email))
-            _emailFound.value =
-                if (req.isSuccessful) "check your email for the reset link." else "please check your email address again."
+            try{
+                val req =
+                    Network.easyFlowServices.sendResetPasswordRequest(UserNetworkModel(email = email))
+                _emailFound.value =
+                    if (req.isSuccessful) "check your email for the reset link." else "please check your email address again."
+            }
+            catch (e: Exception){
+                _emailFound.value = "No internet Connection."
+            }
         }
     }
 

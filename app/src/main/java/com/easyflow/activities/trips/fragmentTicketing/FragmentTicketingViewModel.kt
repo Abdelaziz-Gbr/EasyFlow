@@ -25,18 +25,24 @@ class FragmentTicketingViewModel(private val tripsDao: TripDao) : ViewModel() {
 
     private suspend fun updateTrips() {
         if(UserKey.value != null){
-            val response = Network.easyFlowServices.getTrips(UserKey.value!!)
-            if(response.isSuccessful){
-                tripsDao.deleteAllTrips()
-                Log.d("trips", "sucess")
-                val trips = response.body()
-                if(trips != null){
-                    Log.d("trips", "inserting ${trips.size} trips")
-                    tripsDao.insert(*trips.map {
-                        it.toDatabaseModel()
-                    }.toTypedArray()
-                    )
+            try{
+                val response = Network.easyFlowServices.getTrips(UserKey.value!!)
+                if (response.isSuccessful) {
+                    tripsDao.deleteAllTrips()
+                    Log.d("trips", "sucess")
+                    val trips = response.body()
+                    if (trips != null) {
+                        Log.d("trips", "inserting ${trips.size} trips")
+                        tripsDao.insert(
+                            *trips.map {
+                                it.toDatabaseModel()
+                            }.toTypedArray()
+                        )
+                    }
                 }
+            }
+            catch (e: Exception){
+
             }
 
         }

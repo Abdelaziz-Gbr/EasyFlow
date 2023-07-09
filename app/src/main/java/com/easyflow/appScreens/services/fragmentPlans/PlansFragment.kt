@@ -11,11 +11,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.easyflow.R
 import com.easyflow.databinding.FragmentPlansBinding
+import com.easyflow.utils.LoadingDialog
 
 class PlansFragment : Fragment() {
     private lateinit var binding : FragmentPlansBinding
     private lateinit var viewModel: PlansFragmentViewModel
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -23,6 +23,7 @@ class PlansFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_plans,container, false)
 
         viewModel = ViewModelProvider(this)[PlansFragmentViewModel::class.java]
+
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
