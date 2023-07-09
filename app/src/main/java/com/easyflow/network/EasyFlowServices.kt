@@ -14,7 +14,7 @@ interface EasyFlowServices {
 
     @POST("Register")
     suspend fun register(
-        @Body user: UserNetworkModel) : Response<ResponseBody>
+        @Body user: UserNetworkModel) : Response<ServerResponse>
 
     @GET("passenger/profile")
     suspend fun getUserInfo(
@@ -34,7 +34,7 @@ interface EasyFlowServices {
         @Header("Authorization") authKey: String): Response<List<TripNetworkModel>>
     @GET("plans")
     suspend fun getAllPlans(
-        @Header("Authorization") authKey: String? = UserKey.value): List<PlanNetworkModel>
+        @Header("Authorization") authKey: String? = UserKey.value): Response<List<PlanNetworkModel>>
 
     @POST("passenger/subscribe")
     suspend fun subscribeToPlan(

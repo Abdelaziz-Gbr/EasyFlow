@@ -6,12 +6,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.easyflow.network.Network
 import com.easyflow.network.models.PlanNetworkModel
+import com.easyflow.utils.EasyFlowApiStatus
 import kotlinx.coroutines.launch
 
-enum class EasyFlowApiStatus{ LOADING, ERROR, DONE}
+
 class PlansFragmentViewModel: ViewModel() {
-    private val _status = MutableLiveData<EasyFlowApiStatus>()
-    val status: LiveData<EasyFlowApiStatus>
+    private val _status = MutableLiveData<EasyFlowApiStatus?>()
+    val status: LiveData<EasyFlowApiStatus?>
         get() = _status
 
     private val _plans = MutableLiveData<List<PlanNetworkModel>>()
@@ -29,8 +30,14 @@ class PlansFragmentViewModel: ViewModel() {
         viewModelScope.launch {
             try{
                 val plansReq = Network.easyFlowServices.getAllPlans()
-                _status.value = EasyFlowApiStatus.DONE
-                _plans.value = plansReq
+                if(plansReq.isSuccessful){
+                    _status.value = EasyFlowApiStatus.DONE
+                    _plans.value = plansReq.body()
+                }
+                else{
+                    _status.value = EasyFlowApiStatus.ERROR
+                    _plans.value = ArrayList()
+                }
             }
             catch (e: Exception){
                 _status.value = EasyFlowApiStatus.ERROR
@@ -45,5 +52,9 @@ class PlansFragmentViewModel: ViewModel() {
 
     fun onPlanDetailsNavigated(){
         _navigateToPlanDetail.value = null
+    }
+
+    fun onStatusRecieved() {
+        _status.value = null
     }
 }

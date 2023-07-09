@@ -15,6 +15,7 @@ import com.easyflow.R
 import com.easyflow.databinding.FragmentRegisterBinding
 import com.easyflow.network.models.UserNetworkModel
 import com.easyflow.utils.LoadingDialog
+import com.easyflow.utils.StatusCode
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
@@ -65,31 +66,25 @@ class RegisterFragment : Fragment() {
             passwordText.setSelection(passwordText.text!!.length)
         }
         binding.registerButton.setOnClickListener {
+            loadingDialog.startLoadingAnimation()
             register()
         }
 
 
         viewModel.registerResponse.observe(viewLifecycleOwner){ response ->
-            if(response != null){
-                when(response){
-                    RegisterStatus.LOADING ->{
-                        loadingDialog.startLoadingAnimation()
-                    }
-                    RegisterStatus.OK -> {
-                        loadingDialog.endLoadingAnimation()
-                        Toast.makeText(requireContext(), "Sign up Successful", Toast.LENGTH_SHORT).show()
-                        view?.findNavController()?.navigate(RegisterFragmentDirections.actionRegisterFragmentToSignInFragment())
-                    }
-                    else -> {
-                        loadingDialog.endLoadingAnimation()
-                        viewModel.registerErrorMessage.observe(viewLifecycleOwner){msg->
-                            if(msg != null)Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
-                        }
-                    }
+            response?.let{
+                loadingDialog.endLoadingAnimation()
+                if(response.status == StatusCode.from(200).name){
+                    Toast.makeText(requireContext(), "Sign up Successful", Toast.LENGTH_SHORT).show()
+                    view?.findNavController()?.navigate(RegisterFragmentDirections.actionRegisterFragmentToSignInFragment())
                 }
-                viewModel.onRegistered()
+                else{
+                    Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
+                }
+                viewModel.onResponseReceived()
             }
         }
+
         return binding.root
     }
 

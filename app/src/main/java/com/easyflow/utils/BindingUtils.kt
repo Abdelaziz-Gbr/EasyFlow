@@ -10,7 +10,6 @@ import androidx.annotation.RequiresApi
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.easyflow.R
-import com.easyflow.appScreens.services.fragmentPlans.EasyFlowApiStatus
 import com.easyflow.appScreens.services.fragmentPlans.PlanListAdapter
 import com.easyflow.appScreens.services.fragmentUserSubscription.SubscriptionsListAdapter
 import com.easyflow.database.models.TicketDatabaseModel

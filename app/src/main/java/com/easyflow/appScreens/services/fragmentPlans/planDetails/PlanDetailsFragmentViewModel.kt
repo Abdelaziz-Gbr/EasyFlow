@@ -8,6 +8,7 @@ import com.easyflow.cache.UserCache
 import com.easyflow.network.Network
 import com.easyflow.network.models.PlanNetworkModel
 import com.easyflow.network.models.PlanSubscriptionModel
+import com.easyflow.utils.StatusCode
 import kotlinx.coroutines.launch
 
 
@@ -24,7 +25,7 @@ class PlanDetailsFragmentViewModel : ViewModel() {
                         planName = plan.name
                     )
                 )
-                if(subResponse.isSuccessful){
+                if(subResponse.isSuccessful && subResponse.body()!!.status!! == StatusCode.from(200).name){
                     UserCache.subtractBalance(plan.price)
                 }
                 _planSubscripe.value = subResponse.body()!!.message

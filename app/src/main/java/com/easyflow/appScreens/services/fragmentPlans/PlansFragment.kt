@@ -11,11 +11,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.easyflow.R
 import com.easyflow.databinding.FragmentPlansBinding
+import com.easyflow.utils.EasyFlowApiStatus
 import com.easyflow.utils.LoadingDialog
 
 class PlansFragment : Fragment() {
     private lateinit var binding : FragmentPlansBinding
     private lateinit var viewModel: PlansFragmentViewModel
+    private lateinit var loadingDialog: LoadingDialog
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -24,6 +26,7 @@ class PlansFragment : Fragment() {
 
         viewModel = ViewModelProvider(this)[PlansFragmentViewModel::class.java]
 
+        loadingDialog = LoadingDialog(requireActivity())
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -32,15 +35,26 @@ class PlansFragment : Fragment() {
             viewModel.displayPlanDetails(it)
         })
 
-        viewModel.status.observe(viewLifecycleOwner){error ->
-            error?.let {
-                if(error == EasyFlowApiStatus.ERROR) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Failed to Retrieve Plans information, pls try again later",
-                        Toast.LENGTH_SHORT
-                    ).show()
+        viewModel.status.observe(viewLifecycleOwner){ApiCallState ->
+            ApiCallState?.let {
+                when(ApiCallState){
+                    EasyFlowApiStatus.LOADING->{
+                        loadingDialog.startLoadingAnimation()
+                    }
+                    EasyFlowApiStatus.DONE->{
+                        loadingDialog.endLoadingAnimation()
+                    }
+                    EasyFlowApiStatus.ERROR->{
+                        loadingDialog.endLoadingAnimation()
+                        Toast.makeText(
+                            requireContext(),
+                            "Failed to Retrieve Plans information, pls try again later",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
+                viewModel.onStatusRecieved()
+
             }
         }
 
