@@ -110,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/male"
                 android:checked="@{viewModel.isMale()}"
-                android:onCheckedChanged="@{(buttonView, isChecked) -> viewModel.onGenderChanged(isChecked, @string/male)}"/>
+                />
 
             <RadioButton
                 android:id="@+id/female_radio_button"
@@ -118,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/female"
                 android:checked="@{viewModel.isFemale()}"
-                android:onCheckedChanged="@{(buttonView, isChecked) -> viewModel.onGenderChanged(isChecked, @string/female)}"/>
+                />
 
 
         </RadioGroup>

@@ -52,5 +52,4 @@ class ProfileFragment : Fragment() {
         binding.updatePinBtn.setOnClickListener { findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToUpdatePinFragment()) }
         return binding.root
     }
-
 }
