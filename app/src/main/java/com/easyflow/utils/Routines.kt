@@ -82,7 +82,7 @@ fun subscribeToUserFeed(){
         .addOnCompleteListener{
                 task ->
             if(task.isSuccessful){
-                Log.d("Firebase_subscription_user", "succeeded")
+                Log.d("Firebase_subscription_user", "${UserCache.username}")
                 with(SharedPreferences.data.edit()){
                     putBoolean("sub_user", true)
                     apply()
@@ -99,7 +99,7 @@ fun unSubscribeToUserFeed(){
         .addOnCompleteListener{
                 task ->
             if(task.isSuccessful){
-                Log.d("Firebase_unsubscription_user", "succeeded")
+                Log.d("Firebase_unsubscription_user", "${UserCache.username}")
                 with(SharedPreferences.data.edit()){
                     putBoolean("sub_user", false)
                     apply()
@@ -127,21 +127,3 @@ suspend fun dropAllData(userDataSource: UserDao, ticketDataSource : TicketDao, t
     ticketDataSource.deleteAllTickets()
     tripDao.deleteAllTrips()
 }
-/*
-
-fun isWifiConnected(context: Context): Boolean {
-    val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    val network = connectivityManager.activeNetwork ?: return false
-    val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
-    return capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)
-}
-
-fun isDataConnected(context: Context): Boolean {
-    val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-    val network = connectivityManager.activeNetwork ?: return false
-    val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
-    return capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)
-}
-
-
-*/

@@ -22,6 +22,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         subscribeToMainFeed()
     }
     override fun onMessageReceived(message: RemoteMessage) {
+        Log.d("notificationFrom", message.from!!)
         message.notification?.apply {
             val recievedTag = tag?: "0"
             val myTag =

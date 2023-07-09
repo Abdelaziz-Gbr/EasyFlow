@@ -4,14 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.easyflow.network.Network
-import com.easyflow.cache.UserKey
 import com.easyflow.database.TicketDao
 import com.easyflow.database.UserDao
-import com.easyflow.database.models.UserDatabaseModel
 import com.easyflow.network.models.UserNetworkModel
 import com.easyflow.utils.signUserIn
-import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.launch
 
 class SignInViewModel(private val userDao: UserDao, private val ticketDao: TicketDao): ViewModel() {
