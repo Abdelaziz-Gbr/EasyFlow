@@ -66,7 +66,7 @@ class RegisterFragment : Fragment() {
             passwordText.setSelection(passwordText.text!!.length)
         }
         binding.registerButton.setOnClickListener {
-            loadingDialog.startLoadingAnimation()
+            binding.registerButton.isActivated = false
             register()
         }
 
@@ -79,6 +79,7 @@ class RegisterFragment : Fragment() {
                     view?.findNavController()?.navigate(RegisterFragmentDirections.actionRegisterFragmentToSignInFragment())
                 }
                 else{
+                    binding.registerButton.isActivated = true
                     Toast.makeText(requireContext(), response.message, Toast.LENGTH_SHORT).show()
                 }
                 viewModel.onResponseReceived()
@@ -92,9 +93,11 @@ class RegisterFragment : Fragment() {
         val user = getUser()
 
         if (user != null) {
+            loadingDialog.startLoadingAnimation()
             viewModel.register(user)
         }
         else{
+            binding.registerButton.isActivated = true
             Toast.makeText(requireContext(), "please fill all the above slots", Toast.LENGTH_SHORT).show()
         }
 
